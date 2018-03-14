@@ -5,7 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
 	'id' => 'safe-tool',
-	'name' => 'SAFe tool',
+	'name' => 'Scaled Agile Framework Tool',
 	'basePath' => dirname(__DIR__),
 	'bootstrap' => ['log'],
 	'language' => 'en-US',
