@@ -12,6 +12,7 @@
 namespace app\models\forms;
 
 //Imports
+use app\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -23,13 +24,12 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-	
+
 	public $username;
 	public $password;
 	public $rememberMe = false;
 
 	private $_user = false;
-
 
 	/**
 	 * @return array the validation rules.
@@ -51,9 +51,9 @@ class LoginForm extends Model
 		return [
 			'username' => Yii::t('login', 'Username'),
 			'password' => Yii::t('login', 'Password'),
-			'rememberMe' => Yii::t('login', 'Remember me for 30 days'),
+			'rememberMe' => Yii::t('login', 'Remember me for {0,number,integer} days', self::getLoginDuration('days')),
 		];
-	}	
+	}
 
 	/**
 	 * Validates the password.
@@ -80,7 +80,7 @@ class LoginForm extends Model
 	public function login()
 	{
 		if ($this->validate()) {
-			return Yii::$app->getUser()->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+			return Yii::$app->getUser()->login($this->getUser(), $this->rememberMe ? self::getLoginDuration('seconds') : 0);
 		}
 		return false;
 	}
@@ -98,5 +98,34 @@ class LoginForm extends Model
 
 		return $this->_user;
 	}
-	
+
+	/**
+	 * Returns the user login session duration.
+	 * The login session duration is based on the parameter loginDuration and must be defined as seconds.
+	 *
+	 * @param $unit string to convert from seconds.
+	 * @return int
+	 */
+	private static function getLoginDuration($unit)
+	{
+		$loginDuration = (int)Yii::$app->params['loginDuration'];
+
+		switch ($unit) {
+			case 'seconds':
+				return $loginDuration;
+				break;
+			case 'minutes':
+				return $loginDuration / 60;
+				break;
+			case 'hours':
+				return $loginDuration / 3600;
+				break;
+			case 'days':
+				return $loginDuration / 86400;
+				break;
+			default:
+				return $loginDuration;
+		}
+	}
+
 }
