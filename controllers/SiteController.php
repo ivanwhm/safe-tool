@@ -32,7 +32,7 @@ class SiteController extends SafeToolController
 	 */
 	public function actionLogin()
 	{
-		$this->layout = 'login';
+		$this->layout = 'sbadmin2_login';
 		return $this->render('login', [
 			'hasLogo' => false,
 			'logo' => '',
