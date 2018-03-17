@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit2e3cd62efe550dc6e86209520ffb4f71
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
@@ -25,10 +25,15 @@ class ComposerStaticInit2e3cd62efe550dc6e86209520ffb4f71
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
+            'yidas\\yii\\fontawesome\\' => 22,
         ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'm' => 
+        array (
+            'mimicreative\\assets\\' => 20,
         ),
         'c' => 
         array (
@@ -103,11 +108,19 @@ class ComposerStaticInit2e3cd62efe550dc6e86209520ffb4f71
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
+        'yidas\\yii\\fontawesome\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yidas/yii2-fontawesome/src',
+        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'mimicreative\\assets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mimicreative/yii2-metismenu/src',
         ),
         'cebe\\markdown\\' => 
         array (

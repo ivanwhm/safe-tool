@@ -48,4 +48,22 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
+  'mimicreative/yii2-metismenu' => 
+  array (
+    'name' => 'mimicreative/yii2-metismenu',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@mimicreative/assets' => $vendorDir . '/mimicreative/yii2-metismenu/src',
+    ),
+  ),
+  'yidas/yii2-fontawesome' => 
+  array (
+    'name' => 'yidas/yii2-fontawesome',
+    'version' => '2.0.0.0',
+    'alias' => 
+    array (
+      '@yidas/yii/fontawesome' => $vendorDir . '/yidas/yii2-fontawesome/src',
+    ),
+  ),
 );

@@ -123,7 +123,7 @@ class HTML extends CodeceptionResultPrinter
         );
 
         $failures = '';
-        $name = Descriptor::getTestSignature($test);
+        $name = Descriptor::getTestSignatureUnique($test);
         if (isset($this->failures[$name])) {
             $failTemplate = new \Text_Template(
                 $this->templatePath . 'fail.html'
@@ -236,7 +236,7 @@ class HTML extends CodeceptionResultPrinter
      */
     public function addError(\PHPUnit\Framework\Test $test, \Throwable $e, float $time) : void
     {
-        $this->failures[Descriptor::getTestSignature($test)][] = $this->cleanMessage($e);
+        $this->failures[Descriptor::getTestSignatureUnique($test)][] = $this->cleanMessage($e);
         parent::addError($test, $e, $time);
     }
 
@@ -249,10 +249,10 @@ class HTML extends CodeceptionResultPrinter
      */
     public function addFailure(\PHPUnit\Framework\Test $test, \PHPUnit\Framework\AssertionFailedError $e, float $time) : void
     {
-        $this->failures[Descriptor::getTestSignature($test)][] = $this->cleanMessage($e);
+        $this->failures[Descriptor::getTestSignatureUnique($test)][] = $this->cleanMessage($e);
         parent::addFailure($test, $e, $time);
     }
-    
+
     /**
      * Starts test
      *
@@ -260,7 +260,7 @@ class HTML extends CodeceptionResultPrinter
      */
     public function startTest(\PHPUnit\Framework\Test $test):void
     {
-        $name = Descriptor::getTestSignature($test);
+        $name = Descriptor::getTestSignatureUnique($test);
         if (isset($this->failures[$name])) {
             // test failed in before hook
             return;
@@ -297,6 +297,9 @@ class HTML extends CodeceptionResultPrinter
     private function cleanMessage($exception)
     {
         $msg = $exception->getMessage();
+        if ($exception instanceof \PHPUnit\Framework\AssertionFailedError && $exception->getComparisonFailure()) {
+            $msg .= $exception->getComparisonFailure()->getDiff();
+        }
         $msg = str_replace(['<info>','</info>','<bold>','</bold>'], ['','','',''], $msg);
         return htmlentities($msg);
     }

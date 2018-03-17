@@ -15,7 +15,9 @@ $config = [
 		'@bower' => '@vendor/bower-asset',
 		'@npm' => '@vendor/npm-asset',
 	],
+	'layout' => 'sbadmin2',
 	'components' => [
+		'db' => $db,
 		'request' => [
 			'cookieValidationKey' => 'yK45pNRKblPIb4BFgC-CFP-XOacwnZXI',
 		],
@@ -29,7 +31,6 @@ $config = [
 		'errorHandler' => [
 			'errorAction' => 'site/error',
 		],
-		'db' => $db,
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
