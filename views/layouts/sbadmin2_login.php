@@ -16,34 +16,33 @@ use yii\web\View;
 
 SBAdmin2Asset::register($this);
 
-//html
-$this->beginPage();
-echo Html::beginTag('!DOCTYPE html');
-echo Html::beginTag('html', ['lang' => Yii::$app->language]);
+?>
 
-//head
-echo Html::beginTag('head');
-echo Html::tag('meta', '', ['charset' => Yii::$app->charset]);
-echo Html::csrfMetaTags();
-echo Html::tag('title', Yii::$app->name);
-$this->head();
-echo Html::endTag('head');
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
 
-//body
-echo Html::beginTag('body');
-$this->beginBody();
+	<head>
+		<meta charset="<?= Yii::$app->charset ?>">
+		<?= Html::csrfMetaTags() ?>
+		<title><?= Yii::$app->name ?></title>
+		<?php $this->head() ?>
+	</head>
+	
+	<body>
+		<?php $this->beginBody() ?>
+	
+		<!-- Content -->
+		<div class="container">
+			<div class="row">
+				<?= $content ?>
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container -->
+	
+		<?php $this->endBody() ?>
+	</body>
 
-//content
-echo Html::beginTag('div', ['class' => 'container']);
-echo Html::beginTag('div', ['class' => 'row']);
-echo $content;
-echo Html::endTag('div');
-echo Html::endTag('div');
-
-//end body
-$this->endBody();
-echo Html::endTag('body');
-
-//end html
-echo Html::endTag('html');
-$this->endPage();
+</html>
+<?php $this->endPage() ?>
