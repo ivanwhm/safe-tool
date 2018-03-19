@@ -3,5 +3,9 @@ return [
 	'Settings' => '',
 	'User Profile' => '',
 	'Dashboard' => '',
-	'Logout' => ''
+	'Log out' => '',
+	'Are you sure you want to log out?' => '',
+	'Confirmation' => '',
+	'Yes' => '',
+	'No' => ''
 ];

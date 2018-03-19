@@ -3,5 +3,9 @@ return [
 	'Settings' => 'Configurações',
 	'User Profile' => 'Perfil do usuário',
 	'Dashboard' => 'Painel de controle',
-	'Logout' => 'Sair'
+	'Log out' => 'Sair',
+	'Are you sure you want to log out?' => 'Tem certeza que deseja sair?',
+	'Confirmation' => 'Confirmação',
+	'Yes' => 'Sim',
+	'No' => 'Não'
 ];
