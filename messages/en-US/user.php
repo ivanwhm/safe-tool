@@ -6,6 +6,8 @@ return [
 	'SALT' => '',
 	'Status' => '',
 	'E-mail' => '',
+	'Language' => '',
+	'Date of the last login' => '',
 	'Date of creation' => '',
 	'Date of the last update' => '',
 	'The user of creation' => '',

@@ -6,6 +6,8 @@ return [
 	'SALT' => 'Segredo',
 	'Status' => 'Estado',
 	'E-mail' => 'E-mail',
+	'Language' => 'Idioma',
+	'Date of the last login' => 'Data do último login',
 	'Date of creation' => 'Data da criação',
 	'Date of the last update' => 'Data da última atualização',
 	'The user of creation' => 'Usuário que criou',

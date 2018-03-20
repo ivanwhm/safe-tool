@@ -10,6 +10,7 @@
  * @property string $status User status.
  * @property string $email User e-mail.
  * @property string $language User language.
+ * @property datetime $last_login_date Date ant time of the last user login.
  * @property datetime $date_created Date and time that user was created.
  * @property datetime $date_updated Date and time that user was updated.
  * @property int $user_created User ID that created this user.
@@ -28,9 +29,8 @@ namespace app\models;
 //Imports
 use app\components\SafeToolActiveRecord;
 use Yii;
-use yii\base\Exception;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\web\IdentityInterface;
 
 class User extends SafeToolActiveRecord implements IdentityInterface
@@ -65,7 +65,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 		return [
 			[['username', 'password', 'salt', 'email', 'language'], 'required'],
 			[['id', 'user_created', 'user_updated'], 'integer'],
-			[['date_created', 'date_updated'], 'safe'],
+			[['last_login_date', 'date_created', 'date_updated'], 'safe'],
 			[['username'], 'string', 'max' => 20],
 			[['password'], 'string', 'max' => 64],
 			[['salt'], 'string', 'max' => 128],
@@ -75,8 +75,8 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			[['id', 'username', 'email'], 'unique'],
 			[['password', 'new_password'], 'required', 'on' => 'create'],
 			[['new_password'], 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('password', 'The entered passwords are different.')],
-			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_created' => 'id']],
-			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_updated' => 'id']],
+			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
+			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_updated' => 'id']],
 		];
 	}
 
@@ -92,6 +92,8 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			'salt' => Yii::t('user', 'SALT'),
 			'status' => Yii::t('user', 'Status'),
 			'email' => Yii::t('user', 'E-mail'),
+			'language' => Yii::t('user', 'Language'),
+			'last_login_date' => Yii::t('user', 'Date of the last login'),
 			'date_created' => Yii::t('user', 'Date of creation'),
 			'date_updated' => Yii::t('user', 'Date of the last update'),
 			'user_created' => Yii::t('user', 'The user of creation'),
@@ -104,7 +106,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getUserCreated()
 	{
-		return $this->hasOne(User::className(), ['id' => 'user_created']);
+		return $this->hasOne(User::class, ['id' => 'user_created']);
 	}
 
 	/**
@@ -112,7 +114,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getCreatedUsers()
 	{
-		return $this->hasMany(User::className(), ['user_created' => 'id']);
+		return $this->hasMany(User::class, ['user_created' => 'id']);
 	}
 
 	/**
@@ -120,7 +122,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getUserUpdated()
 	{
-		return $this->hasOne(User::className(), ['id' => 'user_updated']);
+		return $this->hasOne(User::class, ['id' => 'user_updated']);
 	}
 
 	/**
@@ -128,9 +130,18 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getUpdatedUsers()
 	{
-		return $this->hasMany(User::className(), ['user_updated' => 'id']);
+		return $this->hasMany(User::class, ['user_updated' => 'id']);
 	}
 
+	/**
+	 * Register the last login of the user.
+	 */
+	public function registerLogin()
+	{
+		$this->password = '';
+		$this->last_login_date = new Expression('current_timestamp');
+		$this->save(false);
+	}
 
 	/**
 	 * Do the password cryptography.
@@ -251,5 +262,6 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
 		// TODO: Implement findIdentityByAccessToken() method.
+		return null;
 	}
 }
