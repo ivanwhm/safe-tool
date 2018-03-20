@@ -12,6 +12,7 @@
 //Imports
 use app\assets\SBAdmin2\SBAdmin2Asset;
 use kartik\dialog\Dialog;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -21,9 +22,9 @@ SBAdmin2Asset::register($this);
 try {
 	echo Dialog::widget([
 			'options' => [
-				'title' => Yii::t('index', 'Confirmation'),
-				'btnOKLabel' => '<span class="' . Dialog::ICON_OK . '"></span> ' . Yii::t('index', 'Yes'),
-				'btnCancelLabel' => '<span class="' . Dialog::ICON_CANCEL . '"></span> ' . Yii::t('index', 'No'),
+				'title' => Icon::show('sign-out') . ' ' . Yii::t('index', 'Confirmation'),
+				'btnOKLabel' => Icon::show('sign-out') . ' ' . Yii::t('index', 'Yes'),
+				'btnCancelLabel' => Icon::show('ban') . ' ' . Yii::t('index', 'No'),
 			]
 		]
 	);
@@ -40,6 +41,7 @@ try {
 	<meta charset="<?= Yii::$app->charset ?>">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<?= Html::csrfMetaTags() ?>
+	<?php Icon::map($this, Icon::FA); ?>
 	<title><?= Yii::$app->name ?></title>
 	<?php $this->head() ?>
 </head>
@@ -66,13 +68,24 @@ try {
 			<!-- /.dropdown -->
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+					<?= Icon::show('user', ['class' => 'fa-fw']) . Icon::show('caret-down') ?>
 				</a>
 				<ul class="dropdown-menu dropdown-user">
-					<li><a href="#"><i class="fa fa-user fa-fw"></i> <?= Yii::t('index', 'User Profile') ?></a></li>
-					<li><a href="#"><i class="fa fa-gear fa-fw"></i> <?= Yii::t('index', 'Settings') ?></a></li>
+					<li>
+						<a href="#">
+							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'User Profile') ?>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<?= Icon::show('gear', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Settings') ?>
+						</a>
+					</li>
 					<li class="divider"></li>
-					<li><a href="#" id="btn-logout"><i class="fa fa-sign-out fa-fw"></i> <?= Yii::t('index', 'Log out') ?></a>
+					<li>
+						<a href="#" id="btn-logout">
+							<?= Icon::show('sign-out', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Log out') ?>
+						</a>
 					</li>
 				</ul>
 				<!-- /.dropdown-user -->
@@ -85,8 +98,9 @@ try {
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
 					<li>
-						<a href="<?= Url::to(['site/index']) ?>"><i
-								class="fa fa-dashboard fa-fw"></i> <?= Yii::t('index', 'Dashboard') ?></a>
+						<a href="<?= Url::to(['site/index']) ?>">
+							<?= Icon::show('dashboard', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Dashboard') ?>
+						</a>
 					</li>
 					<!--					<li>-->
 					<!--						<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->

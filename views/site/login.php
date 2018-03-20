@@ -11,6 +11,7 @@
 
 //Imports
 use app\models\forms\LoginForm;
+use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
@@ -68,7 +69,7 @@ use yii\widgets\ActiveForm;
 				<!-- ./checkbox -->
 
 				<?php 
-					echo Html::submitButton(Yii::t('login', 'Login'), [
+					echo Html::submitButton(Icon::show('sign-in') . ' ' . Yii::t('login', 'Login'), [
 						'class' => 'btn btn-lg btn-success btn-block',
 						'name' => 'login-button'
 					]);
