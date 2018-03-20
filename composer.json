@@ -24,8 +24,8 @@
 		"yiisoft/yii2-bootstrap": "~2.0.0",
 		"yiisoft/yii2-swiftmailer": "~2.0.0",
 		"mimicreative/yii2-metismenu": "~1.0",
-		"yidas/yii2-fontawesome": "^2.0",
-		"kartik-v/yii2-dialog": "@dev"
+		"kartik-v/yii2-dialog": "@dev",
+		"kartik-v/yii2-icons": "@dev"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "~2.0.0",
