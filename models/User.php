@@ -262,6 +262,6 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
 		// TODO: Implement findIdentityByAccessToken() method.
-		return null;
+		return null;	
 	}
 }
