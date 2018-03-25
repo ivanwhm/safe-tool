@@ -30,6 +30,7 @@ $newPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the ne
 $repeatNewPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the new password (again).');
 $changePasswordLabel = Icon::show('pencil') . Yii::t('password', 'Change password');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
+$mandatoryFields = Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -41,6 +42,19 @@ $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
 				'id' => 'change-password-form',
 			]); ?>
 
+		<?php if ($model->hasErrors()) : ?>
+			<div class="alert alert-danger">
+				<?= $form->errorSummary($model) ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if ($updated) : ?>
+			<div class="alert alert-success alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<?= Yii::t('password', 'Password changed successfully.') ?>
+			</div>
+		<?php endif; ?>
+		
 		<?= $form->field($model, 'oldPassword')->widget(
 			PasswordInput::class, [
 				'options' => [
@@ -90,6 +104,12 @@ $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
 			'class' => 'help-block'
 		]) ?>
 
+		<br>
+
+		<?= Html::tag('span', $mandatoryFields, [
+			'class' => 'help-block'
+		]) ?>
+		
 		<div class="form-group">
 			<?= Html::submitButton($changePasswordLabel, ['class' => 'btn btn-success']) ?>
 			<?= Html::a($cancelLabel, ['index'], ['class' => 'btn btn-danger']) ?>

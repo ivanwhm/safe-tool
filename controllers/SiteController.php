@@ -134,13 +134,16 @@ class SiteController extends SafeToolController
 	 */
 	public function actionPassword()
 	{
+		$updated = false;
+		
 		$model = new ChangePasswordForm();
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->changePassword()) {
-			return $this->actionLogout();
+			$updated = true;
 		}
 
 		return $this->render('password', [
 			'model' => $model,
+			'updated' => $updated
 		]);
 	}
 
