@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 //Imports
+use app\models\forms\ChangePasswordForm;
 use Yii;
 use yii\filters\AccessControl;
 use app\components\SafeToolController;
@@ -27,7 +28,7 @@ class SiteController extends SafeToolController
 		return [
 			'access' => [
 				'class' => AccessControl::class,
-				'only' => ['logout', 'index', 'password'],
+				'only' => ['logout', 'index', 'password', 'language'],
 				'rules' => [
 					[
 						'allow' => true,
@@ -36,7 +37,7 @@ class SiteController extends SafeToolController
 					],
 					[
 						'allow' => true,
-						'actions' => ['logout', 'index', 'password'],
+						'actions' => ['logout', 'index', 'password', 'language'],
 						'roles' => ['@'],
 					],
 				],
@@ -70,7 +71,7 @@ class SiteController extends SafeToolController
 				]
 			);
 		}
-		
+
 		return '';
 	}
 
@@ -100,18 +101,6 @@ class SiteController extends SafeToolController
 	}
 
 	/**
-	 * Logout action.
-	 *
-	 * @return string
-	 */
-	public function actionLogout()
-	{
-		Yii::$app->getUser()->logout();
-		return $this->goHome();
-	}
-
-
-	/**
 	 * Language change action.
 	 *
 	 * @param string $lang Language
@@ -137,4 +126,33 @@ class SiteController extends SafeToolController
 
 		return $this->goHome();
 	}
+
+	/**
+	 * Change password action.
+	 *
+	 * @return string
+	 */
+	public function actionPassword()
+	{
+		$model = new ChangePasswordForm();
+		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->changePassword()) {
+			return $this->actionLogout();
+		}
+
+		return $this->render('password', [
+			'model' => $model,
+		]);
+	}
+
+	/**
+	 * Logout action.
+	 *
+	 * @return string
+	 */
+	public function actionLogout()
+	{
+		Yii::$app->getUser()->logout();
+		return $this->goHome();
+	}
+
 }

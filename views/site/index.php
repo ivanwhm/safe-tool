@@ -1,7 +1,2 @@
-<div class="row">
-	<div class="col-lg-12">
-		<h1 class="page-header"><?= Yii::t('index', 'Dashboard') ?></h1>
-	</div>
-	<!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
+<?php
+$this->title = Yii::t('index', 'Dashboard');

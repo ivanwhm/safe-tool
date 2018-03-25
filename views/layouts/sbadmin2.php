@@ -34,6 +34,9 @@ try {
 }
 
 $user = User::findOne(Yii::$app->getUser()->getId());
+$logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?', [
+	'username' => $user->getAttribute('username')
+]);
 
 ?>
 
@@ -47,7 +50,7 @@ $user = User::findOne(Yii::$app->getUser()->getId());
 	<?= Html::csrfMetaTags() ?>
 	<?php Icon::map($this, Icon::FA); ?>
 	<?php Icon::map($this, Icon::FI); ?>
-	<title><?= Yii::$app->name ?></title>
+	<title><?= Yii::$app->name . ' - ' . $this->title ?></title>
 	<?php $this->head() ?>
 </head>
 
@@ -78,10 +81,9 @@ $user = User::findOne(Yii::$app->getUser()->getId());
 				<ul class="dropdown-menu">
 					<?php
 					$languages = Language::getLanguageCountryData();
-					foreach (Language::getLanguageData() as $key => $value)
-					{
+					foreach (Language::getLanguageData() as $key => $value) {
 						echo Html::beginTag('li');
-						$text = Icon::show($languages[$key], [], Icon::FI) . $value;
+						$text = Icon::show($languages[$key], ['class' => 'fa-fw'], Icon::FI) . $value;
 						echo Html::a($text, Url::to(['site/language', 'lang' => $key]));
 						echo Html::endTag('li');
 					}
@@ -100,6 +102,11 @@ $user = User::findOne(Yii::$app->getUser()->getId());
 							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'User Profile') ?>
 						</a>
 					</li>
+					<li>
+						<a href="<?= Url::to(["site/password"]) ?>">
+							<?= Icon::show('key', ['class' => 'fa-fw']) . Yii::t('password', 'Change password') ?>
+						</a>
+					</li>					
 					<li>
 						<a href="#">
 							<?= Icon::show('gear', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Settings') ?>
@@ -166,7 +173,46 @@ $user = User::findOne(Yii::$app->getUser()->getId());
 	<!-- Page Content -->
 	<div id="page-wrapper">
 		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header"><?= $this->title ?></h1>
+					<!-- .breadcrumb -->
+					<ol class="breadcrumb">
+						<li>
+							<?= Icon::show('dashboard') ?> 
+							<a href="<?= Url::to(["site/index"]) ?>">
+								<?= Yii::t('index', 'Dashboard') ?>
+							</a>
+						</li>
+
+						<?php
+						$breadcrumbs = isset($this->params["breadcrumbs"]) ? $this->params["breadcrumbs"] : [];
+						foreach ($breadcrumbs as $breadcrumb) :
+							$active = (isset($breadcrumb["active"]) && $breadcrumb["active"]) ? "active" : "";
+							$label = isset($breadcrumb["label"]) ? $breadcrumb["label"] : "";
+							$icon = isset($breadcrumb["icon"]) ? $breadcrumb["icon"] : "";
+							$url = isset($breadcrumb["url"]) ? $breadcrumb["url"] : "";
+							?>
+							<li class="<?= $active ?>">
+								<?= $icon ?>
+								<?php if ($url != "") : ?>
+								<a href="<?= $url ?>">
+									<?php endif; ?>
+									<?= $label ?>
+									<?php if ($url != "") : ?>
+								</a>
+							<?php endif; ?>
+							</li>
+						<?php endforeach; ?>
+					</ol>
+					<!-- /.breadcrumb -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<!-- content -->
 			<?= $content ?>
+			<!-- /content -->
 		</div>
 		<!-- /.container-fluid -->
 	</div>
@@ -178,7 +224,7 @@ $user = User::findOne(Yii::$app->getUser()->getId());
 <?php
 $this->registerJs("
 	$('#btn-logout').on('click', function() {
-		let message = '" . Yii::t('index', 'Are you sure you want to log out?') . "'; 
+		let message = '" . $logoutMessage . "'; 
 		krajeeDialog.confirm(message, function(out) { 
 			if (out) { 
 				window.location = '" . Url::to(['site/logout']) . "'; 

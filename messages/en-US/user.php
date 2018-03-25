@@ -8,6 +8,7 @@ return [
 	'E-mail' => '',
 	'Language' => '',
 	'Date of the last login' => '',
+	'Date of the last password change' => '',
 	'Date of creation' => '',
 	'Date of the last update' => '',
 	'The user of creation' => '',

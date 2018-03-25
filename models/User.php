@@ -10,7 +10,8 @@
  * @property string $status User status.
  * @property string $email User e-mail.
  * @property string $language User language.
- * @property string $last_login_date Date ant time of the last user login.
+ * @property string $last_login_date Date and time of the last user login.
+ * @property string $last_password_change Date and time of the last password change.
  * @property string $date_created Date and time that user was created.
  * @property string $date_updated Date and time that user was updated.
  * @property int $user_created User ID that created this user.
@@ -28,6 +29,7 @@ namespace app\models;
 
 //Imports
 use app\components\SafeToolActiveRecord;
+use kartik\password\StrengthValidator;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
@@ -63,7 +65,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 		return [
 			[['username', 'password', 'salt', 'email', 'language'], 'required'],
 			[['id', 'user_created', 'user_updated'], 'integer'],
-			[['last_login_date', 'date_created', 'date_updated'], 'safe'],
+			[['last_login_date', 'last_password_change', 'date_created', 'date_updated'], 'safe'],
 			[['username'], 'string', 'max' => 20],
 			[['password'], 'string', 'max' => 64],
 			[['salt'], 'string', 'max' => 128],
@@ -72,6 +74,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			[['language'], 'string', 'max' => 5],
 			[['id', 'username', 'email'], 'unique'],
 			[['password', 'new_password'], 'required', 'on' => 'create'],
+			[['password', 'new_password'], StrengthValidator::class, 'hasUser' => false, 'hasEmail' => false, 'min' => 6, 'max' => 30, 'lower' => 1, 'upper' => 1, 'digit' => 1, 'special' => 1],
 			[['new_password'], 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('password', 'The entered passwords are different.')],
 			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
 			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_updated' => 'id']],
@@ -92,6 +95,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			'email' => Yii::t('user', 'E-mail'),
 			'language' => Yii::t('user', 'Language'),
 			'last_login_date' => Yii::t('user', 'Date of the last login'),
+			'last_password_change' => Yii::t('user', 'Date of the last password change'),
 			'date_created' => Yii::t('user', 'Date of creation'),
 			'date_updated' => Yii::t('user', 'Date of the last update'),
 			'user_created' => Yii::t('user', 'The user of creation'),
@@ -139,6 +143,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 		//Set the last login date
 		$this->setAttribute('password', '');
 		$this->setAttribute('last_login_date', new Expression('current_timestamp'));
+		$this->setAttribute('user_updated', Yii::$app->getUser()->getId());
 		$this->save(false);
 
 		//Set the language session

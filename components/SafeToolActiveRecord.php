@@ -23,18 +23,18 @@ class SafeToolActiveRecord extends ActiveRecord
 	{
 		if ($insert) {
 			if ($this->hasAttribute('date_created')) {
-				$this->date_created = new Expression('current_timestamp');
+				$this->setAttribute('date_created', new Expression('current_timestamp'));
 			}
 			if ($this->hasAttribute('user_created')) {
-				$this->user_created = Yii::$app->getUser()->getId();
+				$this->setAttribute('user_created', Yii::$app->getUser()->getId());
 			}
 		}
 
 		if ($this->hasAttribute('date_updated')) {
-			$this->date_updated = new Expression('current_timestamp');
+			$this->setAttribute('date_updated', new Expression('current_timestamp'));
 		}
 		if ($this->hasAttribute('user_updated')) {
-			$this->user_updated = Yii::$app->getUser()->getId();
+			$this->setAttribute('user_updated', Yii::$app->getUser()->getId());
 		}
 
 		return parent::beforeSave($insert);
@@ -49,7 +49,7 @@ class SafeToolActiveRecord extends ActiveRecord
 	public function getUserCreated()
 	{
 		if ($this->hasAttribute('user_created')) {
-			return User::findOne(['id' => $this->user_created]);
+			return User::findOne(['id' => $this->getAttribute('user_created')]);
 		}
 		return null;
 	}
@@ -62,7 +62,7 @@ class SafeToolActiveRecord extends ActiveRecord
 	public function getUserUpdated()
 	{
 		if ($this->hasAttribute('user_updated')) {
-			return User::findOne(['id' => $this->user_updated]);
+			return User::findOne(['id' => $this->getAttribute('user_updated')]);
 		}
 		return null;
 	}
