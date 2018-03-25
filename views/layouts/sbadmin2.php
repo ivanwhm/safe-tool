@@ -98,8 +98,8 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 				</a>
 				<ul class="dropdown-menu dropdown-user">
 					<li>
-						<a href="#">
-							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'User Profile') ?>
+						<a href="<?= Url::to(["site/profile"]) ?>">
+							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'User profile') ?>
 						</a>
 					</li>
 					<li>

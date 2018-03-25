@@ -1,12 +1,15 @@
 <?php
 return [
 	'Settings' => '',
-	'User Profile' => '',
 	'Dashboard' => '',
 	'Log out' => '',
 	'{username}, are you sure you want to log out?' => '',
 	'Confirmation' => '',
 	'Yes' => '',
 	'No' => '',
-	'Cancel' => ''
+	'Cancel' => '',
+	'Save' => '',
+	'Created on {date} by {username}.' => '',
+	'Last update on {date} by {username}.' => '',
+	'Fields marked with (*) are required.' => ''
 ];

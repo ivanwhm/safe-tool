@@ -13,5 +13,10 @@ return [
 	'Date of the last update' => 'Data da última atualização',
 	'The user of creation' => 'Usuário que criou',
 	'The user of the last update' => 'Usuário da última alteração',
-	'The entered passwords are different' => 'As senhas inseridas são diferentes'
+	'The entered passwords are different' => 'As senhas inseridas são diferentes',
+	'User profile' => 'Perfil do usuário',
+	'Input the language.' => 'Informe o idioma.',
+	'Input the username.' => 'Informe o nome de usuário.',
+	'Input the e-mail address.' => 'Informe o endereço de e-mail.',
+	'Data updated successfully.' => 'Dados atualizados com sucesso.'
 ];

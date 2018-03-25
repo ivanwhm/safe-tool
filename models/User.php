@@ -33,6 +33,7 @@ use kartik\password\StrengthValidator;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\helpers\Url;
 use yii\web\Cookie;
 use yii\web\IdentityInterface;
 
@@ -63,7 +64,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
-			[['username', 'password', 'salt', 'email', 'language'], 'required'],
+			[['username', 'salt', 'email', 'language'], 'required'],
 			[['id', 'user_created', 'user_updated'], 'integer'],
 			[['last_login_date', 'last_password_change', 'date_created', 'date_updated'], 'safe'],
 			[['username'], 'string', 'max' => 20],
@@ -73,6 +74,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			[['email'], 'string', 'max' => 150],
 			[['language'], 'string', 'max' => 5],
 			[['id', 'username', 'email'], 'unique'],
+			[['email'], 'email'],
 			[['password', 'new_password'], 'required', 'on' => 'create'],
 			[['password', 'new_password'], StrengthValidator::class, 'hasUser' => false, 'hasEmail' => false, 'min' => 6, 'max' => 30, 'lower' => 1, 'upper' => 1, 'digit' => 1, 'special' => 1],
 			[['new_password'], 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('password', 'The entered passwords are different.')],
@@ -259,6 +261,9 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 				$this->setAttribute('password', $user->getAttribute('password'));
 			}
 		}
+
+		$this->setAttribute('date_updated', new Expression('current_timestamp'));
+		$this->setAttribute('user_updated', Yii::$app->getUser()->getId());
 
 		return parent::beforeSave($insert);
 	}

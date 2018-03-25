@@ -28,7 +28,7 @@ class SiteController extends SafeToolController
 		return [
 			'access' => [
 				'class' => AccessControl::class,
-				'only' => ['logout', 'index', 'password', 'language'],
+				'only' => ['logout', 'index', 'password', 'language', 'profile'],
 				'rules' => [
 					[
 						'allow' => true,
@@ -37,7 +37,7 @@ class SiteController extends SafeToolController
 					],
 					[
 						'allow' => true,
-						'actions' => ['logout', 'index', 'password', 'language'],
+						'actions' => ['logout', 'index', 'password', 'language', 'profile'],
 						'roles' => ['@'],
 					],
 				],
@@ -124,7 +124,7 @@ class SiteController extends SafeToolController
 			'value' => $lang
 		]));
 
-		return $this->goHome();
+		return $this->goBack();
 	}
 
 	/**
@@ -155,4 +155,26 @@ class SiteController extends SafeToolController
 		return $this->goHome();
 	}
 
+	/**
+	 * User profile action.
+	 *
+	 * @return string
+	 */
+	public function actionProfile()
+	{
+		$updated = false;
+		
+		$model = User::findOne(Yii::$app->getUser()->getId());
+		$model->setAttribute('password', '');
+		$model->new_password = '';
+		
+		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->save()) {
+			$updated = true;
+		}
+		
+		return $this->render('profile', [
+			'model' => $model,
+			'updated' => $updated
+		]);
+	}	
 }

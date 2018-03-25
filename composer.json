@@ -26,7 +26,8 @@
 		"mimicreative/yii2-metismenu": "~1.0",
 		"kartik-v/yii2-dialog": "@dev",
 		"kartik-v/yii2-icons": "@dev",
-		"kartik-v/yii2-password": "@dev"
+		"kartik-v/yii2-password": "@dev",
+		"kartik-v/yii2-widget-select2": "@dev"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "~2.0.0",
