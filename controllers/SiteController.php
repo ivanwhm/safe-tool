@@ -13,6 +13,8 @@ use Yii;
 use yii\filters\AccessControl;
 use app\components\SafeToolController;
 use app\models\forms\LoginForm;
+use app\models\User;
+use yii\web\Cookie;
 
 class SiteController extends SafeToolController
 {
@@ -68,13 +70,14 @@ class SiteController extends SafeToolController
 				]
 			);
 		}
+		
+		return '';
 	}
 
 	/**
 	 * Login action.
 	 *
 	 * @return string
-	 * @throws 
 	 */
 	public function actionLogin()
 	{
@@ -86,7 +89,6 @@ class SiteController extends SafeToolController
 
 		$model = new LoginForm();
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->login()) {
-			Yii::$app->getSession()->set('language', Yii::$app->getUser()->getIdentity()->language);
 			return $this->goHome();
 		}
 
@@ -108,4 +110,31 @@ class SiteController extends SafeToolController
 		return $this->goHome();
 	}
 
+
+	/**
+	 * Language change action.
+	 *
+	 * @param string $lang Language
+	 * @return string
+	 */
+	public function actionLanguage($lang)
+	{
+		//Change de user language
+		$user = User::findOne(Yii::$app->getUser()->getId());
+		$user->setAttribute('language', $lang);
+		$user->setAttribute('password', '');
+		$user->new_password = '';
+		$user->save(false);
+
+		//Refresh session data
+		Yii::$app->getSession()->set('language', $lang);
+
+		//Set a cookie
+		Yii::$app->getResponse()->getCookies()->add(new Cookie([
+			'name' => 'language',
+			'value' => $lang
+		]));
+
+		return $this->goHome();
+	}
 }

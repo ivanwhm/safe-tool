@@ -11,6 +11,8 @@
 
 //Imports
 use app\assets\SBAdmin2\SBAdmin2Asset;
+use app\models\Language;
+use app\models\User;
 use kartik\dialog\Dialog;
 use kartik\icons\Icon;
 use yii\helpers\Html;
@@ -31,6 +33,8 @@ try {
 } catch (Exception $e) {
 }
 
+$user = User::findOne(Yii::$app->getUser()->getId());
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -42,6 +46,7 @@ try {
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<?= Html::csrfMetaTags() ?>
 	<?php Icon::map($this, Icon::FA); ?>
+	<?php Icon::map($this, Icon::FI); ?>
 	<title><?= Yii::$app->name ?></title>
 	<?php $this->head() ?>
 </head>
@@ -65,6 +70,25 @@ try {
 		<!-- /.navbar-header -->
 
 		<ul class="nav navbar-top-links navbar-right">
+			<!-- /.dropdown -->
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<?= Icon::show($user->getLanguageCountry(), [], Icon::FI) . ' ' . Icon::show('caret-down') ?>
+				</a>
+				<ul class="dropdown-menu">
+					<?php
+					$languages = Language::getLanguageCountryData();
+					foreach (Language::getLanguageData() as $key => $value)
+					{
+						echo Html::beginTag('li');
+						$text = Icon::show($languages[$key], [], Icon::FI) . $value;
+						echo Html::a($text, Url::to(['site/language', 'lang' => $key]));
+						echo Html::endTag('li');
+					}
+					?>
+				</ul>
+			</li>
+			<!-- /.dropdown -->
 			<!-- /.dropdown -->
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">

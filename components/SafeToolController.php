@@ -8,7 +8,7 @@
 namespace app\components;
 
 //Imports
-use app\models\User;
+use app\models\Language;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -22,19 +22,24 @@ class SafeToolController extends Controller
 	 */
 	public function init()
 	{
-		//Get the browser's language to use on Login page
-		$browserLanguage = Yii::$app->getRequest()->getPreferredLanguage([
-			User::LANGUAGE_PT_BR,
-			User::LANGUAGE_EN_US,
-		]);
-		
 		//Adjust the system language
-		Yii::$app->language = (!Yii::$app->getUser()->getIsGuest())
-			? Yii::$app->getSession()->get('language')
-			: $browserLanguage;
+		if (Yii::$app->getUser()->getIsGuest()) {
+			//Get the language from cookie
+			if (Yii::$app->getRequest()->getCookies()->has('language')) {
+				Yii::$app->language = Yii::$app->getRequest()->getCookies()->get('language')->value;
+			} else {
+				//Get the language from the browser
+				Yii::$app->language = Yii::$app->getRequest()->getPreferredLanguage([
+					Language::LANGUAGE_PT_BR,
+					Language::LANGUAGE_EN_US,
+				]);
+			}
+		} else {
+			//Get the language from session
+			Yii::$app->language = Yii::$app->getSession()->get('language');
+		}
 
 	}
-
 
 	/**
 	 * @inheritdoc

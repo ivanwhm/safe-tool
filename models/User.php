@@ -10,9 +10,9 @@
  * @property string $status User status.
  * @property string $email User e-mail.
  * @property string $language User language.
- * @property datetime $last_login_date Date ant time of the last user login.
- * @property datetime $date_created Date and time that user was created.
- * @property datetime $date_updated Date and time that user was updated.
+ * @property string $last_login_date Date ant time of the last user login.
+ * @property string $date_created Date and time that user was created.
+ * @property string $date_updated Date and time that user was updated.
  * @property int $user_created User ID that created this user.
  * @property int $user_updated User ID that updated this user.
  *
@@ -31,13 +31,11 @@ use app\components\SafeToolActiveRecord;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\web\Cookie;
 use yii\web\IdentityInterface;
 
 class User extends SafeToolActiveRecord implements IdentityInterface
 {
-
-	const LANGUAGE_PT_BR = 'pt-BR';
-	const LANGUAGE_EN_US = 'en-US';
 
 	const STATUS_ACTIVE = 'A';
 	const STATUS_INACTIVE = 'I';
@@ -138,9 +136,19 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function registerLogin()
 	{
-		$this->password = '';
-		$this->last_login_date = new Expression('current_timestamp');
+		//Set the last login date
+		$this->setAttribute('password', '');
+		$this->setAttribute('last_login_date', new Expression('current_timestamp'));
 		$this->save(false);
+
+		//Set the language session
+		Yii::$app->getSession()->set('language', $this->getAttribute('language'));
+
+		//Set the language cookie
+		Yii::$app->getResponse()->getCookies()->add(new Cookie([
+			'name' => 'language',
+			'value' => $this->getAttribute('language')
+		]));
 	}
 
 	/**
@@ -184,7 +192,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getId()
 	{
-		return $this->id;
+		return $this->getAttribute('id');
 	}
 
 	/**
@@ -201,7 +209,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getAuthKey()
 	{
-		return $this->password;
+		return $this->getAttribute('password');
 	}
 
 	/**
@@ -214,7 +222,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function validateAuthKey($authKey)
 	{
-		return $this->passwordCrypt($authKey, $this->salt) === $this->getAuthKey();
+		return $this->passwordCrypt($authKey, $this->getAttribute('salt')) === $this->getAuthKey();
 	}
 
 	/**
@@ -223,7 +231,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public function beforeDelete()
 	{
 		if (parent::beforeDelete()) {
-			return ($this->id !== 1);
+			return ($this->getAttribute('id') !== 1);
 		}
 		return true;
 	}
@@ -234,16 +242,16 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public function beforeSave($insert)
 	{
 		if ($insert) {
-			$this->salt = Yii::$app->getSecurity()->generateRandomString(128);
+			$this->setAttribute('salt', Yii::$app->getSecurity()->generateRandomString(128));
 		}
 
-		if ($this->password != '') {
-			$this->salt = Yii::$app->getSecurity()->generateRandomString(128);
-			$this->password = $this->passwordCrypt($this->password, $this->salt);
+		if ($this->getAttribute('password') !== '') {
+			$this->setAttribute('salt', Yii::$app->getSecurity()->generateRandomString(128));
+			$this->setAttribute('password', $this->passwordCrypt($this->getAttribute('password'), $this->getAttribute('salt')));
 		} else {
-			$user = User::findIdentity($this->id);
+			$user = User::findIdentity($this->getAttribute('id'));
 			if ($user) {
-				$this->password = $user->password;
+				$this->setAttribute('password', $user->getAttribute('password'));
 			}
 		}
 
@@ -262,6 +270,17 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public static function findIdentityByAccessToken($token, $type = null)
 	{
 		// TODO: Implement findIdentityByAccessToken() method.
-		return null;	
+		return null;
 	}
+
+
+	/**
+	 * Returns the language country description of the user.
+	 * @return string
+	 */
+	public function getLanguageCountry()
+	{
+		return ($this->getAttribute('language') != '') ? Language::getLanguageCountryData()[$this->getAttribute('language')] : '';
+	}
+
 }
