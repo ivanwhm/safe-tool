@@ -24,8 +24,7 @@ SBAdmin2Asset::register($this);
 try {
 	echo Dialog::widget([
 			'options' => [
-				'title' => Icon::show('sign-out') . ' ' . Yii::t('index', 'Confirmation'),
-				'btnOKLabel' => Icon::show('sign-out') . ' ' . Yii::t('index', 'Yes'),
+				'btnOKLabel' => Icon::show('check') . ' ' . Yii::t('index', 'Yes'),
 				'btnCancelLabel' => Icon::show('ban') . ' ' . Yii::t('index', 'No'),
 			]
 		]
@@ -35,7 +34,7 @@ try {
 
 $user = User::findOne(Yii::$app->getUser()->getId());
 $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?', [
-	'username' => $user->getAttribute('username')
+	'username' => $user->getAttribute('name')
 ]);
 
 ?>
@@ -133,6 +132,19 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 							<?= Icon::show('dashboard', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Dashboard') ?>
 						</a>
 					</li>
+					<li>
+						<a href="#">
+							<?= Icon::show('edit', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Records') ?>
+						</a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="<?= Url::to(['user/index']) ?>">
+									<?= Icon::show('users', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'Users') ?>
+								</a>
+							</li>
+						</ul>
+						<!-- /.nav-second-level-->
+					</li>					
 					<!--					<li>-->
 					<!--						<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->
 					<!--						<ul class="nav nav-second-level">-->

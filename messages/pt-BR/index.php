@@ -11,5 +11,11 @@ return [
 	'Save' => 'Salvar',
 	'Created on {date} by {username}.' => 'Criado em {date} por {username}.',
 	'Last update on {date} by {username}.' => 'Última alteração em {date} por {username}.',
-	'Fields marked with (*) are required.' => 'Os campos marcados com (*) são obrigatórios.'
+	'Fields marked with (*) are required.' => 'Os campos marcados com (*) são obrigatórios.',
+	'Records' => 'Cadastros',
+	'Active' => 'Ativo',
+	'Inactive' => 'Inativo',
+	'Add' => 'Adicionar',
+	'Update' => 'Editar',
+	'Delete' => 'Excluir'
 ];

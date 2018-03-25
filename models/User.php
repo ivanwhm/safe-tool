@@ -29,10 +29,12 @@ namespace app\models;
 
 //Imports
 use app\components\SafeToolActiveRecord;
+use kartik\icons\Icon;
 use kartik\password\StrengthValidator;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Cookie;
 use yii\web\IdentityInterface;
@@ -64,13 +66,14 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
-			[['username', 'salt', 'email', 'language'], 'required'],
+			[['username', 'name', 'email', 'language', 'status'], 'required'],
 			[['id', 'user_created', 'user_updated'], 'integer'],
 			[['last_login_date', 'last_password_change', 'date_created', 'date_updated'], 'safe'],
 			[['username'], 'string', 'max' => 20],
 			[['password'], 'string', 'max' => 64],
 			[['salt'], 'string', 'max' => 128],
 			[['status'], 'string', 'max' => 1],
+			[['name'], 'string', 'max' => 150],
 			[['email'], 'string', 'max' => 150],
 			[['language'], 'string', 'max' => 5],
 			[['id', 'username', 'email'], 'unique'],
@@ -92,8 +95,10 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			'id' => Yii::t('user', 'ID'),
 			'username' => Yii::t('user', 'Username'),
 			'password' => Yii::t('user', 'Password'),
+			'new_password' => Yii::t('user', 'Repeat password'),
 			'salt' => Yii::t('user', 'SALT'),
 			'status' => Yii::t('user', 'Status'),
+			'name' => Yii::t('user', 'Name'),
 			'email' => Yii::t('user', 'E-mail'),
 			'language' => Yii::t('user', 'Language'),
 			'last_login_date' => Yii::t('user', 'Date of the last login'),
@@ -106,11 +111,13 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * @return ActiveQuery
+	 * Return the user model that created this user.
+	 * 
+	 * @return User
 	 */
 	public function getUserCreated()
 	{
-		return $this->hasOne(User::class, ['id' => 'user_created']);
+		return self::findOne(['id' => $this->getAttribute('user_created')]);
 	}
 
 	/**
@@ -122,11 +129,13 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * @return ActiveQuery
+	 * Returns the user model that updated this user.
+	 * 
+	 * @return User
 	 */
 	public function getUserUpdated()
 	{
-		return $this->hasOne(User::class, ['id' => 'user_updated']);
+		return self::findOne(['id' => $this->getAttribute('user_updated')]);
 	}
 
 	/**
@@ -290,7 +299,50 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getLanguageCountry()
 	{
-		return ($this->getAttribute('language') != '') ? Language::getLanguageCountryData()[$this->getAttribute('language')] : '';
+		return Language::getLanguageCountryData()[$this->getAttribute('language')];
 	}
+
+	/**
+	 * Returns the language description of the user.
+	 *
+	 * @return string
+	 */
+	public function getLanguage()
+	{
+		return Icon::show($this->getLanguageCountry(), [], Icon::FI) . Language::getLanguageData()[$this->getAttribute('language')];
+	}
+	
+	/**
+	 * Returns all the user status information.
+	 *
+	 * @return array
+	 */
+	public static function getStatusData()
+	{
+		return [
+			self::STATUS_ACTIVE => Yii::t('index', 'Active'),
+			self::STATUS_INACTIVE => Yii::t('index', 'Inactive')
+		];
+	}
+	
+	/**
+	 * Returns the status description of the user.
+	 *
+	 * @return string
+	 */
+	public function getStatus()
+	{
+		return ($this->getAttribute('status') != '') ? $result = Html::tag('span', Html::tag('i', '', ['class' => 'glyphicon ' . (($this->status == self::STATUS_ACTIVE) ? 'glyphicon-ok' : 'glyphicon-remove')]) . '  ' . self::getStatusData()[$this->getAttribute('status')], ['class' => 'label ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'label-primary' : 'label-danger')]) : '';
+	}
+
+	/**
+	 * Returns the link to user visualization info.
+	 *
+	 * @return string
+	 */
+	public function getLink()
+	{
+		return Url::to(['user/view', 'id' => $this->getAttribute('id')]);
+	}	
 
 }

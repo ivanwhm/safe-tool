@@ -10,8 +10,10 @@ namespace app\components;
 //Imports
 use app\models\User;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\helpers\Html;
 
 class SafeToolActiveRecord extends ActiveRecord
 {
@@ -66,5 +68,40 @@ class SafeToolActiveRecord extends ActiveRecord
 		}
 		return null;
 	}
+
+
+	/**
+	 * Returns the created information to print on views.
+	 *
+	 * @return string
+	 * @throws InvalidConfigException
+	 */
+	public function printCreatedInformation()
+	{
+		if ($this->hasAttribute('date_created'))
+		{
+			return Yii::t('index', 'Created on {date} by {username}.', [
+				'date' => Yii::$app->getFormatter()->asDatetime($this->getAttribute('date_created')),
+				'username' => Html::a($this->getUserCreated()->getAttribute('name'), $this->getUserCreated()->getLink())
+			]);
+		}
+	}
+
+	/**
+	 * Returns the last updated information to print on views.
+	 *
+	 * @return string
+	 * @throws InvalidConfigException
+	 */
+	public function printLastUpdatedInformation()
+	{
+		if ($this->hasAttribute('date_updated'))
+		{
+			return Yii::t('index', 'Last update on {date} by {username}.', [
+				'date' => Yii::$app->getFormatter()->asDatetime($this->getAttribute('date_updated')),
+				'username' => Html::a($this->getUserUpdated()->getAttribute('name'), $this->getUserUpdated()->getLink())
+			]);
+		}
+	}	
 
 }
