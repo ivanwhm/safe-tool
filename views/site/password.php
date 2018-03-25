@@ -30,7 +30,7 @@ $newPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the ne
 $repeatNewPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the new password (again).');
 $changePasswordLabel = Icon::show('pencil') . Yii::t('password', 'Change password');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Yii::t('index', 'Fields marked with (*) are required.');
+$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 

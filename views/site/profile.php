@@ -32,7 +32,7 @@ $emailLabel = Icon::show('info-circle') . Yii::t('user', 'Input the e-mail addre
 $languageLabel = Icon::show('info-circle') . Yii::t('user', 'Input the language.');
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Yii::t('index', 'Fields marked with (*) are required.');
+$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
