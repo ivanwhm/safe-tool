@@ -270,9 +270,6 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			}
 		}
 
-		$this->setAttribute('date_updated', new Expression('current_timestamp'));
-		$this->setAttribute('user_updated', Yii::$app->getUser()->getId());
-
 		return parent::beforeSave($insert);
 	}
 
@@ -356,4 +353,23 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			'date' => Yii::$app->getFormatter()->asDatetime($this->getAttribute('last_password_change'))
 		]);
 	}
+
+	/**
+	 * Returns all the users.
+	 *
+	 * @return array
+	 */
+	public static function getUsers()
+	{
+		$all = [];
+		$users = self::find([
+			'status' => self::STATUS_ACTIVE
+		])->orderBy('name')->all();
+		foreach ($users as $user)
+		{
+			$all[$user->getAttribute('id')] = $user->getAttribute('name');
+		}
+		return $all;
+	}
+	
 }

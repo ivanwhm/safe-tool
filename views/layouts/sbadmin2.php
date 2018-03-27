@@ -138,6 +138,11 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 						</a>
 						<ul class="nav nav-second-level">
 							<li>
+								<a href="<?= Url::to(['product-owner/index']) ?>">
+									<?= Icon::show('user-md', ['class' => 'fa-fw']) . ' ' . Yii::t('product-owner', 'Product owners') ?>
+								</a>
+							</li>
+							<li>
 								<a href="<?= Url::to(['user/index']) ?>">
 									<?= Icon::show('users', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'Users') ?>
 								</a>
