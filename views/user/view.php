@@ -83,13 +83,13 @@ $this->params['breadcrumbs'] = [
 			[
 				'attribute' => 'user_created',
 				'format' => 'html',
-				'value' => Html::a($model->getUserCreated()->getAttribute('name'), $model->getUserCreated()->getLink())
+				'value' => $model->getUserCreated() instanceof User ? Html::a($model->getUserCreated()->getAttribute('name'), $model->getUserCreated()->getLink()) : ''
 			],
 			'date_updated:datetime',
 			[
 				'attribute' => 'user_updated',
 				'format' => 'html',
-				'value' => Html::a($model->getUserUpdated()->getAttribute('name'), $model->getUserUpdated()->getLink())
+				'value' => $model->getUserUpdated() instanceof User ? Html::a($model->getUserUpdated()->getAttribute('name'), $model->getUserUpdated()->getLink()) : ''
 			],
 		],
 	]) ?>

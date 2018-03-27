@@ -112,7 +112,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 
 	/**
 	 * Return the user model that created this user.
-	 * 
+	 *
 	 * @return User
 	 */
 	public function getUserCreated()
@@ -130,7 +130,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 
 	/**
 	 * Returns the user model that updated this user.
-	 * 
+	 *
 	 * @return User
 	 */
 	public function getUserUpdated()
@@ -154,7 +154,6 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 		//Set the last login date
 		$this->setAttribute('password', '');
 		$this->setAttribute('last_login_date', new Expression('current_timestamp'));
-		$this->setAttribute('user_updated', Yii::$app->getUser()->getId());
 		$this->save(false);
 
 		//Set the language session
@@ -311,7 +310,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	{
 		return Icon::show($this->getLanguageCountry(), [], Icon::FI) . Language::getLanguageData()[$this->getAttribute('language')];
 	}
-	
+
 	/**
 	 * Returns all the user status information.
 	 *
@@ -324,7 +323,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			self::STATUS_INACTIVE => Yii::t('index', 'Inactive')
 		];
 	}
-	
+
 	/**
 	 * Returns the status description of the user.
 	 *
@@ -332,7 +331,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getStatus()
 	{
-		return ($this->getAttribute('status') != '') ? $result = Html::tag('span', Html::tag('i', '', ['class' => 'glyphicon ' . (($this->status == self::STATUS_ACTIVE) ? 'glyphicon-ok' : 'glyphicon-remove')]) . '  ' . self::getStatusData()[$this->getAttribute('status')], ['class' => 'label ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'label-primary' : 'label-danger')]) : '';
+		return ($this->getAttribute('status') != '') ? $result = Html::tag('span', Html::tag('i', '', ['class' => 'glyphicon ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'glyphicon-ok' : 'glyphicon-remove')]) . '  ' . self::getStatusData()[$this->getAttribute('status')], ['class' => 'label ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'label-success' : 'label-danger')]) : '';
 	}
 
 	/**
@@ -343,6 +342,18 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public function getLink()
 	{
 		return Url::to(['user/view', 'id' => $this->getAttribute('id')]);
-	}	
+	}
 
+	/**
+	 * Returns the last password change information to print on views.
+	 *
+	 * @return string
+	 * @throws \yii\base\InvalidConfigException
+	 */
+	public function printLastPasswordChangeInformation()
+	{
+		return Yii::t('password', 'Last password change on {date}.', [
+			'date' => Yii::$app->getFormatter()->asDatetime($this->getAttribute('last_password_change'))
+		]);
+	}
 }

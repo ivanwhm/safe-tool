@@ -10,5 +10,6 @@ return [
 	'Input the old password.' => 'Informe a sua senha atual.',
 	'Input the new password.' => 'Informe a nova senha.',
 	'Input the new password (again).' => 'Repita a nova senha.',
-	'Password changed successfully.' => 'Senha alterada com sucesso.'
+	'Password changed successfully.' => 'Senha alterada com sucesso.',
+	'Last password change on {date}.' => 'Última alteração da senha em {date}.'
 ];

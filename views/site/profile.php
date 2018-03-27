@@ -92,6 +92,10 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		]) ?>
 		
 		<br>
+		
+		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), [
+			'class' => 'help-block'
+		]) ?>
 
 		<?= Html::tag('span', $mandatoryFields, [
 			'class' => 'help-block'

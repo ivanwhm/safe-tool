@@ -10,5 +10,6 @@ return [
 	'Input the old password.' => '',
 	'Input the new password.' => '',
 	'Input the new password (again).' => '',
-	'Password changed successfully.' => ''
+	'Password changed successfully.' => '',
+	'Last password change on {date}.' => ''
 ];

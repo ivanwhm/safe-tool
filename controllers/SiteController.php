@@ -90,6 +90,7 @@ class SiteController extends SafeToolController
 
 		$model = new LoginForm();
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->login()) {
+			Yii::$app->getUser()->getIdentity()->registerLogin();
 			return $this->goHome();
 		}
 
@@ -143,7 +144,8 @@ class SiteController extends SafeToolController
 
 		return $this->render('password', [
 			'model' => $model,
-			'updated' => $updated
+			'updated' => $updated,
+			'user' => User::findOne(Yii::$app->getUser()->getId())
 		]);
 	}
 

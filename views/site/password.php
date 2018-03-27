@@ -4,11 +4,14 @@
  *
  * @var $this View
  * @var $model ChangePasswordForm
+ * @var $updated boolean
+ * @var $user User
  *
  * @author Ivan Wilhelm <ivan.whm@me.com>
  */
 
 //Imports
+use app\models\User;
 use kartik\icons\Icon;
 use kartik\password\PasswordInput;
 use yii\helpers\Html;
@@ -105,6 +108,10 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		]) ?>
 
 		<br>
+
+		<?= Html::tag('span', Icon::show('user') . $user->printLastPasswordChangeInformation(), [
+			'class' => 'help-block'
+		]) ?>
 
 		<?= Html::tag('span', $mandatoryFields, [
 			'class' => 'help-block'

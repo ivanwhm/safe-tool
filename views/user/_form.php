@@ -132,8 +132,9 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'class' => 'help-block'
 	]) ?>
 
+	<br>
+	
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('br') ?>
 		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
 		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>

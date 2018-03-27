@@ -23,12 +23,14 @@ class SafeToolActiveRecord extends ActiveRecord
 	 */
 	public function beforeSave($insert)
 	{
+		$user = Yii::$app->getUser()->getId();
+		
 		if ($insert) {
 			if ($this->hasAttribute('date_created')) {
 				$this->setAttribute('date_created', new Expression('current_timestamp'));
 			}
 			if ($this->hasAttribute('user_created')) {
-				$this->setAttribute('user_created', Yii::$app->getUser()->getId());
+				$this->setAttribute('user_created', $user);
 			}
 		}
 
@@ -36,7 +38,7 @@ class SafeToolActiveRecord extends ActiveRecord
 			$this->setAttribute('date_updated', new Expression('current_timestamp'));
 		}
 		if ($this->hasAttribute('user_updated')) {
-			$this->setAttribute('user_updated', Yii::$app->getUser()->getId());
+			$this->setAttribute('user_updated', $user);
 		}
 
 		return parent::beforeSave($insert);
@@ -78,13 +80,16 @@ class SafeToolActiveRecord extends ActiveRecord
 	 */
 	public function printCreatedInformation()
 	{
-		if ($this->hasAttribute('date_created'))
-		{
+		if (($this->hasAttribute('date_created')) and ($this->getUserCreated() instanceof User)) {
+			$this->refresh();
+			$date = $this->getAttribute('date_created');
+				
 			return Yii::t('index', 'Created on {date} by {username}.', [
-				'date' => Yii::$app->getFormatter()->asDatetime($this->getAttribute('date_created')),
+				'date' => Yii::$app->getFormatter()->asDatetime($date),
 				'username' => Html::a($this->getUserCreated()->getAttribute('name'), $this->getUserCreated()->getLink())
 			]);
 		}
+		return '';
 	}
 
 	/**
@@ -95,13 +100,16 @@ class SafeToolActiveRecord extends ActiveRecord
 	 */
 	public function printLastUpdatedInformation()
 	{
-		if ($this->hasAttribute('date_updated'))
-		{
+		if (($this->hasAttribute('date_updated')) and ($this->getUserUpdated() instanceof User)) {
+			$this->refresh();
+			$date = $this->getAttribute('date_updated');
+			
 			return Yii::t('index', 'Last update on {date} by {username}.', [
-				'date' => Yii::$app->getFormatter()->asDatetime($this->getAttribute('date_updated')),
+				'date' => Yii::$app->getFormatter()->asDatetime($date),
 				'username' => Html::a($this->getUserUpdated()->getAttribute('name'), $this->getUserUpdated()->getLink())
 			]);
 		}
+		return '';
 	}	
 
 }
