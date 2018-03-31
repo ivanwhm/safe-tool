@@ -25,13 +25,12 @@ class UserController extends SafeToolController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider = new ActiveDataProvider([
-			'query' => User::find()->orderBy('username'),
-			'pagination' => false
-		]);
+		$searchModel = new User();
+		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
+			'searchModel' => $searchModel
 		]);
 	}
 

@@ -29,7 +29,8 @@
 		"kartik-v/yii2-password": "@dev",
 		"kartik-v/yii2-widget-select2": "@dev",
 		"kartik-v/yii2-grid": "@dev",
-		"kartik-v/yii2-detail-view": "@dev"
+		"kartik-v/yii2-detail-view": "@dev",
+		"kartik-v/yii2-number": "@dev"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "~2.0.0",

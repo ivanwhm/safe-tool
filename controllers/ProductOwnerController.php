@@ -25,14 +25,14 @@ class ProductOwnerController extends SafeToolController
 	 */
 	public function actionIndex()
 	{
-		$dataProvider = new ActiveDataProvider([
-			'query' => ProductOwner::find()->orderBy('name'),
-			'pagination' => false
-		]);
+		$searchModel = new ProductOwner();
+		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
+			'searchModel' => $searchModel
 		]);
+
 	}
 
 	/**

@@ -4,12 +4,14 @@
  *
  * @var $this View
  * @var $dataProvider ActiveDataProvider
+ * @var $searchModel ProductOwner
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
 use app\models\ProductOwner;
+use app\models\User;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
 use kartik\icons\Icon;
@@ -38,12 +40,13 @@ $this->params['breadcrumbs'] = [
 	<?= GridView::widget([
 		'id' => 'product-owner-gridview',
 		'dataProvider' => $dataProvider,
+		'filterModel' => $searchModel,
 		'pjax' => true,
 		'hover' => true,
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' =>' <h3 class="panel-title">' . Icon::show('-md')  . ' '. Yii::t('product-owner', 'Product owners') .'</h3>',
+			'heading' =>' <h3 class="panel-title">' . Icon::show('user-md')  . ' '. Yii::t('product-owner', 'Product owners') .'</h3>',
 			'type' => 'default',
 			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
 			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
@@ -54,6 +57,7 @@ $this->params['breadcrumbs'] = [
 				'attribute' => 'id',
 				'hAlign' => GridView::ALIGN_LEFT,
 				'width' => '70px',
+				'filter' => false
 			],
 			'name',
 			[
@@ -62,6 +66,12 @@ $this->params['breadcrumbs'] = [
 				'value' => function (ProductOwner $data) {
 					return $data->printUserLink();
 				},
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => User::getUsers(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => '---']
 			],			
 			[
 				'attribute' => 'status',
@@ -70,6 +80,12 @@ $this->params['breadcrumbs'] = [
 				'value' => function (ProductOwner $data) {
 					return $data->getStatus();
 				},
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => ProductOwner::getStatusData(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => '---']				
 			],
 			[
 				'class' => ActionColumn::class,

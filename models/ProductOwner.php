@@ -24,6 +24,7 @@ namespace app\models;
 //Imports
 use app\components\SafeToolActiveRecord;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -131,4 +132,29 @@ class ProductOwner extends SafeToolActiveRecord
         }
         return null;
     }
+
+	/**
+	 * Returns the form search.
+	 *
+	 * @param $params
+	 * @return ActiveDataProvider
+	 */
+	public function search($params) {
+		$query = self::find();
+		$query->orderBy('name');
+		
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => false,
+			'sort' => ['attributes' => ['id', 'name']]
+		]);
+		$this->load($params);
+
+		$query->andFilterWhere(['=', 'id', $this->getAttribute('id')])
+			->andFilterWhere(['=', 'user_id', $this->getAttribute('user_id')])
+			->andFilterWhere(['=', 'status', $this->getAttribute('status')]);
+
+		return $dataProvider;
+	}
+	
 }

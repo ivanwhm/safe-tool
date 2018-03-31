@@ -32,8 +32,10 @@ use app\components\SafeToolActiveRecord;
 use kartik\icons\Icon;
 use kartik\password\StrengthValidator;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Cookie;
@@ -361,15 +363,34 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public static function getUsers()
 	{
-		$all = [];
-		$users = self::find([
-			'status' => self::STATUS_ACTIVE
-		])->orderBy('name')->all();
-		foreach ($users as $user)
-		{
-			$all[$user->getAttribute('id')] = $user->getAttribute('name');
-		}
-		return $all;
+		$users = self::find(['status' => self::STATUS_ACTIVE])->orderBy('name')->all();
+		return ArrayHelper::map($users, 'id', 'name');
 	}
+
+	/**
+	 * Returns the form search.
+	 * 
+	 * @param $params
+	 * @return ActiveDataProvider
+	 */
+	public function search($params) {
+		$query = User::find();
+		$query->orderBy('name');
+		
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+			'pagination' => false,
+			'sort' => ['attributes' => ['id', 'name', 'username']]
+		]);
+		$this->load($params);
+
+		$query->andFilterWhere(['=', 'id', $this->getAttribute('id')])
+			->andFilterWhere(['like', 'name', $this->getAttribute('name')])
+			->andFilterWhere(['like', 'username', $this->getAttribute('username')])
+			->andFilterWhere(['=', 'status', $this->getAttribute('status')])
+			->andFilterWhere(['=', 'language', $this->getAttribute('language')]);		
+		
+		return $dataProvider;
+	}	
 	
 }
