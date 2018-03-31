@@ -193,8 +193,9 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header"><?= $this->title ?></h1>
+					<br>
 					<!-- .breadcrumb -->
-					<ol class="breadcrumb">
+					<ol class="breadcrumb2">
 						<li>
 							<?= Icon::show('dashboard') ?> 
 							<a href="<?= Url::to(["site/index"]) ?>">
