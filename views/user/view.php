@@ -37,33 +37,16 @@ $this->params['breadcrumbs'] = [
 ];
 ?>
 <div class="user-view">
-
-	<p>
-		<?= Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], [
-			'class' => 'btn btn-success'
-		]) ?>
-
-		<?= Html::a(Icon::show('pencil') . Yii::t('index', 'Update'), [
-			'update',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-primary'
-		]) ?>
-
-		<?= Html::a(Icon::show('trash') . Yii::t('index', 'Delete'), [
-			'delete',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-danger',
-			'data' => [
-				'confirm' => Yii::t('user', 'Do you want to delete this user?'),
-				'method' => 'post'
-			]
-		]) ?>
-	</p>
-
+	
 	<?= DetailView::widget([
 		'model' => $model,
+		'hover' => true,
+		'panel' => [
+			'heading' => ' <h3 class="panel-title">' . Icon::show('users') . ' ' . Yii::t('user', 'View user') . '</h3>',
+			'type' => DetailView::TYPE_DEFAULT,
+		],
+		'buttons1' => '',
+		'buttons2' => '',
 		'attributes' => [
 			'id',
 			'name',
@@ -93,5 +76,29 @@ $this->params['breadcrumbs'] = [
 			],
 		],
 	]) ?>
+
+	<p>
+		<?= Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], [
+			'class' => 'btn btn-success'
+		]) ?>
+
+		<?= Html::a(Icon::show('pencil') . Yii::t('index', 'Update'), [
+			'update',
+			'id' => $model->getAttribute('id')
+		], [
+			'class' => 'btn btn-primary'
+		]) ?>
+
+		<?= Html::a(Icon::show('trash') . Yii::t('index', 'Delete'), [
+			'delete',
+			'id' => $model->getAttribute('id')
+		], [
+			'class' => 'btn btn-danger',
+			'data' => [
+				'confirm' => Yii::t('user', 'Do you want to delete this user?'),
+				'method' => 'post'
+			]
+		]) ?>
+	</p>
 
 </div>
