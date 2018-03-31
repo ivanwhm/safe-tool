@@ -30,7 +30,8 @@
 		"kartik-v/yii2-widget-select2": "@dev",
 		"kartik-v/yii2-grid": "@dev",
 		"kartik-v/yii2-detail-view": "@dev",
-		"kartik-v/yii2-number": "@dev"
+		"kartik-v/yii2-number": "@dev",
+		"kartik-v/yii2-widget-switchinput": "*"
 	},
 	"require-dev": {
 		"yiisoft/yii2-debug": "~2.0.0",

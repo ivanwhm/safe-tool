@@ -7,7 +7,7 @@
  * @property string $username Username.
  * @property string $password User password.
  * @property string $salt User salt password.
- * @property string $status User status.
+ * @property boolean $status User status.
  * @property string $email User e-mail.
  * @property string $language User language.
  * @property string $last_login_date Date and time of the last user login.
@@ -44,8 +44,8 @@ use yii\web\IdentityInterface;
 class User extends SafeToolActiveRecord implements IdentityInterface
 {
 
-	const STATUS_ACTIVE = 'A';
-	const STATUS_INACTIVE = 'I';
+	const STATUS_ACTIVE = 1;
+	const STATUS_INACTIVE = 0;
 
 	/**
 	 * Attribute used to compare passwords.
@@ -74,7 +74,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			[['username'], 'string', 'max' => 20],
 			[['password'], 'string', 'max' => 64],
 			[['salt'], 'string', 'max' => 128],
-			[['status'], 'string', 'max' => 1],
+			[['status'], 'boolean'],
 			[['name'], 'string', 'max' => 150],
 			[['email'], 'string', 'max' => 150],
 			[['language'], 'string', 'max' => 5],
@@ -330,7 +330,9 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getStatus()
 	{
-		return ($this->getAttribute('status') != '') ? $result = Html::tag('span', Html::tag('i', '', ['class' => 'glyphicon ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'glyphicon-ok' : 'glyphicon-remove')]) . '  ' . self::getStatusData()[$this->getAttribute('status')], ['class' => 'label ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'label-success' : 'label-danger')]) : '';
+		return $this->getAttribute('status') ?
+			Html::tag('span', Yii::t('index', 'Active'), ['class' => 'label label-success']) :
+			Html::tag('span', Yii::t('index', 'Inactive'), ['class' => 'label label-danger']);
 	}
 
 	/**
@@ -369,14 +371,15 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 
 	/**
 	 * Returns the form search.
-	 * 
+	 *
 	 * @param $params
 	 * @return ActiveDataProvider
 	 */
-	public function search($params) {
+	public function search($params)
+	{
 		$query = User::find();
 		$query->orderBy('name');
-		
+
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
 			'pagination' => false,
@@ -388,9 +391,9 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 			->andFilterWhere(['like', 'name', $this->getAttribute('name')])
 			->andFilterWhere(['like', 'username', $this->getAttribute('username')])
 			->andFilterWhere(['=', 'status', $this->getAttribute('status')])
-			->andFilterWhere(['=', 'language', $this->getAttribute('language')]);		
-		
+			->andFilterWhere(['=', 'language', $this->getAttribute('language')]);
+
 		return $dataProvider;
-	}	
-	
+	}
+
 }

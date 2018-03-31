@@ -15,6 +15,7 @@ use app\models\User;
 use kartik\icons\Icon;
 use kartik\password\PasswordInput;
 use kartik\select2\Select2;
+use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
@@ -117,12 +118,18 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'class' => 'help-block'
 	]) ?>
 
-	<?= $form->field($model, 'status')->widget(Select2::class, [
-		'data' => User::getStatusData(),
-		'options' => [
-			'prompt' => '---',
-			'aria-describedby' => 'hbStatus'
-		]]) ?>
+
+	<?= $form->field($model, 'status')->widget(SwitchInput::class, [
+		'type' => SwitchInput::CHECKBOX,
+		'pluginOptions' => [
+			'handleWidth' => 60,
+			'onText' => Yii::t('index', 'Active'),
+			'offText' => Yii::t('index', 'Inactive'),
+			'onColor' => 'success',
+			'offColor' => 'danger',
+			'aria-describedby' => 'hbStatus',
+		]
+	]); ?>
 
 	<?= Html::tag('span', $activeHelp, [
 		'id' => 'hbStatus',
@@ -130,7 +137,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	]) ?>
 
 	<br>
-	
+
 	<?php if (!$model->getIsNewRecord()) : ?>
 		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
 		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>

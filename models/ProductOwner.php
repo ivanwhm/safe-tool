@@ -6,7 +6,7 @@
  * @property int $id Product owner ID.
  * @property int $user_id User ID associated with this product owner.
  * @property string $name Product owner name.
- * @property string $status Product owner status.
+ * @property boolean $status Product owner status.
  * @property string $date_created Date and time that product owner was created.
  * @property string $date_updated Date and time that product owner was updated.
  * @property int $user_created User ID that created this product owner.
@@ -31,8 +31,8 @@ use yii\helpers\Url;
 class ProductOwner extends SafeToolActiveRecord
 {
 
-	const STATUS_ACTIVE = 'A';
-	const STATUS_INACTIVE = 'I';
+	const STATUS_ACTIVE = '1';
+	const STATUS_INACTIVE = '0';
 	
 	/**
 	 * @inheritdoc
@@ -52,7 +52,7 @@ class ProductOwner extends SafeToolActiveRecord
 			[['id', 'user_id', 'user_created', 'user_updated'], 'integer'],
 			[['date_created', 'date_updated'], 'safe'],
 			[['name'], 'string', 'max' => 100],
-			[['status'], 'string', 'max' => 1],
+			[['status'], 'boolean'],
 			[['user_id'], 'unique'],
 			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
 			[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -108,7 +108,9 @@ class ProductOwner extends SafeToolActiveRecord
 	 */
 	public function getStatus()
 	{
-		return ($this->getAttribute('status') != '') ? $result = Html::tag('span', Html::tag('i', '', ['class' => 'glyphicon ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'glyphicon-ok' : 'glyphicon-remove')]) . '  ' . self::getStatusData()[$this->getAttribute('status')], ['class' => 'label ' . (($this->getAttribute('status') == self::STATUS_ACTIVE) ? 'label-success' : 'label-danger')]) : '';
+		return $this->getAttribute('status') ?
+			Html::tag('span', Yii::t('index', 'Active'), ['class' => 'label label-success']) :
+			Html::tag('span', Yii::t('index', 'Inactive'), ['class' => 'label label-danger']);
 	}
 
 	/**

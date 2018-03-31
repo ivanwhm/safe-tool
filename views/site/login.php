@@ -12,6 +12,7 @@
 //Imports
 use app\models\forms\LoginForm;
 use kartik\icons\Icon;
+use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;

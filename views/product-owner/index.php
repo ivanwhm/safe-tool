@@ -69,9 +69,13 @@ $this->params['breadcrumbs'] = [
 				'filterType' => GridView::FILTER_SELECT2,
 				'filter' => User::getUsers(),
 				'filterWidgetOptions' => [
-					'pluginOptions' => ['allowClear' => true],
+					'pluginOptions' => [
+						'allowClear' => true
+					],
 				],
-				'filterInputOptions' => ['placeholder' => '---']
+				'filterInputOptions' => [
+					'placeholder' => '---'
+				]
 			],			
 			[
 				'attribute' => 'status',
