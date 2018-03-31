@@ -17,5 +17,6 @@ return [
 	'Inactive' => 'Inativo',
 	'Add' => 'Adicionar',
 	'Update' => 'Editar',
-	'Delete' => 'Excluir'
+	'Delete' => 'Excluir',
+	'Reload' => 'Recarregar'
 ];

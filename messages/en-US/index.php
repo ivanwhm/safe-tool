@@ -17,5 +17,6 @@ return [
 	'Inactive' => '',
 	'Add' => '',
 	'Update' => '',
-	'Delete' => ''
+	'Delete' => '',
+	'Reload' => ''
 ];

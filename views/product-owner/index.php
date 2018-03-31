@@ -35,15 +35,20 @@ $this->params['breadcrumbs'] = [
 ?>
 <div class="product-owner-index">
 
-	<p>
-		<?= Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], [
-			'class' => 'btn btn-success'
-		]) ?>
-	</p>
-
 	<?= GridView::widget([
+		'id' => 'product-owner-gridview',
 		'dataProvider' => $dataProvider,
 		'pjax' => true,
+		'hover' => true,
+		'persistResize' => true,
+		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
+		'panel' => [
+			'heading' =>' <h3 class="panel-title">' . Icon::show('-md')  . ' '. Yii::t('product-owner', 'Product owners') .'</h3>',
+			'type' => 'default',
+			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
+			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
+			'footer'=> false
+		],
 		'columns' => [
 			[
 				'attribute' => 'id',
