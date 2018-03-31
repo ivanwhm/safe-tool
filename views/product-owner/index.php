@@ -55,7 +55,7 @@ $this->params['breadcrumbs'] = [
 				'attribute' => 'user_id',
 				'format' => 'html',
 				'value' => function (ProductOwner $data) {
-					return Html::a($data->getUser()->getAttribute('name'), $data->getUser()->getLink());
+					return $data->printUserLink();
 				},
 			],			
 			[

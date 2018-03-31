@@ -30,14 +30,12 @@ $this->params['breadcrumbs'] = [
 		"label" => $this->title,
 		"icon" => Icon::show('pencil'),
 		"active" => true,
-		"url" => Url::to(["product-owner/update", 'id' => $model->getAttribute('id')])
+		"url" => $model->getLink()
 	]
 ];
 ?>
 <div class="product-owner-update">
 
-	<?= $this->render('_form', [
-		'model' => $model,
-	]) ?>
+	<?= $this->render('_form', ['model' => $model]) ?>
 
 </div>

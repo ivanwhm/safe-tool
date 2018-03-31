@@ -30,10 +30,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 <div class="product-owner-form">
 
-	<?php $form = ActiveForm::begin([
-			'id' => 'product-owner-form',
-		]
-	); ?>
+	<?php $form = ActiveForm::begin(['id' => 'product-owner-form']); ?>
 
 	<?php if ($model->hasErrors()) : ?>
 		<div class="alert alert-danger">

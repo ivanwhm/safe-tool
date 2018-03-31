@@ -10,7 +10,6 @@
 
 //Imports
 use app\models\ProductOwner;
-use app\models\User;
 use kartik\detail\DetailView;
 use kartik\icons\Icon;
 use yii\helpers\Html;
@@ -33,7 +32,7 @@ $this->params['breadcrumbs'] = [
 		"label" => $this->title,
 		"icon" => Icon::show('eye'),
 		"active" => true,
-		"url" => Url::to(["product-owner/view", 'id' => $model->getAttribute('id')])
+		"url" => $model->getLink()
 	]
 ];
 ?>
@@ -71,7 +70,7 @@ $this->params['breadcrumbs'] = [
 			[
 				'attribute' => 'user_id',
 				'format' => 'html',
-				'value' => $model->getUser() instanceof User ? Html::a($model->getUser()->getAttribute('name'), $model->getUser()->getLink()) : ''
+				'value' => $model->printUserLink()
 			],
 			[
 				'attribute' => 'status',
@@ -82,13 +81,13 @@ $this->params['breadcrumbs'] = [
 			[
 				'attribute' => 'user_created',
 				'format' => 'html',
-				'value' => $model->getUserCreated() instanceof User ? Html::a($model->getUserCreated()->getAttribute('name'), $model->getUserCreated()->getLink()) : ''
+				'value' => $model->printUserCreatedLink()
 			],
 			'date_updated:datetime',
 			[
 				'attribute' => 'user_updated',
 				'format' => 'html',
-				'value' => $model->getUserUpdated() instanceof User ? Html::a($model->getUserUpdated()->getAttribute('name'), $model->getUserUpdated()->getLink()) : ''
+				'value' => $model->printUserUpdatedLink()
 			],
 		],
 	]) ?>

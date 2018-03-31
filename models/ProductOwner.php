@@ -118,5 +118,17 @@ class ProductOwner extends SafeToolActiveRecord
 	public function getLink()
 	{
 		return Url::to(['product-owner/view', 'id' => $this->getAttribute('id')]);
-	}	
+	}
+
+    /**
+     * Returns the user associated with the product owner.
+     *
+     * @return string
+     */
+    public function printUserLink() {
+        if ($this->getUser() instanceof User) {
+            return Html::a($this->getUser()->getAttribute('name'), $this->getUser()->getLink());
+        }
+        return null;
+    }
 }

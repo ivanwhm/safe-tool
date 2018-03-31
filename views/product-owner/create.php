@@ -38,8 +38,6 @@ $this->params['breadcrumbs'] = [
 ?>
 <div class="product-owner-create">
 
-	<?= $this->render('_form', [
-		'model' => $model,
-	]) ?>
+	<?= $this->render('_form', ['model' => $model]) ?>
 
 </div>

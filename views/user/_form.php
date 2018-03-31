@@ -34,10 +34,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 <div class="user-form">
 
-	<?php $form = ActiveForm::begin([
-			'id' => 'user-form',
-		]
-	); ?>
+	<?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
 
 	<?php if ($model->hasErrors()) : ?>
 		<div class="alert alert-danger">

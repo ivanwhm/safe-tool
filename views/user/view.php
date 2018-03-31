@@ -32,7 +32,7 @@ $this->params['breadcrumbs'] = [
 		"label" => $this->title,
 		"icon" => Icon::show('eye'),
 		"active" => true,
-		"url" => Url::to(["user/view", 'id' => $model->getAttribute('id')])
+		"url" => $model->getLink()
 	]
 ];
 ?>
@@ -83,13 +83,13 @@ $this->params['breadcrumbs'] = [
 			[
 				'attribute' => 'user_created',
 				'format' => 'html',
-				'value' => $model->getUserCreated() instanceof User ? Html::a($model->getUserCreated()->getAttribute('name'), $model->getUserCreated()->getLink()) : ''
+				'value' => $model->printUserCreatedLink()
 			],
 			'date_updated:datetime',
 			[
 				'attribute' => 'user_updated',
 				'format' => 'html',
-				'value' => $model->getUserUpdated() instanceof User ? Html::a($model->getUserUpdated()->getAttribute('name'), $model->getUserUpdated()->getLink()) : ''
+				'value' => $model->printUserUpdatedLink()
 			],
 		],
 	]) ?>
