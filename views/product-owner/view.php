@@ -43,7 +43,7 @@ $this->params['breadcrumbs'] = [
 		'model' => $model,
 		'hover' => true,
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('user-md') . ' ' . $this->title . '</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icon::show('eye') . ' ' . $this->title . '</h3>',
 			'type' => DetailView::TYPE_DEFAULT,
 		],
 		'buttons1' => '',
