@@ -9,18 +9,18 @@
 namespace app\controllers;
 
 //Imports
-use app\models\forms\ChangePasswordForm;
-use Yii;
-use yii\filters\AccessControl;
 use app\components\SafeToolController;
+use app\models\forms\ChangePasswordForm;
 use app\models\forms\LoginForm;
 use app\models\User;
+use Yii;
+use yii\filters\AccessControl;
 use yii\web\Cookie;
 
 class SiteController extends SafeToolController
 {
 
-	/**
+	/*
 	 * @inheritdoc
 	 */
 	public function behaviors()
@@ -79,6 +79,7 @@ class SiteController extends SafeToolController
 	 * Login action.
 	 *
 	 * @return string
+	 * @throws \Throwable
 	 */
 	public function actionLogin()
 	{
@@ -136,7 +137,7 @@ class SiteController extends SafeToolController
 	public function actionPassword()
 	{
 		$updated = false;
-		
+
 		$model = new ChangePasswordForm();
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->changePassword()) {
 			$updated = true;
@@ -168,18 +169,18 @@ class SiteController extends SafeToolController
 	public function actionProfile()
 	{
 		$updated = false;
-		
+
 		$model = User::findOne(Yii::$app->getUser()->getId());
 		$model->setAttribute('password', '');
 		$model->new_password = '';
-		
+
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->validate() && $model->save()) {
 			$updated = true;
 		}
-		
+
 		return $this->render('profile', [
 			'model' => $model,
 			'updated' => $updated
 		]);
-	}	
+	}
 }

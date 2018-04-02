@@ -11,6 +11,7 @@
 
 //Imports
 use app\models\enums\Language;
+use app\models\enums\Status;
 use app\models\User;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
@@ -68,7 +69,7 @@ $this->params['breadcrumbs'] = [
 					return $data->getStatus();
 				},
 				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => User::getStatusData(),
+				'filter' => Status::getData(),
 				'filterWidgetOptions' => [
 					'pluginOptions' => [
 						'allowClear' => true

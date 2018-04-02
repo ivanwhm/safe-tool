@@ -29,22 +29,19 @@ namespace app\models;
 //Imports
 use app\components\SafeToolActiveRecord;
 use app\models\enums\Language;
+use app\models\enums\Status;
 use kartik\password\StrengthValidator;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\Cookie;
 use yii\web\IdentityInterface;
 
 class User extends SafeToolActiveRecord implements IdentityInterface
 {
-
-	const STATUS_ACTIVE = 1;
-	const STATUS_INACTIVE = 0;
 
 	/**
 	 * Attribute used to compare passwords.
@@ -187,7 +184,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public static function findIdentity($id)
 	{
-		return User::findOne(['status' => User::STATUS_ACTIVE, 'id' => $id]);
+		return User::findOne(['status' => Status::ACTIVE, 'id' => $id]);
 	}
 
 	/**
@@ -198,7 +195,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public static function findByUsername($username)
 	{
-		return User::findOne(['status' => User::STATUS_ACTIVE, 'username' => $username]);
+		return User::findOne(['status' => Status::ACTIVE, 'username' => $username]);
 	}
 
 	/**
@@ -300,28 +297,13 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	}
 
 	/**
-	 * Returns all the user status information.
-	 *
-	 * @return array
-	 */
-	public static function getStatusData()
-	{
-		return [
-			self::STATUS_ACTIVE => Yii::t('index', 'Active'),
-			self::STATUS_INACTIVE => Yii::t('index', 'Inactive')
-		];
-	}
-
-	/**
 	 * Returns the status description of the user.
 	 *
 	 * @return string
 	 */
 	public function getStatus()
 	{
-		return $this->getAttribute('status') ?
-			Html::tag('span', Yii::t('index', 'Active'), ['class' => 'label label-success']) :
-			Html::tag('span', Yii::t('index', 'Inactive'), ['class' => 'label label-danger']);
+		return Status::getStatusDescriptionWithLabel($this->getAttribute('status'));
 	}
 
 	/**
@@ -354,7 +336,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public static function getUsers()
 	{
-		$users = self::find()->addParams(['status' => self::STATUS_ACTIVE])->orderBy('name')->all();
+		$users = self::find()->andFilterWhere(['status' => Status::ACTIVE])->orderBy('name')->all();
 		return ArrayHelper::map($users, 'id', 'name');
 	}
 

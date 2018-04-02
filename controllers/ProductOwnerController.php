@@ -9,10 +9,10 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
+use app\models\enums\Status;
 use app\models\ProductOwner;
 use Exception;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class ProductOwnerController extends SafeToolController
@@ -60,7 +60,7 @@ class ProductOwnerController extends SafeToolController
 	public function actionCreate()
 	{
 		$model = new ProductOwner();
-		$model->setAttribute('status', ProductOwner::STATUS_ACTIVE);
+		$model->setAttribute('status', Status::ACTIVE);
 
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);

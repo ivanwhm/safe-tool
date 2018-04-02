@@ -10,6 +10,7 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
+use app\models\enums\Status;
 use app\models\User;
 use Exception;
 use Yii;
@@ -62,7 +63,7 @@ class UserController extends SafeToolController
 		$model->setScenario('create');
 		$model->setAttribute('password', '');
 		$model->new_password = '';
-		$model->setAttribute('status', User::STATUS_ACTIVE);
+		$model->setAttribute('status', Status::ACTIVE);
 		$model->setAttribute('language', Yii::$app->getSession()->get('language'));
 
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {

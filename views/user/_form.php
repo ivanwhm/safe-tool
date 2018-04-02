@@ -11,6 +11,7 @@
 
 //Imports
 use app\models\enums\Language;
+use app\models\enums\Status;
 use app\models\User;
 use kartik\icons\Icon;
 use kartik\password\PasswordInput;
@@ -122,8 +123,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'type' => SwitchInput::CHECKBOX,
 		'pluginOptions' => [
 			'handleWidth' => 60,
-			'onText' => Yii::t('index', 'Active'),
-			'offText' => Yii::t('index', 'Inactive'),
+			'onText' => Status::getStatusDescription(Status::ACTIVE),
+			'offText' => Status::getStatusDescription(Status::INACTIVE),
 			'onColor' => 'success',
 			'offColor' => 'danger',
 			'aria-describedby' => 'hbStatus',

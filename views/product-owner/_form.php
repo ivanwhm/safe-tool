@@ -10,7 +10,7 @@
  */
 
 //Imports
-use app\models\Language;
+use app\models\enums\Status;
 use app\models\ProductOwner;
 use app\models\User;
 use kartik\icons\Icon;
@@ -49,7 +49,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'id' => 'hbName',
 		'class' => 'help-block'
 	]) ?>
-	
+
 	<?= $form->field($model, 'user_id')->widget(Select2::class, [
 		'data' => User::getUsers(),
 		'options' => [
@@ -66,8 +66,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'type' => SwitchInput::CHECKBOX,
 		'pluginOptions' => [
 			'handleWidth' => 60,
-			'onText' => Yii::t('index', 'Active'),
-			'offText' => Yii::t('index', 'Inactive'),
+			'onText' => Status::getStatusDescription(Status::ACTIVE),
+			'offText' => Status::getStatusDescription(Status::INACTIVE),
 			'onColor' => 'success',
 			'offColor' => 'danger',
 			'aria-describedby' => 'hbStatus',
@@ -80,7 +80,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	]) ?>
 
 	<br>
-	
+
 	<?php if (!$model->getIsNewRecord()) : ?>
 		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
 		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>

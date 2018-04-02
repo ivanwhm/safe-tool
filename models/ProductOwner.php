@@ -23,6 +23,7 @@ namespace app\models;
 
 //Imports
 use app\components\SafeToolActiveRecord;
+use app\models\enums\Status;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
@@ -31,9 +32,6 @@ use yii\helpers\Url;
 class ProductOwner extends SafeToolActiveRecord
 {
 
-	const STATUS_ACTIVE = '1';
-	const STATUS_INACTIVE = '0';
-	
 	/**
 	 * @inheritdoc
 	 */
@@ -79,26 +77,12 @@ class ProductOwner extends SafeToolActiveRecord
 
 	/**
 	 * Returns the user associated with this product owner.
-	 * 
+	 *
 	 * @return User
 	 */
 	public function getUser()
 	{
 		return User::findOne(['id' => $this->getAttribute('user_id')]);
-	}
-
-
-	/**
-	 * Returns all the product owner status information.
-	 *
-	 * @return array
-	 */
-	public static function getStatusData()
-	{
-		return [
-			self::STATUS_ACTIVE => Yii::t('index', 'Active'),
-			self::STATUS_INACTIVE => Yii::t('index', 'Inactive')
-		];
 	}
 
 	/**
@@ -108,9 +92,7 @@ class ProductOwner extends SafeToolActiveRecord
 	 */
 	public function getStatus()
 	{
-		return $this->getAttribute('status') ?
-			Html::tag('span', Yii::t('index', 'Active'), ['class' => 'label label-success']) :
-			Html::tag('span', Yii::t('index', 'Inactive'), ['class' => 'label label-danger']);
+		return Status::getStatusDescriptionWithLabel($this->getAttribute('status'));
 	}
 
 	/**
@@ -123,17 +105,18 @@ class ProductOwner extends SafeToolActiveRecord
 		return Url::to(['product-owner/view', 'id' => $this->getAttribute('id')]);
 	}
 
-    /**
-     * Returns the user associated with the product owner.
-     *
-     * @return string
-     */
-    public function printUserLink() {
-        if ($this->getUser() instanceof User) {
-            return Html::a($this->getUser()->getAttribute('name'), $this->getUser()->getLink());
-        }
-        return null;
-    }
+	/**
+	 * Returns the user associated with the product owner.
+	 *
+	 * @return string
+	 */
+	public function printUserLink()
+	{
+		if ($this->getUser() instanceof User) {
+			return Html::a($this->getUser()->getAttribute('name'), $this->getUser()->getLink());
+		}
+		return null;
+	}
 
 	/**
 	 * Returns the form search.
@@ -141,10 +124,11 @@ class ProductOwner extends SafeToolActiveRecord
 	 * @param $params
 	 * @return ActiveDataProvider
 	 */
-	public function search($params) {
+	public function search($params)
+	{
 		$query = self::find();
 		$query->orderBy('name');
-		
+
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
 			'pagination' => false,
@@ -158,5 +142,5 @@ class ProductOwner extends SafeToolActiveRecord
 
 		return $dataProvider;
 	}
-	
+
 }

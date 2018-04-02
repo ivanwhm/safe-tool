@@ -10,6 +10,7 @@
  */
 
 //Imports
+use app\models\enums\Status;
 use app\models\ProductOwner;
 use app\models\User;
 use kartik\grid\ActionColumn;
@@ -46,11 +47,11 @@ $this->params['breadcrumbs'] = [
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' =>' <h3 class="panel-title">' . Icon::show('user-md')  . ' '. Yii::t('product-owner', 'Product owners') .'</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icon::show('user-md') . ' ' . Yii::t('product-owner', 'Product owners') . '</h3>',
 			'type' => 'default',
 			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
 			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
-			'footer'=> false
+			'footer' => false
 		],
 		'columns' => [
 			[
@@ -76,7 +77,7 @@ $this->params['breadcrumbs'] = [
 				'filterInputOptions' => [
 					'placeholder' => '---'
 				]
-			],			
+			],
 			[
 				'attribute' => 'status',
 				'format' => 'html',
@@ -85,11 +86,11 @@ $this->params['breadcrumbs'] = [
 					return $data->getStatus();
 				},
 				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => ProductOwner::getStatusData(),
+				'filter' => Status::getData(),
 				'filterWidgetOptions' => [
 					'pluginOptions' => ['allowClear' => true],
 				],
-				'filterInputOptions' => ['placeholder' => '---']				
+				'filterInputOptions' => ['placeholder' => '---']
 			],
 			[
 				'class' => ActionColumn::class,
@@ -98,9 +99,9 @@ $this->params['breadcrumbs'] = [
 					'delete' => function ($url) {
 						return Html::a(
 							Icon::show('trash'),
-							[$url], 
+							[$url],
 							[
-								'data-confirm' => Yii::t('product-owner', 'Do you want to delete this product owner?'), 
+								'data-confirm' => Yii::t('product-owner', 'Do you want to delete this product owner?'),
 								'data-method' => 'post'
 							]
 						);
