@@ -10,7 +10,7 @@
  */
 
 //Imports
-use app\models\Language;
+use app\models\enums\Language;
 use app\models\User;
 use kartik\icons\Icon;
 use kartik\password\PasswordInput;
@@ -30,7 +30,6 @@ $activeHelp = Icon::show('info-circle') . Yii::t('user', 'Please tell if the use
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
 $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
-
 ?>
 
 <div class="user-form">
@@ -107,7 +106,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	]) ?>
 
 	<?= $form->field($model, 'language')->widget(Select2::class, [
-		'data' => Language::getLanguageData(),
+		'data' => Language::getData(),
 		'options' => [
 			'prompt' => '---',
 			'aria-describedby' => 'hbLanguage'

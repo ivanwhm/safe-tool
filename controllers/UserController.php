@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This class is responsible to manager the User CRUD related pages.
  *
@@ -12,7 +13,6 @@ use app\components\SafeToolController;
 use app\models\User;
 use Exception;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class UserController extends SafeToolController
@@ -139,4 +139,5 @@ class UserController extends SafeToolController
 			throw new NotFoundHttpException(Yii::t('user', 'The requested user does not exist.'));
 		}
 	}
+
 }

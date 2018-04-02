@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @inheritdoc
  *
@@ -8,7 +9,7 @@
 namespace app\components;
 
 //Imports
-use app\models\Language;
+use app\models\enums\Language;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -30,15 +31,14 @@ class SafeToolController extends Controller
 			} else {
 				//Get the language from the browser
 				Yii::$app->language = Yii::$app->getRequest()->getPreferredLanguage([
-					Language::LANGUAGE_PT_BR,
-					Language::LANGUAGE_EN_US,
+					Language::PT_BR,
+					Language::EN_US,
 				]);
 			}
 		} else {
 			//Get the language from session
 			Yii::$app->language = Yii::$app->getSession()->get('language');
 		}
-
 	}
 
 	/**
@@ -64,4 +64,5 @@ class SafeToolController extends Controller
 			],
 		];
 	}
+
 }

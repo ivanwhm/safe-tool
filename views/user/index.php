@@ -10,7 +10,7 @@
  */
 
 //Imports
-use app\models\Language;
+use app\models\enums\Language;
 use app\models\User;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
@@ -33,7 +33,6 @@ $this->params['breadcrumbs'] = [
 		"url" => Url::to(["user/index"])
 	]
 ];
-
 ?>
 <div class="user-index">
 
@@ -86,7 +85,7 @@ $this->params['breadcrumbs'] = [
 					return $data->getLanguage();
 				},
 				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => Language::getLanguageData(),
+				'filter' => Language::getData(),
 				'filterWidgetOptions' => [
 					'pluginOptions' => ['allowClear' => true],
 				],
@@ -110,7 +109,6 @@ $this->params['breadcrumbs'] = [
 			],
 		],
 	]);
-
 	?>
 
 </div>

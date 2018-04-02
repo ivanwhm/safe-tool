@@ -10,7 +10,7 @@
  */
 
 //Imports
-use app\models\Language;
+use app\models\enums\Language;
 use app\models\User;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
@@ -21,11 +21,11 @@ use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('user', 'User profile');
 $this->params['breadcrumbs'] = [[
-		"label" => Yii::t('user', 'User profile'),
-		"icon" => Icon::show('user'),
-		"active" => false,
-		"url" => Url::to(["site/profile"])
-	]];
+	"label" => Yii::t('user', 'User profile'),
+	"icon" => Icon::show('user'),
+	"active" => false,
+	"url" => Url::to(["site/profile"])
+]];
 
 $usernameLabel = Icon::show('info-circle') . Yii::t('user', 'Input the username.');
 $emailLabel = Icon::show('info-circle') . Yii::t('user', 'Input the e-mail address.');
@@ -40,9 +40,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 	<div class="user-profile-form">
 
-		<?php $form = ActiveForm::begin([
-				'id' => 'user-profile-form',
-			]); ?>
+		<?php $form = ActiveForm::begin(['id' => 'user-profile-form']); ?>
 
 		<?php if ($model->hasErrors()) : ?>
 			<div class="alert alert-danger">
@@ -58,13 +56,13 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		<?php endif; ?>
 
 		<?= $form->field($model, 'username')->textInput([
-			'maxlength' => true, 
-			'autofocus' => true, 
+			'maxlength' => true,
+			'autofocus' => true,
 			'aria-describedby' => 'hbUsername'
 		]) ?>
-		
+
 		<?= Html::tag('span', $usernameLabel, [
-			'id' => 'hbUsername', 
+			'id' => 'hbUsername',
 			'class' => 'help-block'
 		]) ?>
 
@@ -80,9 +78,9 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		]) ?>
 
 		<?= $form->field($model, 'language')->widget(Select2::class, [
-			'data' => Language::getLanguageData(), 
+			'data' => Language::getData(),
 			'options' => [
-				'prompt' => '---', 
+				'prompt' => '---',
 				'aria-describedby' => 'hbLanguage'
 			]]) ?>
 
@@ -90,9 +88,9 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 			'id' => 'hbLanguage',
 			'class' => 'help-block'
 		]) ?>
-		
+
 		<br>
-		
+
 		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), [
 			'class' => 'help-block'
 		]) ?>
@@ -100,7 +98,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		<?= Html::tag('span', $mandatoryFields, [
 			'class' => 'help-block'
 		]) ?>
-		
+
 		<div class="form-group">
 			<?= Html::submitButton($saveLabel, ['class' => 'btn btn-success']) ?>
 			<?= Html::a($cancelLabel, ['index'], ['class' => 'btn btn-danger']) ?>

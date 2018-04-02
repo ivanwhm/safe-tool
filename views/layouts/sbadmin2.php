@@ -11,7 +11,7 @@
 
 //Imports
 use app\assets\SBAdmin2\SBAdmin2Asset;
-use app\models\Language;
+use app\models\enums\Language;
 use app\models\User;
 use kartik\dialog\Dialog;
 use kartik\icons\Icon;
@@ -75,14 +75,13 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 			<!-- /.dropdown -->
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<?= Icon::show($user->getLanguageCountry(), [], Icon::FI) . ' ' . Icon::show('caret-down') ?>
+					<?= Language::getCountryIconFromLanguage($user->getAttribute('language'), ['class' => 'fa-fw']) . ' ' . Icon::show('caret-down') ?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php
-					$languages = Language::getLanguageCountryData();
-					foreach (Language::getLanguageData() as $key => $value) {
+					foreach (Language::getData() as $key => $value) {
 						echo Html::beginTag('li');
-						$text = Icon::show($languages[$key], ['class' => 'fa-fw'], Icon::FI) . $value;
+						$text = Language::getCountryIconFromLanguage($key, ['class' => 'fa-fw']) . $value;
 						echo Html::a($text, Url::to(['site/language', 'lang' => $key]));
 						echo Html::endTag('li');
 					}
@@ -105,7 +104,7 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 						<a href="<?= Url::to(["site/password"]) ?>">
 							<?= Icon::show('key', ['class' => 'fa-fw']) . Yii::t('password', 'Change password') ?>
 						</a>
-					</li>					
+					</li>
 					<li>
 						<a href="#">
 							<?= Icon::show('gear', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Settings') ?>
@@ -149,7 +148,7 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 							</li>
 						</ul>
 						<!-- /.nav-second-level-->
-					</li>					
+					</li>
 					<!--					<li>-->
 					<!--						<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->
 					<!--						<ul class="nav nav-second-level">-->
@@ -197,7 +196,7 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 					<!-- .breadcrumb -->
 					<ol class="breadcrumb2">
 						<li>
-							<?= Icon::show('dashboard') ?> 
+							<?= Icon::show('dashboard') ?>
 							<a href="<?= Url::to(["site/index"]) ?>">
 								<?= Yii::t('index', 'Dashboard') ?>
 							</a>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This is the model class for table "user".
  *
@@ -29,7 +28,7 @@ namespace app\models;
 
 //Imports
 use app\components\SafeToolActiveRecord;
-use kartik\icons\Icon;
+use app\models\enums\Language;
 use kartik\password\StrengthValidator;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -290,16 +289,6 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 		return null;
 	}
 
-
-	/**
-	 * Returns the language country description of the user.
-	 * @return string
-	 */
-	public function getLanguageCountry()
-	{
-		return Language::getLanguageCountryData()[$this->getAttribute('language')];
-	}
-
 	/**
 	 * Returns the language description of the user.
 	 *
@@ -307,7 +296,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public function getLanguage()
 	{
-		return Icon::show($this->getLanguageCountry(), [], Icon::FI) . Language::getLanguageData()[$this->getAttribute('language')];
+		return Language::getLanguageDescription($this->getAttribute('language'), true, ['class' => 'fa-fw']);
 	}
 
 	/**
@@ -365,7 +354,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	 */
 	public static function getUsers()
 	{
-		$users = self::find(['status' => self::STATUS_ACTIVE])->orderBy('name')->all();
+		$users = self::find()->addParams(['status' => self::STATUS_ACTIVE])->orderBy('name')->all();
 		return ArrayHelper::map($users, 'id', 'name');
 	}
 
@@ -397,3 +386,4 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	}
 
 }
+	
