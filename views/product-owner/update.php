@@ -30,7 +30,7 @@ $this->params['breadcrumbs'] = [
 		"label" => $this->title,
 		"icon" => Icon::show('pencil'),
 		"active" => true,
-		"url" => $model->getLink()
+		"url" => $model->getLink(true)
 	]
 ];
 ?>

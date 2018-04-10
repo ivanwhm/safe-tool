@@ -98,10 +98,14 @@ class ProductOwner extends SafeToolActiveRecord
 	/**
 	 * Returns the link to product owner visualization info.
 	 *
+	 * @param bool $edit Edit or view link
 	 * @return string
 	 */
-	public function getLink()
+	public function getLink($edit = false)
 	{
+		if ($edit) {
+			return Url::to(['product-owner/update', 'id' => $this->getAttribute('id')]);
+		}
 		return Url::to(['product-owner/view', 'id' => $this->getAttribute('id')]);
 	}
 
