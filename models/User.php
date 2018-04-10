@@ -309,10 +309,14 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	/**
 	 * Returns the link to user visualization info.
 	 *
+	 * @param bool $edit Edit or view link
 	 * @return string
 	 */
-	public function getLink()
+	public function getLink($edit = false)
 	{
+		if ($edit) {
+			return Url::to(['user/update', 'id' => $this->getAttribute('id')]);
+		}
 		return Url::to(['user/view', 'id' => $this->getAttribute('id')]);
 	}
 
