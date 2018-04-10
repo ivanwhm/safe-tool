@@ -149,6 +149,12 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 						</ul>
 						<!-- /.nav-second-level-->
 					</li>
+					<li>
+						<a href="<?= Url::to(['epic/index']) ?>">
+							<?= Icon::show('globe', ['class' => 'fa-fw']) . ' ' . Yii::t('epic', 'Epics') ?>
+						</a>
+					</li>
+					
 					<!--					<li>-->
 					<!--						<a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>-->
 					<!--						<ul class="nav nav-second-level">-->
