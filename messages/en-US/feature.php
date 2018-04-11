@@ -1,0 +1,23 @@
+<?php
+return [
+	'ID' => '',
+	'Feature' => '',
+	'Benefit Hypothesis' => '',
+	'Acceptance Criteria' => '',
+	'Epic' => '',
+	'Date of creation' => '',
+	'Date of the last update' => '',
+	'The user of creation' => '',
+	'The user of the last update' => '',
+	'The requested feature does not exist.' => '',
+	'You can not delete the selected feature.' => '',
+	'Do you want to delete this feature?' => '',
+	'Features' => '',
+	'Add feature' => '',
+	'Update feature' => '',
+	'View feature' => '',
+	'Input the feature description.' => '',
+	'Select the epic of the feature.' => '',
+	'Describe the benefit hypothesis for this feature.' => '',
+	'Describe the acceptance criteria for this feature.' => '',
+];

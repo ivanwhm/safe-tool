@@ -14,7 +14,6 @@
  * @property User $userCreated Data of user that created this epic.
  * @property User $userUpdated Data of user that updated this epic.
  *
- *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
@@ -25,6 +24,8 @@ use app\components\SafeToolActiveRecord;
 use app\models\enums\EpicType;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 class Epic extends SafeToolActiveRecord
@@ -94,7 +95,7 @@ class Epic extends SafeToolActiveRecord
 		}
 		return Url::to(['epic/view', 'id' => $this->getAttribute('id')]);
 	}
-	
+
 	/**
 	 * Returns the form search.
 	 *
@@ -109,7 +110,7 @@ class Epic extends SafeToolActiveRecord
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
 			'pagination' => false,
-			'sort' => ['attributes' => ['id', 'title']]
+			'sort' => ['attributes' => ['title', 'id']]
 		]);
 		$this->load($params);
 
@@ -118,5 +119,25 @@ class Epic extends SafeToolActiveRecord
 			->andFilterWhere(['like', 'epic', $this->getAttribute('epic')]);
 
 		return $dataProvider;
+	}
+
+	/**
+	 * Returns all the epics.
+	 *
+	 * @return array
+	 */
+	public static function getEpics()
+	{
+		$epics = self::find()->orderBy('title')->all();
+		return ArrayHelper::map($epics, 'id', 'title');
+	}
+
+	/**
+	 * Returns the epic link of the record.
+	 *
+	 * @return string
+	 */
+	public function printLink() {
+		return Html::a($this->getAttribute('title'), $this->getLink());
 	}	
 }
