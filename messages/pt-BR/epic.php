@@ -2,6 +2,7 @@
 return [
 	'ID' => 'Código',
 	'Title' => 'Título',
+	'Product' => 'Produto',
 	'Type' => 'Tipo',
 	'Epic' => 'Épico',
 	'Date of creation' => 'Data da criação',
@@ -19,5 +20,6 @@ return [
 	'View epic' => 'Visualizar épico',
 	'Input the title of the epic.' => 'Informe o título do épico.',
 	'Select the type of this epic.' => 'Selectione o tipo do épico.',
-	'Describe this epic.' => 'Descreva este épico.'
+	'Describe this epic.' => 'Descreva este épico.',
+	'Select the product of this epic.' => 'Selecione o produto do épico.'
 ];

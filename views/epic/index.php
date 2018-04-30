@@ -12,6 +12,7 @@
 //Imports
 use app\models\enums\EpicType;
 use app\models\Epic;
+use app\models\Product;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
 use kartik\icons\Icon;
@@ -56,6 +57,20 @@ $this->params['breadcrumbs'] = [
 				'filter' => false
 			],
 			'title',
+			[
+				'attribute' => 'product_id',
+				'format' => 'html',
+				'width' => '170px',
+				'value' => function (Epic $data) {
+					return $data->getProduct()->printLink();
+				},
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => Product::getProducts(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => '---']
+			],			
 			[
 				'attribute' => 'type',
 				'format' => 'html',

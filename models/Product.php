@@ -22,6 +22,8 @@ use app\components\SafeToolActiveRecord;
 use app\models\enums\Status;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 class Product extends SafeToolActiveRecord
@@ -114,4 +116,25 @@ class Product extends SafeToolActiveRecord
 
 		return $dataProvider;
 	}
+
+	/**
+	 * Returns all the products.
+	 *
+	 * @return array
+	 */
+	public static function getProducts()
+	{
+		$products = self::find()->andFilterWhere(['=', 'status', Status::ACTIVE])->orderBy('name')->all();
+		return ArrayHelper::map($products, 'id', 'name');
+	}
+
+	/**
+	 * Returns the product link of the record.
+	 *
+	 * @return string
+	 */
+	public function printLink() {
+		return Html::a($this->getAttribute('name'), $this->getLink());
+	}
+	
 }

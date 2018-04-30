@@ -48,6 +48,11 @@ $this->params['breadcrumbs'] = [
 			'id',
 			'title',
 			[
+				'attribute' => 'product_id',
+				'format' => 'html',
+				'value' => $model->getProduct()->printLink()
+			],
+			[
 				'attribute' => 'type',
 				'format' => 'html',
 				'value' => $model->getType()

@@ -2,6 +2,7 @@
 return [
 	'ID' => '',
 	'Title' => '',
+	'Product' => '',
 	'Type' => '',
 	'Epic' => '',
 	'Date of creation' => '',
@@ -19,5 +20,6 @@ return [
 	'View epic' => '',
 	'Input the title of the epic.' => '',
 	'Select the type of this epic.' => '',
-	'Describe this epic.' => ''
+	'Describe this epic.' => '',
+	'Select the product of this epic.' => ''
 ];

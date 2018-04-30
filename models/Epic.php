@@ -4,6 +4,7 @@
  *
  * @property int $id Epic ID.
  * @property string $title Epic title.
+ * @property int $product_id Product ID of the epic.
  * @property string $type Epic type.
  * @property string $epic Epic full description.
  * @property string $date_created Date and time that the epic was created.
@@ -13,6 +14,7 @@
  *
  * @property User $userCreated Data of user that created this epic.
  * @property User $userUpdated Data of user that updated this epic.
+ * @property Product $product Data of the epic product.
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
@@ -44,12 +46,13 @@ class Epic extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'type', 'epic'], 'required'],
+			[['title', 'product_id', 'type', 'epic'], 'required'],
 			[['date_created', 'date_updated'], 'safe'],
-			[['user_created', 'user_updated'], 'integer'],
+			[['product_id', 'user_created', 'user_updated'], 'integer'],
 			[['title'], 'string', 'max' => 50],
 			[['type'], 'string', 'max' => 1],
 			[['epic'], 'string', 'max' => 2000],
+			[['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::class, 'targetAttribute' => ['product_id' => 'id']],
 			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
 			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_updated' => 'id']],
 		];
@@ -63,6 +66,7 @@ class Epic extends SafeToolActiveRecord
 		return [
 			'id' => Yii::t('epic', 'ID'),
 			'title' => Yii::t('epic', 'Title'),
+			'product_id' => Yii::t('epic', 'Product'),
 			'type' => Yii::t('epic', 'Type'),
 			'epic' => Yii::t('epic', 'Epic'),
 			'date_created' => Yii::t('epic', 'Date of creation'),
@@ -115,6 +119,7 @@ class Epic extends SafeToolActiveRecord
 		$this->load($params);
 
 		$query->andFilterWhere(['=', 'id', $this->getAttribute('id')])
+			->andFilterWhere(['=', 'product_id', $this->getAttribute('product_id')])
 			->andFilterWhere(['=', 'type', $this->getAttribute('type')])
 			->andFilterWhere(['like', 'epic', $this->getAttribute('epic')]);
 
@@ -139,5 +144,15 @@ class Epic extends SafeToolActiveRecord
 	 */
 	public function printLink() {
 		return Html::a($this->getAttribute('title'), $this->getLink());
+	}
+
+	/**
+	 * Return the product of the epic.
+	 * 
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		return Product::findOne(['id' => $this->getAttribute('product_id')]);
 	}	
 }

@@ -12,15 +12,15 @@
 //Imports
 use app\models\enums\EpicType;
 use app\models\Epic;
-use app\models\User;
+use app\models\Product;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
-use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $titleHelp = Icon::show('info-circle') . Yii::t('epic', 'Input the title of the epic.');
+$productHelp = Icon::show('info-circle') . Yii::t('epic', 'Select the product of this epic.');
 $typeHelp = Icon::show('info-circle') . Yii::t('epic', 'Select the type of this epic.');
 $epicHelp = Icon::show('info-circle') . Yii::t('epic', 'Describe this epic.');
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
@@ -50,6 +50,18 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'class' => 'help-block'
 	]) ?>
 
+	<?= $form->field($model, 'product_id')->widget(Select2::class, [
+		'data' => Product::getProducts(),
+		'options' => [
+			'prompt' => '---',
+			'aria-describedby' => 'hbProduct'
+		]]) ?>
+
+	<?= Html::tag('span', $productHelp, [
+		'id' => 'hbProduct',
+		'class' => 'help-block'
+	]) ?>
+	
 	<?= $form->field($model, 'type')->widget(Select2::class, [
 		'data' => EpicType::getData(),
 		'options' => [
