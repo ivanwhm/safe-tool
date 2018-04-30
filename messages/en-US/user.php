@@ -16,7 +16,6 @@ return [
 	'The user of creation' => '',
 	'The user of the last update' => '',
 	'The entered passwords are different' => '',
-	'User profile' => '',
 	'Input the name of the user.' => '',
 	'Input the language.' => '',
 	'Input the username.' => '',

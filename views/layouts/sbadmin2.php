@@ -96,11 +96,6 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 				</a>
 				<ul class="dropdown-menu dropdown-user">
 					<li>
-						<a href="<?= Url::to(["site/profile"]) ?>">
-							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'User profile') ?>
-						</a>
-					</li>
-					<li>
 						<a href="<?= Url::to(["site/password"]) ?>">
 							<?= Icon::show('key', ['class' => 'fa-fw']) . Yii::t('password', 'Change password') ?>
 						</a>
@@ -148,6 +143,11 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 							</li>
 						</ul>
 						<!-- /.nav-second-level-->
+					</li>
+					<li>
+						<a href="<?= Url::to(['product/index']) ?>">
+							<?= Icon::show('product-hunt', ['class' => 'fa-fw']) . ' ' . Yii::t('product', 'Products') ?>
+						</a>
 					</li>
 					<li>
 						<a href="<?= Url::to(['epic/index']) ?>">

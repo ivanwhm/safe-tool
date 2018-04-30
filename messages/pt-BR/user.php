@@ -16,7 +16,6 @@ return [
 	'The user of creation' => 'Usuário que criou',
 	'The user of the last update' => 'Usuário da última alteração',
 	'The entered passwords are different' => 'As senhas inseridas são diferentes',
-	'User profile' => 'Perfil do usuário',
 	'Input the name of the user.' => 'Informe o nome do usuário.',
 	'Input the language.' => 'Informe o idioma.',
 	'Input the username.' => 'Informe o nome de usuário.',
@@ -29,7 +28,7 @@ return [
 	'The requested user does not exist.' => 'O usuário solicitado não foi encontrado.',
 	'You can not delete the selected user.' => 'Você não pode excluir o usuário selecionado.',
 	'Do you want to delete this user?' => 'Você deseja excluir este usuário?',
-  'Add user' => 'Adicionar usuário',
+	'Add user' => 'Adicionar usuário',
 	'Update user' => 'Editar usuário',
 	'View user' => 'Visualizar usuário'
 ];
