@@ -9,9 +9,11 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
+use app\models\Epic;
 use app\models\Feature;
 use Exception;
 use Yii;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
 class FeatureController extends SafeToolController
@@ -129,4 +131,23 @@ class FeatureController extends SafeToolController
 			throw new NotFoundHttpException(Yii::t('feature', 'The requested feature does not exist.'));
 		}
 	}
+
+	/**
+	 * Returns all the epics based in the selected product.
+	 *
+	 * @return string
+	 */	
+	public function actionEpics() {
+		$output = [];
+		if (isset($_POST['depdrop_parents'])) {
+			$parents = $_POST['depdrop_parents'];
+			if ($parents != null) {
+				$productId = $parents[0];
+				$output = Epic::getEpics($productId, 'array');
+				echo Json::encode(['output' => $output, 'selected' => '']);
+				return;
+			}
+		}
+		echo Json::encode(['output' => $output, 'selected' => '']);
+	}	
 }

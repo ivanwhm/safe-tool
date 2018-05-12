@@ -50,6 +50,11 @@ $this->params['breadcrumbs'] = [
 			'benefit_hypothesis',
 			'acceptance_criteria',
 			[
+				'attribute' => 'product_id',
+				'format' => 'html',
+				'value' => $model->getProduct()->printLink()
+			],
+			[
 				'attribute' => 'epic_id',
 				'format' => 'html',
 				'value' => $model->getEpic()->printLink()

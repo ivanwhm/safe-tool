@@ -129,11 +129,23 @@ class Epic extends SafeToolActiveRecord
 	/**
 	 * Returns all the epics.
 	 *
+	 * @param int $productId Product ID.
+	 * @param string $type Type of return.
 	 * @return array
 	 */
-	public static function getEpics()
+	public static function getEpics($productId, $type = 'map')
 	{
-		$epics = self::find()->orderBy('title')->all();
+		$epics = self::find()->where(['product_id' => $productId])->orderBy('title')->all();
+		if ($type === 'array') {
+			$result = [];
+			foreach ($epics as $epic) {
+				$result[] = [
+					'id' => $epic->getAttribute('id'),
+					'name' => $epic->getAttribute('title')
+				];
+			}
+			return $result;
+		}
 		return ArrayHelper::map($epics, 'id', 'title');
 	}
 

@@ -5,6 +5,7 @@ return [
 	'Benefit Hypothesis' => 'Hipótese de benefício',
 	'Acceptance Criteria' => 'Critério de aceitação',
 	'Epic' => 'Épico',
+	'Product' => 'Produto',
 	'Date of creation' => 'Data da criação',
 	'Date of the last update' => 'Data da última atualização',
 	'The user of creation' => 'Usuário que criou',
@@ -17,6 +18,7 @@ return [
 	'Update feature' => 'Editar funcionalidade',
 	'View feature' => 'Visualizar funcionalidade',
 	'Input the feature description.' => 'Informe a descrição da funcionalidade.',
+	'Select the product of the feature.' => 'Selecione o produto da funcionalidade.',
 	'Select the epic of the feature.' => 'Selectione o épico da funcionalidade.',
 	'Describe the benefit hypothesis for this feature.' => 'Descreva a hipótese de benefício da funcionalidade.',
 	'Describe the acceptance criteria for this feature.' => 'Descreva o critério de aceitação da funcionalidade.'

@@ -12,6 +12,7 @@
 //Imports
 use app\models\Feature;
 use app\models\Epic;
+use app\models\Product;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
 use kartik\icons\Icon;
@@ -57,18 +58,27 @@ $this->params['breadcrumbs'] = [
 			],
 			'feature',
 			[
+				'attribute' => 'product_id',
+				'format' => 'html',
+				'width' => '170px',
+				'value' => function (Feature $data) {
+					return $data->getProduct()->printLink();
+				},
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => Product::getProducts(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => '---']
+			],			
+			[
 				'attribute' => 'epic_id',
 				'format' => 'html',
 				'width' => '170px',
 				'value' => function (Feature $data) {
 					return $data->getEpic()->printLink();
 				},
-				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => Epic::getEpics(),
-				'filterWidgetOptions' => [
-					'pluginOptions' => ['allowClear' => true],
-				],
-				'filterInputOptions' => ['placeholder' => '---']
+				'filter' => FALSE,
 			],
 			[
 				'class' => ActionColumn::class,

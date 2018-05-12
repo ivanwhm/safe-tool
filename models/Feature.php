@@ -6,6 +6,7 @@
  * @property string $feature Feature description/title.
  * @property string $benefit_hypothesis The benefit hypothesis of the feature.
  * @property string $acceptance_criteria The acceptance criteria of the feature.
+ * @property int $product_id Product ID related to the feature.
  * @property int $epic_id Epic ID related to the feature.
  * @property string $date_created Date and time that the feature was created.
  * @property string $date_updated Date and time that the feature was updated.
@@ -14,7 +15,8 @@
  *
  * @property User $userCreated Data of user that created this feature.
  * @property User $userUpdated Data of user that updated this feature.
- * @property Epic $epic Epic of the feature.
+ * @property Product $product Data of the Product of the feature.
+ * @property Epic $epic Data of the Epic of the feature.
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
@@ -43,12 +45,13 @@ class Feature extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
-			[['feature', 'epic_id'], 'required'],
-			[['epic_id', 'user_created', 'user_updated'], 'integer'],
+			[['feature', 'product_id', 'epic_id'], 'required'],
+			[['product_id', 'epic_id', 'user_created', 'user_updated'], 'integer'],
 			[['date_created', 'date_updated'], 'safe'],
 			[['feature'], 'string', 'max' => 255],
 			[['benefit_hypothesis'], 'string', 'max' => 1000],
 			[['acceptance_criteria'], 'string', 'max' => 2000],
+			[['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::class, 'targetAttribute' => ['product_id' => 'id']],
 			[['epic_id'], 'exist', 'skipOnError' => true, 'targetClass' => Epic::class, 'targetAttribute' => ['epic_id' => 'id']],
 			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
 			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_updated' => 'id']],
@@ -65,6 +68,7 @@ class Feature extends SafeToolActiveRecord
 			'feature' => Yii::t('feature', 'Feature'),
 			'benefit_hypothesis' => Yii::t('feature', 'Benefit Hypothesis'),
 			'acceptance_criteria' => Yii::t('feature', 'Acceptance Criteria'),
+			'product_id' => Yii::t('feature', 'Product'),
 			'epic_id' => Yii::t('feature', 'Epic'),
 			'date_created' => Yii::t('feature', 'Date of creation'),
 			'date_updated' => Yii::t('feature', 'Date of the last update'),
@@ -73,6 +77,16 @@ class Feature extends SafeToolActiveRecord
 		];
 	}
 
+	/**
+	 * Returns the product of the feature.
+	 *
+	 * @return Product
+	 */
+	public function getProduct()
+	{
+		return Product::findOne(['id' => $this->getAttribute('product_id')]);
+	}
+	
 	/**
 	 * Returns the epic of the feature.
 	 *
@@ -116,6 +130,7 @@ class Feature extends SafeToolActiveRecord
 		$this->load($params);
 
 		$query->andFilterWhere(['=', 'id', $this->getAttribute('id')])
+			->andFilterWhere(['=', 'product_id', $this->getAttribute('product_id')])
 			->andFilterWhere(['=', 'epic_id', $this->getAttribute('epic_id')])
 			->andFilterWhere(['like', 'feature', $this->getAttribute('feature')]);
 

@@ -12,13 +12,17 @@
 //Imports
 use app\models\Epic;
 use app\models\Feature;
+use app\models\Product;
+use kartik\depdrop\DepDrop;
 use kartik\icons\Icon;
-use \kartik\select2\Select2;
+use kartik\select2\Select2;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $featureHelp = Icon::show('info-circle') . Yii::t('feature', 'Input the feature description.');
+$productIDHelp = Icon::show('info-circle') . Yii::t('feature', 'Select the product of the feature.');
 $epicIDHelp = Icon::show('info-circle') . Yii::t('feature', 'Select the epic of the feature.');
 $benefitHypothesisHelp = Icon::show('info-circle') . Yii::t('feature', 'Describe the benefit hypothesis for this feature.');
 $acceptanceCriteriaHelp = Icon::show('info-circle') . Yii::t('feature', 'Describe the acceptance criteria for this feature.');
@@ -49,12 +53,33 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'class' => 'help-block'
 	]) ?>
 
-	<?= $form->field($model, 'epic_id')->widget(Select2::class, [
-		'data' => Epic::getEpics(),
+	<?= $form->field($model, 'product_id')->widget(Select2::class, [
+		'data' => Product::getProducts(),
 		'options' => [
 			'prompt' => '---',
-			'aria-describedby' => 'hbEpicID'
+			'aria-describedby' => 'hbProductID',
+			'id' => 'SelectProductID'
 		]]) ?>
+
+	<?= Html::tag('span', $productIDHelp, [
+		'id' => 'hbProductID',
+		'class' => 'help-block'
+	]) ?>
+	
+	<?= $form->field($model, 'epic_id')->widget(DepDrop::class, [
+		'type' => DepDrop::TYPE_SELECT2,
+		'data' => Epic::getEpics($model->getAttribute('product_id')),
+		'options' => [
+			'prompt' => '---',
+			'aria-describedby' => 'hbEpicID',
+			'id' => 'SelectEpicID'
+		],
+		'pluginOptions'=>[
+			'depends' => ['SelectProductID'],
+			'placeholder' => '---',
+			'url' => Url::to(['feature/epics']),
+		]
+	]) ?>
 
 	<?= Html::tag('span', $epicIDHelp, [
 		'id' => 'hbEpicID',
