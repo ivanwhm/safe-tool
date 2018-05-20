@@ -137,6 +137,11 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 								</a>
 							</li>
 							<li>
+								<a href="<?= Url::to(['story-role/index']) ?>">
+									<?= Icon::show('female', ['class' => 'fa-fw']) . ' ' . Yii::t('story-role', 'Story roles') ?>
+								</a>
+							</li>
+							<li>
 								<a href="<?= Url::to(['user/index']) ?>">
 									<?= Icon::show('users', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'Users') ?>
 								</a>
