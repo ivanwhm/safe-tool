@@ -99,7 +99,7 @@ class FeatureController extends SafeToolController
 	 * @param integer $id Feature ID.
 	 * @return string
 	 *
-	 * @throws NotFoundHttpException If the user cannot be deleted
+	 * @throws NotFoundHttpException If the feature cannot be deleted
 	 * @throws \Throwable
 	 */
 	public function actionDelete($id)
@@ -115,7 +115,7 @@ class FeatureController extends SafeToolController
 	}
 
 	/**
-	 * Finds the User model based on its primary key value.
+	 * Finds the Feature model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 *
 	 * @param integer $id Feature ID.
@@ -136,8 +136,9 @@ class FeatureController extends SafeToolController
 	 * Returns all the epics based in the selected product.
 	 *
 	 * @return string
-	 */	
-	public function actionEpics() {
+	 */
+	public function actionEpics()
+	{
 		$output = [];
 		if (isset($_POST['depdrop_parents'])) {
 			$parents = $_POST['depdrop_parents'];
@@ -149,5 +150,5 @@ class FeatureController extends SafeToolController
 			}
 		}
 		echo Json::encode(['output' => $output, 'selected' => '']);
-	}	
+	}
 }

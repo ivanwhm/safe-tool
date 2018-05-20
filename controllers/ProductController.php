@@ -99,7 +99,7 @@ class ProductController extends SafeToolController
 	 * @param integer $id Product ID
 	 * @return string
 	 *
-	 * @throws NotFoundHttpException If the user cannot be deleted
+	 * @throws NotFoundHttpException If the product cannot be deleted
 	 * @throws \Throwable
 	 */
 	public function actionDelete($id)
@@ -115,7 +115,7 @@ class ProductController extends SafeToolController
 	}
 
 	/**
-	 * Finds the User model based on its primary key value.
+	 * Finds the Product model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 *
 	 * @param integer $id Product ID

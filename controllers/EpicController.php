@@ -97,7 +97,7 @@ class EpicController extends SafeToolController
 	 * @param integer $id Epic ID
 	 * @return string
 	 *
-	 * @throws NotFoundHttpException If the user cannot be deleted
+	 * @throws NotFoundHttpException If the epic cannot be deleted
 	 * @throws \Throwable
 	 */
 	public function actionDelete($id)
@@ -113,7 +113,7 @@ class EpicController extends SafeToolController
 	}
 
 	/**
-	 * Finds the User model based on its primary key value.
+	 * Finds the Epic model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 *
 	 * @param integer $id Epic ID
