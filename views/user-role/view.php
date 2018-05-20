@@ -1,6 +1,6 @@
 <?php
 /**
- * Displays the update page to Product CRUD.
+ * Displays the update page to User Role CRUD.
  *
  * @var $this View
  * @var $model Product
@@ -16,17 +16,17 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
-$this->title = Yii::t('story-role', 'View story role');
+$this->title = Yii::t('user-role', 'View user role');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
 		"icon" => Icon::show('edit')
 	],
 	[
-		"label" => Yii::t('story-role', 'Story roles'),
+		"label" => Yii::t('user-role', 'User roles'),
 		"icon" => Icon::show('female'),
 		"active" => false,
-		"url" => Url::to(["story-role/index"])
+		"url" => Url::to(["user-role/index"])
 	],
 	[
 		"label" => $this->title,
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'] = [
 ];
 ?>
 
-<div class="story-role-view">
+<div class="user-role-view">
 
 	<?= DetailView::widget([
 		'model' => $model,
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'] = [
 		], [
 			'class' => 'btn btn-danger',
 			'data' => [
-				'confirm' => Yii::t('story-role', 'Do you want to delete this story role?'),
+				'confirm' => Yii::t('user-role', 'Do you want to delete this user role?'),
 				'method' => 'post'
 			]
 		]) ?>

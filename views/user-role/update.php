@@ -1,30 +1,30 @@
 <?php
 /**
- * Displays the update page to Story Role CRUD.
+ * Displays the update page to User Role CRUD.
  *
  * @var $this View
- * @var $model StoryRole
+ * @var $model UserRole
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
-use app\models\StoryRole;
+use app\models\UserRole;
 use kartik\icons\Icon;
 use yii\helpers\Url;
 use yii\web\View;
 
-$this->title = Yii::t('story-role', 'Update story role');
+$this->title = Yii::t('user-role', 'Update user role');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
 		"icon" => Icon::show('edit')
 	],
 	[
-		"label" => Yii::t('story-role', 'Story roles'),
+		"label" => Yii::t('user-role', 'User roles'),
 		"icon" => Icon::show('female'),
 		"active" => false,
-		"url" => Url::to(["story-role/index"])
+		"url" => Url::to(["user-role/index"])
 	],
 	[
 		"label" => $this->title,
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'] = [
 	]
 ];
 ?>
-<div class="story-role-update">
+<div class="user-role-update">
 
 	<?= $this->render('_form', ['model' => $model]) ?>
 

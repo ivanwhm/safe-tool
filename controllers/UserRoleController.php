@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is responsible to manager the Story Role CRUD related pages.
+ * This class is responsible to manager the User Role CRUD related pages.
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
@@ -10,22 +10,22 @@ namespace app\controllers;
 //Imports
 use app\components\SafeToolController;
 use app\models\enums\Status;
-use app\models\StoryRole;
+use app\models\UserRole;
 use Exception;
 use Yii;
 use yii\web\NotFoundHttpException;
 
-class StoryRoleController extends SafeToolController
+class UserRoleController extends SafeToolController
 {
 
 	/**
-	 * Lists all Story Role models.
+	 * Lists all User Role models.
 	 *
 	 * @return string
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new StoryRole();
+		$searchModel = new UserRole();
 		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
 		return $this->render('index', [
@@ -36,9 +36,9 @@ class StoryRoleController extends SafeToolController
 	}
 
 	/**
-	 * Displays a single Story Role model.
+	 * Displays a single User Role model.
 	 *
-	 * @param integer $id Story Role ID
+	 * @param integer $id User Role ID
 	 * @return string
 	 * @throws NotFoundHttpException
 	 */
@@ -52,14 +52,14 @@ class StoryRoleController extends SafeToolController
 	}
 
 	/**
-	 * Creates a new Story Role model.
+	 * Creates a new User Role model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 *
 	 * @return string
 	 */
 	public function actionCreate()
 	{
-		$model = new StoryRole();
+		$model = new UserRole();
 		$model->setAttribute('status', Status::ACTIVE);
 
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
@@ -72,10 +72,10 @@ class StoryRoleController extends SafeToolController
 	}
 
 	/**
-	 * Updates an existing Story Role model.
+	 * Updates an existing User Role model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 *
-	 * @param integer $id Story Role ID
+	 * @param integer $id User Role ID
 	 * @return string
 	 * @throws NotFoundHttpException
 	 */
@@ -93,13 +93,13 @@ class StoryRoleController extends SafeToolController
 	}
 
 	/**
-	 * Deletes an existing Story Role model.
+	 * Deletes an existing User Role model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
-	 * @param integer $id Story Role ID
+	 * @param integer $id User Role ID
 	 * @return string
 	 *
-	 * @throws NotFoundHttpException If the story role cannot be deleted
+	 * @throws NotFoundHttpException If the user role cannot be deleted
 	 * @throws \Throwable
 	 */
 	public function actionDelete($id)
@@ -108,27 +108,27 @@ class StoryRoleController extends SafeToolController
 		try {
 			$model->delete();
 		} catch (Exception $ex) {
-			throw new NotFoundHttpException(Yii::t('story-role', 'You can not delete the selected story role.'));
+			throw new NotFoundHttpException(Yii::t('user-role', 'You can not delete the selected user role.'));
 		}
 
 		return $this->redirect(['index']);
 	}
 
 	/**
-	 * Finds the Story Role model based on its primary key value.
+	 * Finds the User Role model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 *
-	 * @param integer $id Story Role ID
-	 * @return StoryRole
+	 * @param integer $id User Role ID
+	 * @return UserRole
 	 *
 	 * @throws NotFoundHttpException if the model cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = StoryRole::findOne($id)) !== null) {
+		if (($model = UserRole::findOne($id)) !== null) {
 			return $model;
 		} else {
-			throw new NotFoundHttpException(Yii::t('story-role', 'The requested story role does not exist.'));
+			throw new NotFoundHttpException(Yii::t('user-role', 'The requested user role does not exist.'));
 		}
 	}
 }

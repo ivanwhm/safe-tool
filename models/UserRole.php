@@ -1,11 +1,11 @@
 <?php
 /**
- * This is the model class for table "story_role".
+ * This is the model class for table "user_role".
  *
- * @property int $id Story Role ID.
- * @property string $role Story Role name.
- * @property string $description Story Role description.
- * @property int $status Story Role status.
+ * @property int $id User Role ID.
+ * @property string $role User Role name.
+ * @property string $description User Role description.
+ * @property int $status User Role status.
  * @property string $date_created Date and time that product was created.
  * @property string $date_updated Date and time that product was updated.
  * @property int $user_created User ID that created this product.
@@ -24,18 +24,17 @@ use app\components\SafeToolActiveRecord;
 use app\models\enums\Status;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-class StoryRole extends SafeToolActiveRecord
+class UserRole extends SafeToolActiveRecord
 {
 	/**
 	 * {@inheritdoc}
 	 */
 	public static function tableName()
 	{
-		return 'story_role';
+		return 'user_role';
 	}
 
 	/**
@@ -60,19 +59,19 @@ class StoryRole extends SafeToolActiveRecord
 	public function attributeLabels()
 	{
 		return [
-			'id' => Yii::t('story-role', 'ID'),
-			'role' => Yii::t('story-role', 'Name'),
-			'description' => Yii::t('story-role', 'Description'),
-			'status' => Yii::t('story-role', 'Status'),
-			'date_created' => Yii::t('story-role', 'Date of creation'),
-			'date_updated' => Yii::t('story-role', 'Date of the last update'),
-			'user_created' => Yii::t('story-role', 'The user of creation'),
-			'user_updated' => Yii::t('story-role', 'The user of the last update'),
+			'id' => Yii::t('user-role', 'ID'),
+			'role' => Yii::t('user-role', 'Name'),
+			'description' => Yii::t('user-role', 'Description'),
+			'status' => Yii::t('user-role', 'Status'),
+			'date_created' => Yii::t('user-role', 'Date of creation'),
+			'date_updated' => Yii::t('user-role', 'Date of the last update'),
+			'user_created' => Yii::t('user-role', 'The user of creation'),
+			'user_updated' => Yii::t('user-role', 'The user of the last update'),
 		];
 	}
 
 	/**
-	 * Returns the status description of the story role.
+	 * Returns the status description of the user role.
 	 *
 	 * @return string
 	 */
@@ -104,7 +103,7 @@ class StoryRole extends SafeToolActiveRecord
 	}
 
 	/**
-	 * Returns the story role link of the record.
+	 * Returns the user role link of the record.
 	 *
 	 * @return string
 	 */
@@ -114,7 +113,7 @@ class StoryRole extends SafeToolActiveRecord
 	}
 
 	/**
-	 * Returns the link to story role visualization info.
+	 * Returns the link to user role visualization info.
 	 *
 	 * @param bool $edit Edit or view link
 	 * @return string
@@ -122,9 +121,9 @@ class StoryRole extends SafeToolActiveRecord
 	public function getLink($edit = false)
 	{
 		if ($edit) {
-			return Url::to(['story-role/update', 'id' => $this->getAttribute('id')]);
+			return Url::to(['user-role/update', 'id' => $this->getAttribute('id')]);
 		}
-		return Url::to(['story-role/view', 'id' => $this->getAttribute('id')]);
+		return Url::to(['user-role/view', 'id' => $this->getAttribute('id')]);
 	}
 
 }

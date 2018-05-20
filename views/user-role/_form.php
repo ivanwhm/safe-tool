@@ -1,9 +1,9 @@
 <?php
 /**
- * Displays the create page to Story Role CRUD.
+ * Displays the create page to User Role CRUD.
  *
  * @var $this View
- * @var $model StoryRole
+ * @var $model UserRole
  * @var $form ActiveForm
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
@@ -11,25 +11,25 @@
 
 //Imports
 use app\models\enums\Status;
-use app\models\StoryRole;
+use app\models\UserRole;
 use kartik\icons\Icon;
 use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$nameHelp = Icon::show('info-circle') . Yii::t('story-role', 'Input the name of the story role.');
-$descriptionHelp = Icon::show('info-circle') . Yii::t('story-role', 'Input the description of the story role.');
-$activeHelp = Icon::show('info-circle') . Yii::t('story-role', 'Please tell if the story role is active or inactive.');
+$nameHelp = Icon::show('info-circle') . Yii::t('user-role', 'Input the name of the user role.');
+$descriptionHelp = Icon::show('info-circle') . Yii::t('user-role', 'Input the description of the user role.');
+$activeHelp = Icon::show('info-circle') . Yii::t('user-role', 'Please tell if the user role is active or inactive.');
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
 $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
-<div class="story-role-form">
+<div class="user-role-form">
 
-	<?php $form = ActiveForm::begin(['id' => 'story-role-form']); ?>
+	<?php $form = ActiveForm::begin(['id' => 'user-role-form']); ?>
 
 	<?php if ($model->hasErrors()) : ?>
 		<div class="alert alert-danger">
