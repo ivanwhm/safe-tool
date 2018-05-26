@@ -42,6 +42,8 @@ class StoryStatus extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
+			['ready', 'default', 'value' => YesNo::NO],
+			['status', 'default', 'value' => Status::ACTIVE],
 			[['name', 'ready', 'status'], 'required'],
 			[['status', 'ready', 'user_created', 'user_updated'], 'integer'],
 			[['date_created', 'date_updated'], 'safe'],

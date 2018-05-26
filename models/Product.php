@@ -42,6 +42,7 @@ class Product extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
+			['status', 'default', 'value' => Status::ACTIVE],
 			[['name', 'status'], 'required'],
 			[['date_created', 'date_updated'], 'safe'],
 			[['user_created', 'user_updated'], 'integer'],

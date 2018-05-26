@@ -44,6 +44,7 @@ class UserRole extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
+			['status', 'default', 'value' => Status::ACTIVE],
 			[['role', 'status'], 'required'],
 			[['status', 'user_created', 'user_updated'], 'integer'],
 			[['date_created', 'date_updated'], 'safe'],

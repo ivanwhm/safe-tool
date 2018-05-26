@@ -64,6 +64,8 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
+			['status', 'default', 'value' => Status::ACTIVE],
+			['language', 'default', 'value' => Yii::$app->getSession()->get('language')],			
 			[['username', 'name', 'email', 'language', 'status'], 'required'],
 			[['id', 'user_created', 'user_updated'], 'integer'],
 			[['last_login_date', 'last_password_change', 'date_created', 'date_updated'], 'safe'],
