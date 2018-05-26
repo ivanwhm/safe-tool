@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is responsible to manager the Feature CRUD related pages.
+ * This class is responsible to manager the Story CRUD related pages.
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
@@ -9,23 +9,22 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
-use app\models\Feature;
+use app\models\Story;
 use Exception;
 use Yii;
-use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
-class FeatureController extends SafeToolController
+class StoryController extends SafeToolController
 {
 
 	/**
-	 * Lists all Feature models.
+	 * Lists all Story models.
 	 *
 	 * @return string
 	 */
 	public function actionIndex()
 	{
-		$searchModel = new Feature();
+		$searchModel = new Story();
 		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
 		return $this->render('index', [
@@ -36,9 +35,9 @@ class FeatureController extends SafeToolController
 	}
 
 	/**
-	 * Displays a single Feature model.
+	 * Displays a single Story model.
 	 *
-	 * @param integer $id Feature ID.
+	 * @param integer $id Story ID.
 	 * @return string
 	 * @throws NotFoundHttpException
 	 */
@@ -52,14 +51,14 @@ class FeatureController extends SafeToolController
 	}
 
 	/**
-	 * Creates a new Feature model.
+	 * Creates a new Story model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 *
 	 * @return string
 	 */
 	public function actionCreate()
 	{
-		$model = new Feature();
+		$model = new Story();
 
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);
@@ -71,10 +70,10 @@ class FeatureController extends SafeToolController
 	}
 
 	/**
-	 * Updates an existing Feature model.
+	 * Updates an existing Story model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 *
-	 * @param integer $id Feature ID.
+	 * @param integer $id Story ID.
 	 * @return string
 	 * @throws NotFoundHttpException
 	 */
@@ -92,13 +91,13 @@ class FeatureController extends SafeToolController
 	}
 
 	/**
-	 * Deletes an existing Feature model.
+	 * Deletes an existing Story model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
-	 * @param integer $id Feature ID.
+	 * @param integer $id Story ID.
 	 * @return string
 	 *
-	 * @throws NotFoundHttpException If the feature cannot be deleted
+	 * @throws NotFoundHttpException If the story cannot be deleted
 	 * @throws \Throwable
 	 */
 	public function actionDelete($id)
@@ -107,49 +106,28 @@ class FeatureController extends SafeToolController
 		try {
 			$model->delete();
 		} catch (Exception $ex) {
-			throw new NotFoundHttpException(Yii::t('feature', 'You can not delete the selected feature.'));
+			throw new NotFoundHttpException(Yii::t('story', 'You can not delete the selected story.'));
 		}
 
 		return $this->redirect(['index']);
 	}
 
 	/**
-	 * Finds the Feature model based on its primary key value.
+	 * Finds the Story model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 *
-	 * @param integer $id Feature ID.
-	 * @return Feature
+	 * @param integer $id Story ID.
+	 * @return Story
 	 *
-	 * @throws NotFoundHttpException if the model cannot be found
+	 * @throws NotFoundHttpException if the story cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Feature::findOne($id)) !== null) {
+		if (($model = Story::findOne($id)) !== null) {
 			return $model;
 		} else {
-			throw new NotFoundHttpException(Yii::t('feature', 'The requested feature does not exist.'));
+			throw new NotFoundHttpException(Yii::t('story', 'The requested story does not exist.'));
 		}
 	}
 
-	/**
-	 * Returns all the features based in the selected product and epic.
-	 *
-	 * @return string
-	 */
-	public function actionFeatures()
-	{
-		$output = [];
-		if (isset($_POST['depdrop_parents'])) {
-			$parents = $_POST['depdrop_parents'];
-			if ($parents != null) {
-				$productId = $parents[0];
-				$epicId = $parents[1];
-				$output = Feature::getFeatures($productId, $epicId, 'array');
-				echo Json::encode(['output' => $output, 'selected' => '']);
-				return;
-			}
-		}
-		echo Json::encode(['output' => $output, 'selected' => '']);
-		return;
-	}
 }

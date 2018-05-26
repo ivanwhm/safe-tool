@@ -12,6 +12,7 @@ use app\components\SafeToolController;
 use app\models\Epic;
 use Exception;
 use Yii;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
 class EpicController extends SafeToolController
@@ -128,5 +129,26 @@ class EpicController extends SafeToolController
 		} else {
 			throw new NotFoundHttpException(Yii::t('epic', 'The requested epic does not exist.'));
 		}
+	}
+
+	/**
+	 * Returns all the epics based in the selected product.
+	 *
+	 * @return string
+	 */
+	public function actionEpics()
+	{
+		$output = [];
+		if (isset($_POST['depdrop_parents'])) {
+			$parents = $_POST['depdrop_parents'];
+			if ($parents != null) {
+				$productId = $parents[0];
+				$output = Epic::getEpics($productId, 'array');
+				echo Json::encode(['output' => $output, 'selected' => '']);
+				return;
+			}
+		}
+		echo Json::encode(['output' => $output, 'selected' => '']);
+		return;
 	}
 }

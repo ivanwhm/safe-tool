@@ -24,6 +24,7 @@ use app\components\SafeToolActiveRecord;
 use app\models\enums\Status;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -124,6 +125,17 @@ class UserRole extends SafeToolActiveRecord
 			return Url::to(['user-role/update', 'id' => $this->getAttribute('id')]);
 		}
 		return Url::to(['user-role/view', 'id' => $this->getAttribute('id')]);
+	}
+
+	/**
+	 * Returns all the user roles.
+	 *
+	 * @return array
+	 */
+	public static function getUserRoles()
+	{
+		$products = self::find()->andFilterWhere(['=', 'status', Status::ACTIVE])->orderBy('role')->all();
+		return ArrayHelper::map($products, 'id', 'role');
 	}
 
 }

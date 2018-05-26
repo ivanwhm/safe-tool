@@ -27,6 +27,8 @@ namespace app\models;
 use app\components\SafeToolActiveRecord;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 class Feature extends SafeToolActiveRecord
@@ -86,7 +88,7 @@ class Feature extends SafeToolActiveRecord
 	{
 		return Product::findOne(['id' => $this->getAttribute('product_id')]);
 	}
-	
+
 	/**
 	 * Returns the epic of the feature.
 	 *
@@ -136,4 +138,43 @@ class Feature extends SafeToolActiveRecord
 
 		return $dataProvider;
 	}
+
+	/**
+	 * Returns the feature link of the record.
+	 *
+	 * @return string
+	 */
+	public function printLink()
+	{
+		return Html::a($this->getAttribute('feature'), $this->getLink());
+	}
+
+	/**
+	 * Returns all the features.
+	 *
+	 * @param int $productId Product ID.
+	 * @param int $epicId Epic ID.
+	 * @param string $type Type of return.
+	 * @return array
+	 */
+	public static function getFeatures($productId, $epicId, $type = 'map')
+	{
+		$features = self::find()->where([
+			'product_id' => $productId,
+			'epic_id' => $epicId
+		])->orderBy('feature')->all();
+
+		if ($type === 'array') {
+			$result = [];
+			foreach ($features as $feature) {
+				$result[] = [
+					'id' => $feature->getAttribute('id'),
+					'name' => $feature->getAttribute('feature')
+				];
+			}
+			return $result;
+		}
+		return ArrayHelper::map($features, 'id', 'feature');
+	}
+
 }

@@ -1,9 +1,9 @@
 <?php
 /**
- * Displays the create page to Feature CRUD.
+ * Displays the create page to Story CRUD.
  *
  * @var $this View
- * @var $model Feature
+ * @var $model Story
  * @var $form ActiveForm
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
@@ -13,6 +13,8 @@
 use app\models\Epic;
 use app\models\Feature;
 use app\models\Product;
+use app\models\Story;
+use app\models\UserRole;
 use kartik\depdrop\DepDrop;
 use kartik\icons\Icon;
 use kartik\select2\Select2;
@@ -21,37 +23,27 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$featureHelp = Icon::show('info-circle') . Yii::t('feature', 'Input the feature description.');
-$productIDHelp = Icon::show('info-circle') . Yii::t('feature', 'Select the product of the feature.');
-$epicIDHelp = Icon::show('info-circle') . Yii::t('feature', 'Select the epic of the feature.');
-$benefitHypothesisHelp = Icon::show('info-circle') . Yii::t('feature', 'Describe the benefit hypothesis for this feature.');
-$acceptanceCriteriaHelp = Icon::show('info-circle') . Yii::t('feature', 'Describe the acceptance criteria for this feature.');
+$productIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the product of the story.');
+$epicIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the epic of the story.');
+$featureIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the feature of the story.');
+$userRoleHelp = Icon::show('info-circle') . Yii::t('story', 'Select the user role of the story.');
+$iWantToHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the activity that the user want solve.');
+$soThatHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the business value of the activity.');
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
 $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
-<div class="feature-form">
+<div class="story-form">
 
-	<?php $form = ActiveForm::begin(['id' => 'feature-form']); ?>
+	<?php $form = ActiveForm::begin(['id' => 'story-form']); ?>
 
 	<?php if ($model->hasErrors()) : ?>
 		<div class="alert alert-danger">
 			<?= $form->errorSummary($model) ?>
 		</div>
 	<?php endif; ?>
-
-	<?= $form->field($model, 'feature')->textInput([
-		'maxlength' => true,
-		'autofocus' => true,
-		'aria-describedby' => 'hbFeature'
-	]) ?>
-
-	<?= Html::tag('span', $featureHelp, [
-		'id' => 'hbFeature',
-		'class' => 'help-block'
-	]) ?>
 
 	<?= $form->field($model, 'product_id')->widget(Select2::class, [
 		'data' => Product::getProducts(),
@@ -78,6 +70,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 			'depends' => ['SelectProductID'],
 			'placeholder' => '---',
 			'url' => Url::to(['epic/epics']),
+			'loadingText' => Yii::t('index', 'Loading...')
 		]
 	]) ?>
 
@@ -86,25 +79,58 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'class' => 'help-block'
 	]) ?>
 
-	<?= $form->field($model, 'benefit_hypothesis')->textarea([
-		'maxlength' => true,
-		'rows' => '5',
-		'aria-describedby' => 'hbBenefitHypothesis'
+	<?= $form->field($model, 'feature_id')->widget(DepDrop::class, [
+		'type' => DepDrop::TYPE_SELECT2,
+		'data' => Feature::getFeatures($model->getAttribute('product_id'), $model->getAttribute('epic_id')),
+		'options' => [
+			'prompt' => '---',
+			'aria-describedby' => 'hbFeatureID',
+			'id' => 'SelectFeatureID'
+		],
+		'pluginOptions' => [
+			'depends' => ['SelectProductID', 'SelectEpicID'],
+			'placeholder' => '---',
+			'url' => Url::to(['feature/features']),
+			'loadingText' => Yii::t('index', 'Loading...')
+		]
 	]) ?>
 
-	<?= Html::tag('span', $benefitHypothesisHelp, [
-		'id' => 'hbBenefitHypothesis',
+	<?= Html::tag('span', $featureIDHelp, [
+		'id' => 'hbFeatureID',
 		'class' => 'help-block'
 	]) ?>
 
-	<?= $form->field($model, 'acceptance_criteria')->textarea([
-		'maxlength' => true,
-		'rows' => '10',
-		'aria-describedby' => 'hbAcceptanceCriteria'
+	<?= $form->field($model, 'user_role_id')->widget(Select2::class, [
+		'data' => UserRole::getUserRoles(),
+		'options' => [
+			'prompt' => '---',
+			'aria-describedby' => 'hbUserRoleID'
+		]]) ?>
+
+	<?= Html::tag('span', $userRoleHelp, [
+		'id' => 'hbUserRoleID',
+		'class' => 'help-block'
 	]) ?>
 
-	<?= Html::tag('span', $acceptanceCriteriaHelp, [
-		'id' => 'hbAcceptanceCriteria',
+	<?= $form->field($model, 'i_want_to')->textarea([
+		'maxlength' => true,
+		'rows' => '2',
+		'aria-describedby' => 'hbIWantTo'
+	]) ?>
+
+	<?= Html::tag('span', $iWantToHelp, [
+		'id' => 'hbIWantTo',
+		'class' => 'help-block'
+	]) ?>
+
+	<?= $form->field($model, 'so_that')->textarea([
+		'maxlength' => true,
+		'rows' => '2',
+		'aria-describedby' => 'hbSoThat'
+	]) ?>
+
+	<?= Html::tag('span', $soThatHelp, [
+		'id' => 'hbSoThat',
 		'class' => 'help-block'
 	]) ?>
 

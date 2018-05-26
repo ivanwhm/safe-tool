@@ -18,5 +18,6 @@ return [
 	'Add' => 'Adicionar',
 	'Update' => 'Editar',
 	'Delete' => 'Excluir',
-	'Reload' => 'Recarregar'
+	'Reload' => 'Recarregar',
+	'Loading...' => 'Carregando...'
 ];

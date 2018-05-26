@@ -1,0 +1,27 @@
+<?php
+return [
+	'ID' => 'Código',
+	'Product' => 'Produto',
+	'Epic' => 'Épico',
+	'Feature' => 'Funcionalidade',
+	'As a' => 'Como um(a)',
+	'I want' => 'Eu quero',
+	'So that' => 'Para que',
+	'Date of creation' => 'Data da criação',
+	'Date of the last update' => 'Data da última atualização',
+	'The user of creation' => 'Usuário que criou',
+	'The user of the last update' => 'Usuário da última alteração',
+	'The requested story does not exist.' => 'A estória solicitada não foi encontrada.',
+	'You can not delete the selected story.' => 'Você não pode excluir a estória selecionada.',
+	'Do you want to delete this story?' => 'Você deseja excluir esta estória?',
+	'Stories' => 'Estórias',
+	'Add story' => 'Adicionar estória',
+	'Update story' => 'Editar estória',
+	'View story' => 'Visualizar estória',
+	'Select the product of the story.' => 'Selecione o produto da estória.',
+	'Select the epic of the story.' => 'Selecione o épico da estória.',
+	'Select the feature of the story.' => 'Selecione a funcionalidade da estória.',
+	'Select the user role of the story.' => 'Selecione o papél de usuário da estória.',
+	'Describe the activity that the user want solve.' => 'Descreva a atividade que o usuário quer resolver.',
+	'Describe the business value of the activity.' => 'Descreva o valor de negócio da atividade.'
+];

@@ -1,0 +1,27 @@
+<?php
+return [
+	'ID' => '',
+	'Product' => '',
+	'Epic' => '',
+	'Feature' => '',
+	'As a' => '',
+	'I want' => '',
+	'So that' => '',
+	'Date of creation' => '',
+	'Date of the last update' => '',
+	'The user of creation' => '',
+	'The user of the last update' => '',
+	'The requested story does not exist.' => '',
+	'You can not delete the selected story.' => '',
+	'Do you want to delete this story?' => '',
+	'Stories' => '',
+	'Add story' => '',
+	'Update story' => '',
+	'View story' => '',
+	'Select the product of the story.' => '',
+	'Select the epic of the story.' => '',
+	'Select the feature of the story.' => '',
+	'Select the user role of the story.' => '',
+	'Describe the activity that the user want solve.' => '',
+	'Describe the business value of the activity.' => ''
+];

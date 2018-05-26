@@ -18,5 +18,6 @@ return [
 	'Add' => '',
 	'Update' => '',
 	'Delete' => '',
-	'Reload' => ''
+	'Reload' => '',
+	'Loading...' => ''
 ];
