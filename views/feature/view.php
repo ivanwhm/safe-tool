@@ -47,8 +47,6 @@ $this->params['breadcrumbs'] = [
 		'attributes' => [
 			'id',
 			'feature',
-			'benefit_hypothesis',
-			'acceptance_criteria',
 			[
 				'attribute' => 'product_id',
 				'format' => 'html',
@@ -59,6 +57,8 @@ $this->params['breadcrumbs'] = [
 				'format' => 'html',
 				'value' => $model->getEpic()->printLink()
 			],
+			'benefit_hypothesis',
+			'acceptance_criteria',
 			'date_created:datetime',
 			[
 				'attribute' => 'user_created',
