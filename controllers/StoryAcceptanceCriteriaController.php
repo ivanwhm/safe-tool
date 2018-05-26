@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is responsible to manager the Story CRUD related pages.
+ * This class is responsible to manager the Story Acceptance Criteria CRUD related pages.
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
@@ -9,45 +9,28 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
-use app\models\Story;
 use app\models\StoryAcceptanceCriteria;
 use Exception;
 use Yii;
 use yii\web\NotFoundHttpException;
 
-class StoryController extends SafeToolController
+class StoryAcceptanceCriteriaController extends SafeToolController
 {
 
 	/**
-	 * Lists all Story models.
+	 * Displays a single Story Acceptance Criteria model.
 	 *
-	 * @return string
-	 */
-	public function actionIndex()
-	{
-		$searchModel = new Story();
-		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
-
-		return $this->render('index', [
-			'dataProvider' => $dataProvider,
-			'searchModel' => $searchModel
-		]);
-
-	}
-
-	/**
-	 * Displays a single Story model.
-	 *
-	 * @param integer $id Story ID.
+	 * @param integer $id Story Acceptance Criteria ID.
 	 * @return string
 	 * @throws NotFoundHttpException
 	 */
 	public function actionView($id)
 	{
 		$model = $this->findModel($id);
+
 		$searchModel = new StoryAcceptanceCriteria();
 		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams(), $model->getAttribute('id'));
-		
+
 		return $this->render('view', [
 			'model' => $model,
 			'dataProvider' => $dataProvider,
@@ -56,14 +39,16 @@ class StoryController extends SafeToolController
 	}
 
 	/**
-	 * Creates a new Story model.
+	 * Creates a new Story Acceptance Criteria model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 *
+	 * @param $story int Story ID.
 	 * @return string
 	 */
-	public function actionCreate()
+	public function actionCreate($story)
 	{
-		$model = new Story();
+		$model = new StoryAcceptanceCriteria();
+		$model->setAttribute('story_id', $story);
 
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);
@@ -75,10 +60,10 @@ class StoryController extends SafeToolController
 	}
 
 	/**
-	 * Updates an existing Story model.
+	 * Updates an existing Story Acceptance Criteria model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 *
-	 * @param integer $id Story ID.
+	 * @param integer $id Story Acceptance Criteria ID.
 	 * @return string
 	 * @throws NotFoundHttpException
 	 */
@@ -96,42 +81,45 @@ class StoryController extends SafeToolController
 	}
 
 	/**
-	 * Deletes an existing Story model.
+	 * Deletes an existing Story Acceptance Criteria model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 *
-	 * @param integer $id Story ID.
+	 * @param integer $id Story Acceptance Criteria ID.
 	 * @return string
 	 *
-	 * @throws NotFoundHttpException If the story cannot be deleted
+	 * @throws NotFoundHttpException If the Story Acceptance Criteria cannot be deleted
 	 * @throws \Throwable
 	 */
 	public function actionDelete($id)
 	{
 		$model = $this->findModel($id);
+		$storyId = $model->getAttribute('story_id');
 		try {
 			$model->delete();
 		} catch (Exception $ex) {
-			throw new NotFoundHttpException(Yii::t('story', 'You can not delete the selected story.'));
+			throw new NotFoundHttpException(Yii::t('story-acceptance-criteria',
+				'You can not delete the selected acceptance criteria.'));
 		}
 
-		return $this->redirect(['index']);
+		return $this->redirect(['story/view', 'id' => $storyId]);
 	}
 
 	/**
-	 * Finds the Story model based on its primary key value.
+	 * Finds the Story Acceptance Criteria model based on its primary key value.
 	 * If the model is not found, a 404 HTTP exception will be thrown.
 	 *
-	 * @param integer $id Story ID.
-	 * @return Story
+	 * @param integer $id Story Acceptance Criteria ID.
+	 * @return StoryAcceptanceCriteria
 	 *
-	 * @throws NotFoundHttpException if the story cannot be found
+	 * @throws NotFoundHttpException if the Story Acceptance Criteria cannot be found
 	 */
 	protected function findModel($id)
 	{
-		if (($model = Story::findOne($id)) !== null) {
+		if (($model = StoryAcceptanceCriteria::findOne($id)) !== null) {
 			return $model;
 		} else {
-			throw new NotFoundHttpException(Yii::t('story', 'The requested story does not exist.'));
+			throw new NotFoundHttpException(Yii::t('story-acceptance-criteria',
+				'The requested acceptance criteria does not exist.'));
 		}
 	}
 

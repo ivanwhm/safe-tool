@@ -4,14 +4,20 @@
  *
  * @var $this View
  * @var $model Story
+ * @var $dataProvider ActiveDataProvider
+ * @var $searchModel StoryAcceptanceCriteria
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
 use app\models\Story;
+use app\models\StoryAcceptanceCriteria;
 use kartik\detail\DetailView;
+use kartik\grid\ActionColumn;
+use kartik\grid\GridView;
 use kartik\icons\Icon;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -106,5 +112,61 @@ $this->params['breadcrumbs'] = [
 			]
 		]) ?>
 	</p>
+
+</div>
+
+<br>
+
+<div class="story-acceptance-criteria-index">
+
+	<?= GridView::widget([
+		'id' => 'story-acceptance-criteria-gridview',
+		'dataProvider' => $dataProvider,
+		'filterModel' => $searchModel,
+		'pjax' => true,
+		'hover' => true,
+		'persistResize' => true,
+		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
+		'panel' => [
+			'heading' => ' <h3 class="panel-title">' . Icon::show('check-circle') . ' ' . 
+				Yii::t('story-acceptance-criteria', 'Acceptance criterias') . '</h3>',
+			'type' => 'default',
+			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'),
+				['story-acceptance-criteria/create', 'story' => $model->getAttribute('id')], 
+				['class' => 'btn btn-success']),
+			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), 
+				['index'], ['class' => 'btn btn-info']),
+			'footer' => false
+		],
+		'columns' => [
+			[
+				'attribute' => 'id',
+				'hAlign' => GridView::ALIGN_LEFT,
+				'width' => '70px',
+				'filter' => false
+			],
+			'acceptance_criteria',
+			[
+				'class' => ActionColumn::class,
+				'template' => '{view} {update} {delete}',
+				'controller' => 'story-acceptance-criteria',
+				'buttons' => [
+					'delete' => function ($url) {
+						return Html::a(
+							Icon::show('trash'),
+							[$url],
+							[
+								'data-confirm' => Yii::t('story-acceptance-criteria', 
+									'Do you want to delete this acceptance criteria?'),
+								'data-method' => 'post'
+							]
+						);
+					}
+				]
+			],
+		],
+	]);
+
+	?>
 
 </div>
