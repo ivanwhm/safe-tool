@@ -132,18 +132,23 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 						</a>
 						<ul class="nav nav-second-level">
 							<li>
-								<a href="<?= Url::to(['product-owner/index']) ?>">
-									<?= Icon::show('user-md', ['class' => 'fa-fw']) . ' ' . Yii::t('product-owner', 'Product owners') ?>
-								</a>
-							</li>
-							<li>
 								<a href="<?= Url::to(['user/index']) ?>">
 									<?= Icon::show('users', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'Users') ?>
 								</a>
 							</li>
 							<li>
+								<a href="<?= Url::to(['product-owner/index']) ?>">
+									<?= Icon::show('user-md', ['class' => 'fa-fw']) . ' ' . Yii::t('product-owner', 'Product owners') ?>
+								</a>
+							</li>
+							<li>
 								<a href="<?= Url::to(['user-role/index']) ?>">
 									<?= Icon::show('female', ['class' => 'fa-fw']) . ' ' . Yii::t('user-role', 'User roles') ?>
+								</a>
+							</li>
+							<li>
+								<a href="<?= Url::to(['story-status/index']) ?>">
+									<?= Icon::show('tags', ['class' => 'fa-fw']) . ' ' . Yii::t('story-status', 'Story statuses') ?>
 								</a>
 							</li>
 						</ul>
