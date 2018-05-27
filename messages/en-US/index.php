@@ -20,5 +20,6 @@ return [
 	'Update' => '',
 	'Delete' => '',
 	'Reload' => '',
-	'Loading...' => ''
+	'Loading...' => '',
+	'Access the register' => ''
 ];

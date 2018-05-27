@@ -280,6 +280,63 @@ table.dataTable thead .sorting:after {
 .panel-yellow > a:hover {
   color: #df8a13;
 }
+.panel-pink {
+	border-color: #FF40FF;
+}
+.panel-pink > .panel-heading {
+	border-color: #FF40FF;
+	color: white;
+	background-color: #FF40FF;
+}
+.panel-pink > a {
+	color: #FF40FF;
+}
+.panel-pink > a:hover {
+	color: #ed46f0;
+}
+.panel-brown {
+	border-color: #A16E3A;
+}
+.panel-brown > .panel-heading {
+	border-color: #A16E3A;
+	color: white;
+	background-color: #A16E3A;
+}
+.panel-brown > a {
+	color: #A16E3A;
+}
+.panel-brown > a:hover {
+	color: #a14c08;
+}
+.panel-black {
+	border-color: #000;
+}
+.panel-black > .panel-heading {
+	border-color: #000;
+	color: white;
+	background-color: #000;
+}
+.panel-black > a {
+	color: #000;
+}
+.panel-black > a:hover {
+	color: #000;
+}
+.panel-purple {
+	border-color: #942192;
+}
+.panel-purple > .panel-heading {
+	border-color: #942192;
+	color: white;
+	background-color: #942192;
+}
+.panel-purple > a {
+	color: #942192;
+}
+.panel-purple > a:hover {
+	color: #942192;
+}
+
 .timeline {
   position: relative;
   padding: 20px 0 20px;

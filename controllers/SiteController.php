@@ -10,9 +10,17 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
+use app\models\enums\Status;
+use app\models\Epic;
+use app\models\Feature;
 use app\models\forms\ChangePasswordForm;
 use app\models\forms\LoginForm;
+use app\models\Product;
+use app\models\ProductOwner;
+use app\models\Story;
+use app\models\StoryStatus;
 use app\models\User;
+use app\models\UserRole;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Cookie;
@@ -52,7 +60,16 @@ class SiteController extends SafeToolController
 	 */
 	public function actionIndex()
 	{
-		return $this->render('index');
+		return $this->render('index', [
+			'productCount' => Product::find()->where(['status' => Status::ACTIVE])->count(),
+			'epicCount' => Epic::find()->count(),
+			'featureCount' => Feature::find()->count(),
+			'storyCount' => Story::find()->count(),
+			'userCount' => User::find()->where(['status' => Status::ACTIVE])->count(),
+			'productOwnerCount' => ProductOwner::find()->where(['status' => Status::ACTIVE])->count(),
+			'userRoleCount' => UserRole::find()->where(['status' => Status::ACTIVE])->count(),
+			'storyStatusCount' => StoryStatus::find()->where(['status' => Status::ACTIVE])->count()
+		]);
 	}
 
 

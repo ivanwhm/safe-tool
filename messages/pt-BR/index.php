@@ -20,5 +20,6 @@ return [
 	'Update' => 'Editar',
 	'Delete' => 'Excluir',
 	'Reload' => 'Recarregar',
-	'Loading...' => 'Carregando...'
+	'Loading...' => 'Carregando...',
+	'Access the register' => 'Acessar o cadastro'
 ];
