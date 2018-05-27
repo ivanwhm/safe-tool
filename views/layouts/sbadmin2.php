@@ -107,7 +107,7 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 					</li>
 					<li class="divider"></li>
 					<li>
-						<a href="#" id="btn-logout">
+						<a id="btn-logout">
 							<?= Icon::show('sign-out', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Log out') ?>
 						</a>
 					</li>
