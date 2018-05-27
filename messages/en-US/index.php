@@ -9,6 +9,7 @@ return [
 	'No' => '',
 	'Cancel' => '',
 	'Save' => '',
+	'Transfer' => '',
 	'Created on {date} by {username}.' => '',
 	'Last update on {date} by {username}.' => '',
 	'Fields marked with (*) are required.' => '',

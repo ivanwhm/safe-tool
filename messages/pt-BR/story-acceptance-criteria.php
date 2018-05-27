@@ -13,5 +13,8 @@ return [
 	'Do you want to delete this acceptance criteria?' => 'Você deseja excluir este critério de aceitação?',
 	'You can not delete the selected acceptance criteria.' => 'Você não pode excluir o critério de aceitação selecionado.',
 	'The requested acceptance criteria does not exist.' => 'O critério de aceitação solicitado não existe.',
-	'Describe the acceptance criteria of the story.' => 'Descreva o critério de aceitação da estória.'
+	'Describe the acceptance criteria of the story.' => 'Descreva o critério de aceitação da estória.',
+	'Only the product owner of this story can create more acceptance criterias.' => 'Somente o dono do produto desta estória pode criar mais critérios de aceitação',
+	'Only the product owner of the story related to the acceptance criteria can change it.' => 'Somente o dono do produto da estória relacionada ao critério de aceitação pode modificá-lo.',
+	'Only the product owner of the story related to the acceptance criteria can delete it.' => 'Somente o dono do produto da estória relacionada ao critério de aceitação pode excluí-lo.'
 ];

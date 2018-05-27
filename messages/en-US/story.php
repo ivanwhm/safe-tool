@@ -1,6 +1,7 @@
 <?php
 return [
 	'ID' => '',
+	'Product owner' => '',
 	'Product' => '',
 	'Epic' => '',
 	'Feature' => '',
@@ -18,10 +19,15 @@ return [
 	'Add story' => '',
 	'Update story' => '',
 	'View story' => '',
+	'Product owner transfer of the story' => '',
 	'Select the product of the story.' => '',
 	'Select the epic of the story.' => '',
 	'Select the feature of the story.' => '',
 	'Select the user role of the story.' => '',
+	'Select the product owner of the story.' => '',
 	'Describe the activity that the user want solve.' => '',
-	'Describe the business value of the activity.' => ''
+	'Describe the business value of the activity.' => '',
+	'Only the product owner responsible for this story can change it.' => '',
+	'Only the product owner responsible for this story can delete it.' => '',
+	'Only the product owner responsible for this story can transfer it.' => ''
 ];

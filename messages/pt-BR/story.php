@@ -1,6 +1,7 @@
 <?php
 return [
 	'ID' => 'Código',
+	'Product owner' => 'Dono do produto',
 	'Product' => 'Produto',
 	'Epic' => 'Épico',
 	'Feature' => 'Funcionalidade',
@@ -18,10 +19,15 @@ return [
 	'Add story' => 'Adicionar estória',
 	'Update story' => 'Editar estória',
 	'View story' => 'Visualizar estória',
+	'Product owner transfer of the story' => 'Transferência do dono do produto da estória',
 	'Select the product of the story.' => 'Selecione o produto da estória.',
 	'Select the epic of the story.' => 'Selecione o épico da estória.',
 	'Select the feature of the story.' => 'Selecione a funcionalidade da estória.',
 	'Select the user role of the story.' => 'Selecione o papél de usuário da estória.',
+	'Select the product owner of the story.' => 'Selecione o dono do produto da estória.',
 	'Describe the activity that the user want solve.' => 'Descreva a atividade que o usuário quer resolver.',
-	'Describe the business value of the activity.' => 'Descreva o valor de negócio da atividade.'
+	'Describe the business value of the activity.' => 'Descreva o valor de negócio da atividade.',
+	'Only the product owner responsible for this story can change it.' => 'Apenas o dono do produto responsável por esta estória pode alterá-la.',
+	'Only the product owner responsible for this story can delete it.' => 'Apenas o dono do produto responsável por esta estória pode excluí-la.',
+	'Only the product owner responsible for this story can transfer it.' => 'Apenas o dono do produto responsável por esta estória pode transferí-la.'
 ];

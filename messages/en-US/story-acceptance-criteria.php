@@ -13,5 +13,8 @@ return [
 	'Do you want to delete this acceptance criteria?' => '',
 	'You can not delete the selected acceptance criteria.' => '',
 	'The requested acceptance criteria does not exist.' => '',
-	'Describe the acceptance criteria of the story.' => ''
+	'Describe the acceptance criteria of the story.' => '',
+	'Only the product owner of this story can create more acceptance criterias.' => '',
+	'Only the product owner of the story related to the acceptance criteria can change it.' => '',
+	'Only the product owner of the story related to the acceptance criteria can delete it.' => ''
 ];

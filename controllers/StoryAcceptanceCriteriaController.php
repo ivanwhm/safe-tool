@@ -9,6 +9,8 @@ namespace app\controllers;
 
 //Imports
 use app\components\SafeToolController;
+use app\models\ProductOwner;
+use app\models\Story;
 use app\models\StoryAcceptanceCriteria;
 use Exception;
 use Yii;
@@ -44,9 +46,17 @@ class StoryAcceptanceCriteriaController extends SafeToolController
 	 *
 	 * @param $story int Story ID.
 	 * @return string
+	 * @throws NotFoundHttpException
 	 */
 	public function actionCreate($story)
 	{
+		$storyModel = Story::findOne(['id' => $story]);
+
+		if (ProductOwner::getCurrentProductOwnerId() != $storyModel->getAttribute('product_owner_id')) {
+			throw new NotFoundHttpException(Yii::t('story-acceptance-criteria',
+				'Only the product owner of this story can create more acceptance criterias.'));
+		}
+
 		$model = new StoryAcceptanceCriteria();
 		$model->setAttribute('story_id', $story);
 
@@ -71,6 +81,11 @@ class StoryAcceptanceCriteriaController extends SafeToolController
 	{
 		$model = $this->findModel($id);
 
+		if (ProductOwner::getCurrentProductOwnerId() != $model->getStory()->getAttribute('product_owner_id')) {
+			throw new NotFoundHttpException(Yii::t('story-acceptance-criteria',
+				'Only the product owner of the story related to the acceptance criteria can change it.'));
+		}
+
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);
 		} else {
@@ -94,6 +109,12 @@ class StoryAcceptanceCriteriaController extends SafeToolController
 	{
 		$model = $this->findModel($id);
 		$storyId = $model->getAttribute('story_id');
+
+		if (ProductOwner::getCurrentProductOwnerId() != $model->getStory()->getAttribute('product_owner_id')) {
+			throw new NotFoundHttpException(Yii::t('story-acceptance-criteria',
+				'Only the product owner of the story related to the acceptance criteria can delete it.'));
+		}
+
 		try {
 			$model->delete();
 		} catch (Exception $ex) {

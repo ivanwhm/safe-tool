@@ -53,6 +53,11 @@ $this->params['breadcrumbs'] = [
 		'attributes' => [
 			'id',
 			[
+				'attribute' => 'product_owner_id',
+				'format' => 'html',
+				'value' => $model->getProductOwner()->printLink()
+			],
+			[
 				'attribute' => 'product_id',
 				'format' => 'html',
 				'value' => $model->getProduct()->printLink()
@@ -96,6 +101,13 @@ $this->params['breadcrumbs'] = [
 
 		<?= Html::a(Icon::show('pencil') . Yii::t('index', 'Update'), [
 			'update',
+			'id' => $model->getAttribute('id')
+		], [
+			'class' => 'btn btn-primary'
+		]) ?>
+		
+		<?= Html::a(Icon::show('exchange') . Yii::t('index', 'Transfer'), [
+			'transfer',
 			'id' => $model->getAttribute('id')
 		], [
 			'class' => 'btn btn-primary'

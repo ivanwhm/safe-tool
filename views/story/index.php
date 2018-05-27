@@ -12,7 +12,7 @@
 //Imports
 use app\models\Product;
 use app\models\Story;
-use app\models\UserRole;
+use app\models\ProductOwner;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
 use kartik\icons\Icon;
@@ -57,6 +57,20 @@ $this->params['breadcrumbs'] = [
 				'filter' => false
 			],
 			[
+				'attribute' => 'product_owner_id',
+				'format' => 'html',
+				'width' => '170px',
+				'value' => function (Story $data) {
+					return $data->getProductOwner()->printLink();
+				},
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => ProductOwner::getProductOwners(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => '---']
+			],
+			[
 				'attribute' => 'product_id',
 				'format' => 'html',
 				'width' => '170px',
@@ -89,23 +103,8 @@ $this->params['breadcrumbs'] = [
 				'filter' => FALSE,
 			],
 			[
-				'attribute' => 'user_role_id',
-				'format' => 'html',
-				'width' => '170px',
-				'value' => function (Story $data) {
-					return $data->getUserRole()->printLink();
-				},
-				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => UserRole::getUserRoles(),
-				'filterWidgetOptions' => [
-					'pluginOptions' => ['allowClear' => true],
-				],
-				'filterInputOptions' => ['placeholder' => '---']
-			],
-			'i_want_to',
-			[
 				'class' => ActionColumn::class,
-				'template' => '{view} {update} {delete}',
+				'template' => '{view} {update} {transfer} {delete}',
 				'buttons' => [
 					'delete' => function ($url) {
 						return Html::a(
@@ -115,6 +114,12 @@ $this->params['breadcrumbs'] = [
 								'data-confirm' => Yii::t('story', 'Do you want to delete this story?'),
 								'data-method' => 'post'
 							]
+						);
+					},
+					'transfer' => function ($url) {
+						return Html::a(
+							Icon::show('exchange'),
+							[$url]
 						);
 					}
 				]

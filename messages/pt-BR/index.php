@@ -9,6 +9,7 @@ return [
 	'No' => 'Não',
 	'Cancel' => 'Cancelar',
 	'Save' => 'Salvar',
+	'Transfer' => 'Transferir',
 	'Created on {date} by {username}.' => 'Criado em {date} por {username}.',
 	'Last update on {date} by {username}.' => 'Última alteração em {date} por {username}.',
 	'Fields marked with (*) are required.' => 'Os campos marcados com (*) são obrigatórios.',

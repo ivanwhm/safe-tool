@@ -4,6 +4,7 @@
  * This is the model class for table "story".
  *
  * @property int $id Story ID.
+ * @property int $product_owner_id Product owner ID.
  * @property int $product_id Story product ID.
  * @property int $epic_id Story epic ID.
  * @property int $feature_id Story feature ID.
@@ -15,6 +16,7 @@
  * @property int $user_created User ID that created this product.
  * @property int $user_updated User ID that updated this product.
  *
+ * @property ProductOwner $productOwner Data of the product owner of the story.
  * @property Epic $epic Data of the epic of the story.
  * @property Feature $feature Data of the feature of the story.
  * @property Product $product Data of the product of the story.
@@ -50,10 +52,12 @@ class Story extends SafeToolActiveRecord
 	{
 		return [
 			[['product_id', 'epic_id', 'feature_id', 'user_role_id', 'i_want_to', 'so_that'], 'required'],
-			[['id', 'product_id', 'epic_id', 'feature_id', 'user_role_id', 'user_created', 'user_updated'], 'integer'],
+			[['product_owner_id'], 'required', 'on' => 'transfer'],
+			[['id', 'product_owner_id', 'product_id', 'epic_id', 'feature_id', 'user_role_id', 'user_created', 'user_updated'], 'integer'],
 			[['date_created', 'date_updated'], 'safe'],
 			[['i_want_to', 'so_that'], 'string', 'max' => 500],
 			[['id'], 'unique'],
+			[['product_owner_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductOwner::class, 'targetAttribute' => ['product_owner_id' => 'id']],
 			[['epic_id'], 'exist', 'skipOnError' => true, 'targetClass' => Epic::class, 'targetAttribute' => ['epic_id' => 'id']],
 			[['feature_id'], 'exist', 'skipOnError' => true, 'targetClass' => Feature::class, 'targetAttribute' => ['feature_id' => 'id']],
 			[['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::class, 'targetAttribute' => ['product_id' => 'id']],
@@ -70,6 +74,7 @@ class Story extends SafeToolActiveRecord
 	{
 		return [
 			'id' => Yii::t('story', 'ID'),
+			'product_owner_id' => Yii::t('story', 'Product owner'),
 			'product_id' => Yii::t('story', 'Product'),
 			'epic_id' => Yii::t('story', 'Epic'),
 			'feature_id' => Yii::t('story', 'Feature'),
@@ -83,6 +88,15 @@ class Story extends SafeToolActiveRecord
 		];
 	}
 
+	/**
+	 * Returns the product owner of the story.
+	 *
+	 * @return ProductOwner
+	 */
+	public function getProductOwner()
+	{
+		return ProductOwner::findOne(['id' => $this->getAttribute('product_owner_id')]);
+	}
 
 	/**
 	 * Returns the product of the story.
@@ -136,10 +150,8 @@ class Story extends SafeToolActiveRecord
 
 		$query = self::find()->orderBy('id');
 		$query->andFilterWhere(['=', 'id', $this->getAttribute('id')])
-			->andFilterWhere(['=', 'product_id', $this->getAttribute('product_id')])
-			->andFilterWhere(['=', 'feature_id', $this->getAttribute('feature_id')])
-			->andFilterWhere(['=', 'user_role_id', $this->getAttribute('user_role_id')])
-			->andFilterWhere(['like', 'i_want_to', $this->getAttribute('i_want_to')]);
+			->andFilterWhere(['=', 'product_owner_id', $this->getAttribute('product_owner_id')])
+			->andFilterWhere(['=', 'product_id', $this->getAttribute('product_id')]);
 
 		return new ActiveDataProvider([
 			'query' => $query,
@@ -147,11 +159,10 @@ class Story extends SafeToolActiveRecord
 			'sort' => [
 				'attributes' => [
 					'id',
+					'product_owner_id',
 					'product_id',
 					'epic_id',
-					'feature_id',
-					'user_role_id',
-					'i_want_to'
+					'feature_id'
 				]
 			]
 		]);

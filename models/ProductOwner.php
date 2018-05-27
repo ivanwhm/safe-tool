@@ -26,6 +26,7 @@ use app\components\SafeToolActiveRecord;
 use app\models\enums\Status;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -111,6 +112,16 @@ class ProductOwner extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the product link of the record.
+	 *
+	 * @return string
+	 */
+	public function printLink()
+	{
+		return Html::a($this->getAttribute('name'), $this->getLink());
+	}
+
+	/**
 	 * Returns the user associated with the product owner.
 	 *
 	 * @return string
@@ -148,4 +159,33 @@ class ProductOwner extends SafeToolActiveRecord
 		return $dataProvider;
 	}
 
+	/**
+	 * Returns all the product owners.
+	 *
+	 * @return array
+	 */
+	public static function getProductOwners()
+	{
+		$productOwners = self::find()->andFilterWhere(['=', 'status', Status::ACTIVE])->orderBy('name')->all();
+		return ArrayHelper::map($productOwners, 'id', 'name');
+	}
+
+	/**
+	 * Finds and returns the current product owner ID.
+	 *
+	 * @return int
+	 *
+	 * @throws NotFoundHttpException
+	 */
+	public static function getCurrentProductOwnerId()
+	{
+		$productOwnerId = self::findOne([
+			'user_id' => Yii::$app->getUser()->getId(),
+			'status' => Status::ACTIVE
+		]);
+		if (!$productOwnerId instanceof ProductOwner) {
+			throw new NotFoundHttpException(Yii::t('product-owner', 'This user does not have a product owner associated.'));
+		}
+		return $productOwnerId->getAttribute('id');
+	}
 }
