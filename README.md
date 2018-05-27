@@ -29,7 +29,7 @@ This tool was developed with this following resources:
 
 Made with &hearts; by Ivan Wilhelm.
 
-Coded with [PhpStorm EAP](https://www.jetbrains.com/phpstorm/) by [JetBrains](https://www.jetbrains.com/)
+Coded with [PhpStorm EAP](https://www.jetbrains.com/phpstorm/eap/) by [JetBrains](https://www.jetbrains.com/)
 
 Screens of the tools:
 --------------------
