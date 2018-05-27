@@ -17,5 +17,6 @@ return [
 	'View story status' => '',
 	'Input the name of the story status.' => '',
 	'Please tell if the ready property is yes or no.' => '',
-	'Please tell if the story status is active or inactive.' => ''
+	'Please tell if the story status is active or inactive.' => '',
+	'Already has a recorded story status and defined as ready.' => ''
 ];

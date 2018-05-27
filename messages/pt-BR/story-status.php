@@ -17,5 +17,6 @@ return [
 	'View story status' => 'Visualizar estado de estória',
 	'Input the name of the story status.' => 'Informe o nome do estado de estória.',
 	'Please tell if the ready property is yes or no.' => 'Por favor, informe se a propriedade pronta é sim ou não.',
-	'Please tell if the story status is active or inactive.' => 'Por favor, informe se o estado de estória está ativo ou inativo.'
+	'Please tell if the story status is active or inactive.' => 'Por favor, informe se o estado de estória está ativo ou inativo.',
+	'Already has a recorded story status and defined as ready.' => 'Já existe um estado de estória cadastrado e definido como pronto.'
 ];

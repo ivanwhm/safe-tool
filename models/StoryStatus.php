@@ -2,9 +2,9 @@
 /**
  * This is the model class for table "story_status".
  *
- * @property int $id Story Status ID.
+ * @property int $id Story status ID.
  * @property string $name Story status name.
- * @property int $ready Story status ready to development.
+ * @property int $ready Indicates that the story status is ready to development.
  * @property int $status Story status status.
  * @property string $date_created Date and time that the story status was created.
  * @property string $date_updated Date and time that the story status was updated.
@@ -48,8 +48,14 @@ class StoryStatus extends SafeToolActiveRecord
 			[['status', 'ready', 'user_created', 'user_updated'], 'integer'],
 			[['date_created', 'date_updated'], 'safe'],
 			[['name'], 'string', 'max' => 50],
-			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
-			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_updated' => 'id']],
+			['ready', 'unique', 'when' => function (StoryStatus $model) {
+				return $model->getAttribute('ready') == YesNo::YES;
+			}, 'message' => Yii::t('story-status',
+				'Already has a recorded story status and defined as ready.')],
+			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class,
+				'targetAttribute' => ['user_created' => 'id']],
+			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class,
+				'targetAttribute' => ['user_updated' => 'id']],
 		];
 	}
 
