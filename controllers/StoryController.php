@@ -61,7 +61,6 @@ class StoryController extends SafeToolController
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 *
 	 * @return string
-	 * @throws NotFoundHttpException
 	 */
 	public function actionCreate()
 	{
@@ -94,6 +93,11 @@ class StoryController extends SafeToolController
 				'Only the product owner responsible for this story can change it.'));
 		}
 
+		if ($model->getStoryStatus()->isReady()) {
+			throw new NotFoundHttpException(Yii::t('story',
+				'The status of this story is ready. You cannot do it.'));
+		}
+		
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);
 		} else {
@@ -119,6 +123,11 @@ class StoryController extends SafeToolController
 		if (ProductOwner::getCurrentProductOwnerId() != $model->getAttribute('product_owner_id')) {
 			throw new NotFoundHttpException(Yii::t('story',
 				'Only the product owner responsible for this story can transfer it.'));
+		}
+
+		if ($model->getStoryStatus()->isReady()) {
+			throw new NotFoundHttpException(Yii::t('story',
+				'The status of this story is ready. You cannot do it.'));
 		}
 
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
@@ -149,6 +158,11 @@ class StoryController extends SafeToolController
 				'Only the product owner responsible for this story can delete it.'));
 		}
 
+		if ($model->getStoryStatus()->isReady()) {
+			throw new NotFoundHttpException(Yii::t('story',
+				'The status of this story is ready. You cannot do it.'));
+		}
+		
 		try {
 			$model->delete();
 		} catch (Exception $ex) {

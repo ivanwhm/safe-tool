@@ -29,5 +29,9 @@ return [
 	'Describe the business value of the activity.' => '',
 	'Only the product owner responsible for this story can change it.' => '',
 	'Only the product owner responsible for this story can delete it.' => '',
-	'Only the product owner responsible for this story can transfer it.' => ''
+	'Only the product owner responsible for this story can transfer it.' => '',
+	'Status' => '',
+	'Select the status of the story.' => '',
+	'The status of this story is ready. You cannot do it.' => '',
+	'This story does not have any acceptance criteria and cannot have the status defined as ready.' => ''
 ];

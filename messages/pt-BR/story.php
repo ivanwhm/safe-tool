@@ -29,5 +29,9 @@ return [
 	'Describe the business value of the activity.' => 'Descreva o valor de negócio da atividade.',
 	'Only the product owner responsible for this story can change it.' => 'Apenas o dono do produto responsável por esta estória pode alterá-la.',
 	'Only the product owner responsible for this story can delete it.' => 'Apenas o dono do produto responsável por esta estória pode excluí-la.',
-	'Only the product owner responsible for this story can transfer it.' => 'Apenas o dono do produto responsável por esta estória pode transferí-la.'
+	'Only the product owner responsible for this story can transfer it.' => 'Apenas o dono do produto responsável por esta estória pode transferí-la.',
+	'Status' => 'Estado',
+	'Select the status of the story.' => 'Selecione o estado da estória.',
+	'The status of this story is ready. You cannot do it.' => 'O estado desta estória é pronto. Você não pode fazer isso.',
+	'This story does not have any acceptance criteria and cannot have the status defined as ready.' => 'Esta estória não tem nenhum critério de aceitação e não pode ter seu estado definido como pronto.'
 ];

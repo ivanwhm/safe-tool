@@ -79,6 +79,11 @@ $this->params['breadcrumbs'] = [
 			],
 			'i_want_to',
 			'so_that',
+			[
+				'attribute' => 'story_status_id',
+				'format' => 'html',
+				'value' => $model->getStoryStatus()->printLink()
+			],
 			'date_created:datetime',
 			[
 				'attribute' => 'user_created',

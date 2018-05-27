@@ -60,6 +60,11 @@ class StoryAcceptanceCriteriaController extends SafeToolController
 		$model = new StoryAcceptanceCriteria();
 		$model->setAttribute('story_id', $story);
 
+		if ($model->getStory()->getStoryStatus()->isReady()) {
+			throw new NotFoundHttpException(Yii::t('story',
+				'The status of this story is ready. You cannot do it.'));
+		}
+
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);
 		} else {
@@ -86,6 +91,11 @@ class StoryAcceptanceCriteriaController extends SafeToolController
 				'Only the product owner of the story related to the acceptance criteria can change it.'));
 		}
 
+		if ($model->getStory()->getStoryStatus()->isReady()) {
+			throw new NotFoundHttpException(Yii::t('story',
+				'The status of this story is ready. You cannot do it.'));
+		}
+		
 		if ($model->load(Yii::$app->getRequest()->post()) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->getAttribute('id')]);
 		} else {
@@ -115,6 +125,11 @@ class StoryAcceptanceCriteriaController extends SafeToolController
 				'Only the product owner of the story related to the acceptance criteria can delete it.'));
 		}
 
+		if ($model->getStory()->getStoryStatus()->isReady()) {
+			throw new NotFoundHttpException(Yii::t('story',
+				'The status of this story is ready. You cannot do it.'));
+		}
+		
 		try {
 			$model->delete();
 		} catch (Exception $ex) {

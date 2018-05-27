@@ -24,6 +24,8 @@ use app\models\enums\Status;
 use app\models\enums\YesNo;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 class StoryStatus extends SafeToolActiveRecord
@@ -136,5 +138,34 @@ class StoryStatus extends SafeToolActiveRecord
 			return Url::to(['story-status/update', 'id' => $this->getAttribute('id')]);
 		}
 		return Url::to(['story-status/view', 'id' => $this->getAttribute('id')]);
+	}
+
+	/**
+	 * Returns all the story statuses.
+	 *
+	 * @return array
+	 */
+	public static function getStoryStatuses()
+	{
+		$products = self::find()->andFilterWhere(['=', 'status', Status::ACTIVE])->orderBy('name')->all();
+		return ArrayHelper::map($products, 'id', 'name');
+	}
+
+	/**
+	 * Returns the story status link of the record.
+	 *
+	 * @return string
+	 */
+	public function printLink() {
+		return Html::a($this->getAttribute('name'), $this->getLink());
+	}
+
+	/**
+	 * Returns if the status is ready.
+	 * 
+	 * @return bool
+	 */
+	public function isReady() {
+		return $this->getAttribute('ready') == YesNo::YES;
 	}
 }

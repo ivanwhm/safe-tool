@@ -12,6 +12,7 @@
 //Imports
 use app\models\Product;
 use app\models\Story;
+use app\models\StoryStatus;
 use app\models\ProductOwner;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
@@ -83,7 +84,7 @@ $this->params['breadcrumbs'] = [
 					'pluginOptions' => ['allowClear' => true],
 				],
 				'filterInputOptions' => ['placeholder' => '---']
-			],
+			],			
 			[
 				'attribute' => 'epic_id',
 				'format' => 'html',
@@ -101,6 +102,20 @@ $this->params['breadcrumbs'] = [
 					return $data->getFeature()->printLink();
 				},
 				'filter' => FALSE,
+			],
+			[
+				'attribute' => 'story_status_id',
+				'format' => 'html',
+				'width' => '170px',
+				'value' => function (Story $data) {
+					return $data->getStoryStatus()->printLink();
+				},
+				'filterType' => GridView::FILTER_SELECT2,
+				'filter' => StoryStatus::getStoryStatuses(),
+				'filterWidgetOptions' => [
+					'pluginOptions' => ['allowClear' => true],
+				],
+				'filterInputOptions' => ['placeholder' => '---']
 			],
 			[
 				'class' => ActionColumn::class,

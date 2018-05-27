@@ -14,6 +14,7 @@ use app\models\Epic;
 use app\models\Feature;
 use app\models\Product;
 use app\models\Story;
+use app\models\StoryStatus;
 use app\models\UserRole;
 use kartik\depdrop\DepDrop;
 use kartik\icons\Icon;
@@ -29,6 +30,7 @@ $featureIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the feature
 $userRoleHelp = Icon::show('info-circle') . Yii::t('story', 'Select the user role of the story.');
 $iWantToHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the activity that the user want solve.');
 $soThatHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the business value of the activity.');
+$storyStatusHelp = Icon::show('info-circle') . Yii::t('story', 'Select the status of the story.');
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
 $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
@@ -131,6 +133,19 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 	<?= Html::tag('span', $soThatHelp, [
 		'id' => 'hbSoThat',
+		'class' => 'help-block'
+	]) ?>
+
+	<?= $form->field($model, 'story_status_id')->widget(Select2::class, [
+		'data' => StoryStatus::getStoryStatuses(),
+		'options' => [
+			'prompt' => '---',
+			'aria-describedby' => 'hbStoryStatusID'
+		]
+	]) ?>
+	
+	<?= Html::tag('span', $storyStatusHelp, [
+		'id' => 'hbStoryStatusID',
 		'class' => 'help-block'
 	]) ?>
 
