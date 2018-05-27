@@ -159,4 +159,6 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 	<?php ActiveForm::end(); ?>
 
+	<?php $this->registerJs('$("#'. Html::getInputId($model, 'product_id') .'").select2("open");'); ?>
+
 </div>
