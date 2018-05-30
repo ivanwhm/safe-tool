@@ -79,6 +79,7 @@ $this->params['breadcrumbs'] = [
 			],
 			'i_want_to',
 			'so_that',
+			'priority',
 			[
 				'attribute' => 'story_status_id',
 				'format' => 'html',

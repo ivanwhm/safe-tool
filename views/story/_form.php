@@ -18,6 +18,7 @@ use app\models\StoryStatus;
 use app\models\UserRole;
 use kartik\depdrop\DepDrop;
 use kartik\icons\Icon;
+use kartik\number\NumberControl;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -30,6 +31,7 @@ $featureIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the feature
 $userRoleHelp = Icon::show('info-circle') . Yii::t('story', 'Select the user role of the story.');
 $iWantToHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the activity that the user want solve.');
 $soThatHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the business value of the activity.');
+$priorityHelp = Icon::show('info-circle') . Yii::t('story', 'Input the priority of this story. 0 indicates a low priority.');
 $storyStatusHelp = Icon::show('info-circle') . Yii::t('story', 'Select the status of the story.');
 $saveLabel = Icon::show('download') . Yii::t('index', 'Save');
 $cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
@@ -136,6 +138,22 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 		'class' => 'help-block'
 	]) ?>
 
+	<?= $form->field($model, 'priority')->widget(NumberControl::class, [
+		'maskedInputOptions' => [
+      'allowMinus' => false
+		],
+		'options' => [
+			'aria-describedby' => 'hbPriorityID'
+		]
+//		'displayOptions' => $dispOptions,
+//		'saveInputContainer' => $saveCont
+	]) ?>
+
+	<?= Html::tag('span', $priorityHelp, [
+		'id' => 'hbPriorityID',
+		'class' => 'help-block'
+	]) ?>
+	
 	<?= $form->field($model, 'story_status_id')->widget(Select2::class, [
 		'data' => StoryStatus::getStoryStatuses(),
 		'options' => [

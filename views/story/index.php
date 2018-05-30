@@ -103,6 +103,7 @@ $this->params['breadcrumbs'] = [
 				},
 				'filter' => FALSE,
 			],
+			'priority',
 			[
 				'attribute' => 'story_status_id',
 				'format' => 'html',

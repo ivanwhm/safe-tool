@@ -11,6 +11,7 @@
  * @property int $user_role_id As a (user role).
  * @property string $i_want_to I want (activity) to.
  * @property string $so_that So that (business value).
+ * @property int $priority Story priority.
  * @property int $story_status_id Story status ID.
  * @property string $date_created Date and time that the story was created.
  * @property string $date_updated Date and time that the story was updated.
@@ -54,10 +55,12 @@ class Story extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
-			[['product_id', 'epic_id', 'feature_id', 'user_role_id', 'i_want_to', 'so_that', 'story_status_id'], 'required'],
+			[['product_id', 'epic_id', 'feature_id', 'user_role_id', 'i_want_to', 'so_that', 'priority', 'story_status_id'], 
+				'required'],
 			[['product_owner_id'], 'required', 'on' => 'transfer'],
 			[['id', 'product_owner_id', 'product_id', 'epic_id', 'feature_id', 'user_role_id', 'story_status_id',
 				'user_created', 'user_updated'], 'integer'],
+			[['priority'], 'integer', 'min' => 0, 'max' => 999],
 			[['date_created', 'date_updated'], 'safe'],
 			[['i_want_to', 'so_that'], 'string', 'max' => 500],
 			[['id'], 'unique'],
@@ -95,6 +98,7 @@ class Story extends SafeToolActiveRecord
 			'user_role_id' => Yii::t('story', 'As a'),
 			'i_want_to' => Yii::t('story', 'I want'),
 			'so_that' => Yii::t('story', 'So that'),
+			'priority' => Yii::t('story', 'Priority'),
 			'story_status_id' => Yii::t('story', 'Status'),
 			'date_created' => Yii::t('story', 'Date of creation'),
 			'date_updated' => Yii::t('story', 'Date of the last update'),
@@ -177,6 +181,7 @@ class Story extends SafeToolActiveRecord
 		$query->andFilterWhere(['=', 'id', $this->getAttribute('id')])
 			->andFilterWhere(['=', 'product_owner_id', $this->getAttribute('product_owner_id')])
 			->andFilterWhere(['=', 'product_id', $this->getAttribute('product_id')])
+			->andFilterWhere(['=', 'priority', $this->getAttribute('priority')])
 			->andFilterWhere(['=', 'story_status_id', $this->getAttribute('story_status_id')]);
 
 		return new ActiveDataProvider([
@@ -189,6 +194,7 @@ class Story extends SafeToolActiveRecord
 					'product_id',
 					'epic_id',
 					'feature_id',
+					'priority',
 					'story_status_id'
 				]
 			]

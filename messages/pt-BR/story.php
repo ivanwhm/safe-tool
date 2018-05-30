@@ -7,6 +7,7 @@ return [
 	'Feature' => 'Funcionalidade',
 	'As a' => 'Como um(a)',
 	'I want' => 'Eu quero',
+	'Priority' => 'Prioridade',
 	'So that' => 'Para que',
 	'Date of creation' => 'Data da criação',
 	'Date of the last update' => 'Data da última atualização',
@@ -31,6 +32,7 @@ return [
 	'Only the product owner responsible for this story can delete it.' => 'Apenas o dono do produto responsável por esta estória pode excluí-la.',
 	'Only the product owner responsible for this story can transfer it.' => 'Apenas o dono do produto responsável por esta estória pode transferí-la.',
 	'Status' => 'Estado',
+	'Input the priority of this story. 0 indicates a low priority.' => 'Informe a prioridade desta estória. Zero indica prioridade baixa.',
 	'Select the status of the story.' => 'Selecione o estado da estória.',
 	'The status of this story is ready. You cannot do it.' => 'O estado desta estória é pronto. Você não pode fazer isso.',
 	'This story does not have any acceptance criteria and cannot have the status defined as ready.' => 'Esta estória não tem nenhum critério de aceitação e não pode ter seu estado definido como pronto.'

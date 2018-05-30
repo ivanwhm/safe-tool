@@ -8,6 +8,7 @@ return [
 	'As a' => '',
 	'I want' => '',
 	'So that' => '',
+	'Priority' => '',
 	'Date of creation' => '',
 	'Date of the last update' => '',
 	'The user of creation' => '',
@@ -31,6 +32,7 @@ return [
 	'Only the product owner responsible for this story can delete it.' => '',
 	'Only the product owner responsible for this story can transfer it.' => '',
 	'Status' => '',
+	'Input the priority of this story. 0 indicates a low priority.' => '',
 	'Select the status of the story.' => '',
 	'The status of this story is ready. You cannot do it.' => '',
 	'This story does not have any acceptance criteria and cannot have the status defined as ready.' => ''
