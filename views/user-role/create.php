@@ -20,18 +20,18 @@ $this->title = Yii::t('user-role', 'Add user role');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
+		"active" => false,
 		"icon" => Icon::show('edit')
 	],
 	[
 		"label" => Yii::t('user-role', 'User roles'),
 		"icon" => Icon::show('female'),
-		"active" => false,
 		"url" => Url::to(["user-role/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('plus'),
-		"active" => true
+		"active" => false
 	]
 ];
 

@@ -24,12 +24,12 @@ $this->title = Yii::t('user-role', 'User roles');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
+		"active" => false,
 		"icon" => Icon::show('edit')
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('female'),
-		"active" => true,
 		"url" => Url::to(["user-role/index"])
 	]
 ];

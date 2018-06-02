@@ -26,7 +26,6 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('globe'),
-		"active" => true,
 		"url" => Url::to(["epic/index"])
 	]
 ];

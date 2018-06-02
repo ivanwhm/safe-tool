@@ -27,7 +27,6 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('book'),
-		"active" => true,
 		"url" => Url::to(["story/index"])
 	]
 ];

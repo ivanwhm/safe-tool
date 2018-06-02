@@ -21,19 +21,17 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('story', 'View story'),
 		"icon" => Icon::show('book'),
-		"active" => false,
 		"url" => $model->getStory()->getLink()
 	],
 	[
 		"label" => Yii::t('story-acceptance-criteria', 'Acceptance criterias'),
 		"icon" => Icon::show('check-circle'),
-		"active" => false,
 		"url" => Url::to(['story/view', 'id' => $model->getAttribute('story_id')])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('plus'),
-		"active" => true
+		"active" => false
 	]
 ];
 

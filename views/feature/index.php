@@ -26,7 +26,6 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('map-signs'),
-		"active" => true,
 		"url" => Url::to(["feature/index"])
 	]
 ];

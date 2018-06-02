@@ -67,7 +67,7 @@ class ProductOwner extends SafeToolActiveRecord
 	{
 		return [
 			'id' => Yii::t('product-owner', 'ID'),
-			'user_id' => Yii::t('product-owner', 'The user associated with the product owner'),
+			'user_id' => Yii::t('product-owner', 'User'),
 			'name' => Yii::t('product-owner', 'Name'),
 			'status' => Yii::t('product-owner', 'Status'),
 			'date_created' => Yii::t('product-owner', 'Date of creation'),

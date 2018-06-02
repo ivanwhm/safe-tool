@@ -21,13 +21,12 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('story', 'Stories'),
 		"icon" => Icon::show('book'),
-		"active" => false,
 		"url" => Url::to(["story/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('plus'),
-		"active" => true
+		"active" => false
 	]
 ];
 

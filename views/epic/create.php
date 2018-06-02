@@ -21,13 +21,12 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('epic', 'Epics'),
 		"icon" => Icon::show('globe'),
-		"active" => false,
 		"url" => Url::to(["epic/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('plus'),
-		"active" => true
+		"active" => false
 	]
 ];
 

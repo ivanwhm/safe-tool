@@ -1,7 +1,7 @@
 <?php
 return [
 	'ID' => 'Código',
-	'The user associated with the product owner' => 'Usuário associado ao dono do produto',
+	'User' => 'Usuário',
 	'Name' => 'Nome',
 	'Status' => 'Estado',
 	'Date of creation' => 'Data da criação',

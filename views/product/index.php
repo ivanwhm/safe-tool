@@ -25,7 +25,6 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('product-hunt'),
-		"active" => true,
 		"url" => Url::to(["product/index"])
 	]
 ];

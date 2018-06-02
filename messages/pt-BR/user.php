@@ -30,5 +30,6 @@ return [
 	'Do you want to delete this user?' => 'Você deseja excluir este usuário?',
 	'Add user' => 'Adicionar usuário',
 	'Update user' => 'Editar usuário',
-	'View user' => 'Visualizar usuário'
+	'View user' => 'Visualizar usuário',
+	'User profile' => 'Perfil do usuário'
 ];

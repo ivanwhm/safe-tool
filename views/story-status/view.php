@@ -20,18 +20,17 @@ $this->title = Yii::t('story-status', 'View story status');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
+		"active" => false,
 		"icon" => Icon::show('edit')
 	],
 	[
 		"label" => Yii::t('story-status', 'Story statuses'),
 		"icon" => Icon::show('tags'),
-		"active" => false,
 		"url" => Url::to(["story-status/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('eye'),
-		"active" => true,
 		"url" => $model->getLink()
 	]
 ];

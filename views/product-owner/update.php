@@ -18,18 +18,17 @@ $this->title = Yii::t('product-owner', 'Update product owner');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
+		"active" => false,
 		"icon" => Icon::show('edit')
 	],
 	[
 		"label" => Yii::t('product-owner', 'Product owners'),
 		"icon" => Icon::show('user-md'),
-		"active" => false,
 		"url" => Url::to(["product-owner/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('pencil'),
-		"active" => true,
 		"url" => $model->getLink(true)
 	]
 ];

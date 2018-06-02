@@ -41,11 +41,11 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang='<?= Yii::$app->language ?>'>
 
 <head>
-	<meta charset="<?= Yii::$app->charset ?>">
-	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta charset='<?= Yii::$app->charset ?>'>
+	<meta content='width=device-width, initial-scale=1' name='viewport'>
 	<?= Html::csrfMetaTags() ?>
 	<?php Icon::map($this, Icon::FA); ?>
 	<?php Icon::map($this, Icon::FI); ?>
@@ -56,28 +56,28 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 <body>
 <?php $this->beginBody() ?>
 
-<div id="wrapper">
+<div id='wrapper'>
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+	<nav class='navbar navbar-default navbar-static-top' role='navigation' style='margin-bottom: 0'>
+		<div class='navbar-header'>
+			<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+				<span class='sr-only'>Toggle navigation</span>
+				<span class='icon-bar'></span>
+				<span class='icon-bar'></span>
+				<span class='icon-bar'></span>
 			</button>
-			<a class="navbar-brand" href="<?= Url::to(['site/index']) ?>"><?= Yii::$app->name ?></a>
+			<a class='navbar-brand' href='<?= Url::to(['site/index']) ?>'><?= Yii::$app->name ?></a>
 		</div>
 		<!-- /.navbar-header -->
 
-		<ul class="nav navbar-top-links navbar-right">
+		<ul class='nav navbar-top-links navbar-right'>
 			<!-- /.dropdown -->
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			<li class='dropdown'>
+				<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
 					<?= Language::getCountryIconFromLanguage($user->getAttribute('language'), ['class' => 'fa-fw']) . ' ' . Icon::show('caret-down') ?>
 				</a>
-				<ul class="dropdown-menu">
+				<ul class='dropdown-menu'>
 					<?php
 					foreach (Language::getData() as $key => $value) {
 						echo Html::beginTag('li');
@@ -90,19 +90,24 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 			</li>
 			<!-- /.dropdown -->
 			<!-- /.dropdown -->
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<li class='dropdown'>
+				<a class='dropdown-toggle' data-toggle='dropdown' href='#'>
 					<?= Icon::show('user', ['class' => 'fa-fw']) . Icon::show('caret-down') ?>
 				</a>
-				<ul class="dropdown-menu dropdown-user">
+				<ul class='dropdown-menu dropdown-user'>
 					<li>
-						<a href="<?= Url::to(["site/password"]) ?>">
+						<a href="<?= Url::to(["site/profile"]) ?>">
+							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'User profile') ?>
+						</a>
+					</li>
+					<li>
+						<a href='<?= Url::to(['site/password']) ?>'>
 							<?= Icon::show('key', ['class' => 'fa-fw']) . Yii::t('password', 'Change password') ?>
 						</a>
 					</li>
-					<li class="divider"></li>
+					<li class='divider'></li>
 					<li>
-						<a id="btn-logout">
+						<a id='btn-logout'>
 							<?= Icon::show('sign-out', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Log out') ?>
 						</a>
 					</li>
@@ -113,36 +118,36 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 		</ul>
 		<!-- /.navbar-top-links -->
 
-		<div class="navbar-default sidebar" role="navigation">
-			<div class="sidebar-nav navbar-collapse">
-				<ul class="nav" id="side-menu">
+		<div class='navbar-default sidebar' role='navigation'>
+			<div class='sidebar-nav navbar-collapse'>
+				<ul class='nav' id='side-menu'>
 					<li>
-						<a href="<?= Url::to(['site/index']) ?>">
+						<a href='<?= Url::to(['site/index']) ?>'>
 							<?= Icon::show('dashboard', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Dashboard') ?>
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href='#'>
 							<?= Icon::show('edit', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Records') ?>
 						</a>
-						<ul class="nav nav-second-level">
+						<ul class='nav nav-second-level'>
 							<li>
-								<a href="<?= Url::to(['user/index']) ?>">
+								<a href='<?= Url::to(['user/index']) ?>'>
 									<?= Icon::show('users', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'Users') ?>
 								</a>
 							</li>
 							<li>
-								<a href="<?= Url::to(['product-owner/index']) ?>">
+								<a href='<?= Url::to(['product-owner/index']) ?>'>
 									<?= Icon::show('user-md', ['class' => 'fa-fw']) . ' ' . Yii::t('product-owner', 'Product owners') ?>
 								</a>
 							</li>
 							<li>
-								<a href="<?= Url::to(['user-role/index']) ?>">
+								<a href='<?= Url::to(['user-role/index']) ?>'>
 									<?= Icon::show('female', ['class' => 'fa-fw']) . ' ' . Yii::t('user-role', 'User roles') ?>
 								</a>
 							</li>
 							<li>
-								<a href="<?= Url::to(['story-status/index']) ?>">
+								<a href='<?= Url::to(['story-status/index']) ?>'>
 									<?= Icon::show('tags', ['class' => 'fa-fw']) . ' ' . Yii::t('story-status', 'Story statuses') ?>
 								</a>
 							</li>
@@ -150,22 +155,22 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 						<!-- /.nav-second-level-->
 					</li>
 					<li>
-						<a href="<?= Url::to(['product/index']) ?>">
+						<a href='<?= Url::to(['product/index']) ?>'>
 							<?= Icon::show('product-hunt', ['class' => 'fa-fw']) . ' ' . Yii::t('product', 'Products') ?>
 						</a>
 					</li>
 					<li>
-						<a href="<?= Url::to(['epic/index']) ?>">
+						<a href='<?= Url::to(['epic/index']) ?>'>
 							<?= Icon::show('globe', ['class' => 'fa-fw']) . ' ' . Yii::t('epic', 'Epics') ?>
 						</a>
 					</li>
 					<li>
-						<a href="<?= Url::to(['feature/index']) ?>">
+						<a href='<?= Url::to(['feature/index']) ?>'>
 							<?= Icon::show('map-signs', ['class' => 'fa-fw']) . ' ' . Yii::t('feature', 'Features') ?>
 						</a>
 					</li>
 					<li>
-						<a href="<?= Url::to(['story/index']) ?>">
+						<a href='<?= Url::to(['story/index']) ?>'>
 							<?= Icon::show('book', ['class' => 'fa-fw']) . ' ' . Yii::t('story', 'Stories') ?>
 						</a>
 					</li>
@@ -177,33 +182,33 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 	</nav>
 
 	<!-- Page Content -->
-	<div id="page-wrapper">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="page-header"><?= $this->title ?></h1>
+	<div id='page-wrapper'>
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='col-lg-12'>
+					<h1 class='page-header'><?= $this->title ?></h1>
 					<br>
 					<!-- .breadcrumb -->
-					<ol class="breadcrumb2">
+					<ol class='breadcrumb2'>
 						<li>
 							<?= Icon::show('dashboard') ?>
-							<a href="<?= Url::to(["site/index"]) ?>">
+							<a href='<?= Url::to(['site/index']) ?>'>
 								<?= Yii::t('index', 'Dashboard') ?>
 							</a>
 						</li>
 
 						<?php
-						$breadcrumbs = isset($this->params["breadcrumbs"]) ? $this->params["breadcrumbs"] : [];
+						$breadcrumbs = isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [];
 						foreach ($breadcrumbs as $breadcrumb) :
-							$active = (isset($breadcrumb["active"]) && $breadcrumb["active"]) ? "active" : "";
-							$label = isset($breadcrumb["label"]) ? $breadcrumb["label"] : "";
-							$icon = isset($breadcrumb["icon"]) ? $breadcrumb["icon"] : "";
-							$url = isset($breadcrumb["url"]) ? $breadcrumb["url"] : "";
+							$active = (isset($breadcrumb['active']) && !$breadcrumb['active']) ? 'active' : '';
+							$label = isset($breadcrumb['label']) ? $breadcrumb['label'] : '';
+							$icon = isset($breadcrumb['icon']) ? $breadcrumb['icon'] : '';
+							$url = isset($breadcrumb['url']) ? $breadcrumb['url'] : '';
 							?>
-							<li class="<?= $active ?>">
+							<li class='<?= $active ?>'>
 								<?= $icon ?>
 								<?php if ($url != "") : ?>
-								<a href="<?= $url ?>">
+								<a href='<?= $url ?>'>
 									<?php endif; ?>
 									<?= $label ?>
 									<?php if ($url != "") : ?>

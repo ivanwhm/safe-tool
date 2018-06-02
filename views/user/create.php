@@ -20,18 +20,18 @@ $this->title = Yii::t('user', 'Add user');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
-		"icon" => Icon::show('edit')
+		"icon" => Icon::show('edit'),
+		"active" => false
 	],
 	[
 		"label" => Yii::t('user', 'Users'),
 		"icon" => Icon::show('users'),
-		"active" => false,
 		"url" => Url::to(["user/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('plus'),
-		"active" => true
+		"active" => false,
+		"icon" => Icon::show('plus')
 	]
 ];
 

@@ -19,13 +19,11 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('feature', 'Features'),
 		"icon" => Icon::show('map-signs'),
-		"active" => false,
 		"url" => Url::to(["feature/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('pencil'),
-		"active" => true,
 		"url" => $model->getLink(true)
 	]
 ];

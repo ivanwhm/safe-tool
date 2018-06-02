@@ -30,5 +30,6 @@ return [
 	'Do you want to delete this user?' => '',
 	'Add user' => '',
 	'Update user' => '',
-	'View user' => ''
+	'View user' => '',
+	'User profile' => ''
 ];

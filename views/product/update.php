@@ -19,13 +19,11 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('product', 'Products'),
 		"icon" => Icon::show('product-hunt'),
-		"active" => false,
 		"url" => Url::to(["product/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('pencil'),
-		"active" => true,
 		"url" => $model->getLink(true)
 	]
 ];

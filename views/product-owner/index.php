@@ -25,12 +25,12 @@ $this->title = Yii::t('product-owner', 'Product owners');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
+		"active" => false,
 		"icon" => Icon::show('edit')
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('user-md'),
-		"active" => true,
 		"url" => Url::to(["product-owner/index"])
 	]
 ];

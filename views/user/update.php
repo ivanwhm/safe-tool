@@ -18,18 +18,17 @@ $this->title = Yii::t('user', 'Update user');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
+		"active" => false,
 		"icon" => Icon::show('edit')
 	],
 	[
 		"label" => Yii::t('user', 'Users'),
 		"icon" => Icon::show('users'),
-		"active" => false,
 		"url" => Url::to(["user/index"])
 	],
 	[
 		"label" => $this->title,
 		"icon" => Icon::show('pencil'),
-		"active" => true,
 		"url" => $model->getLink(true)
 	]
 ];
