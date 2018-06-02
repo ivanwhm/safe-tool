@@ -10,9 +10,9 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\enums\Language;
 use app\models\User;
-use kartik\icons\Icon;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -22,17 +22,17 @@ use yii\widgets\ActiveForm;
 $this->title = Yii::t('user', 'User profile');
 $this->params['breadcrumbs'] = [[
 	"label" => Yii::t('user', 'User profile'),
-	"icon" => Icon::show('user'),
+	"icon" => Icons::getIcon(Icons::FORM_USER),
 	"active" => false,
 	"url" => Url::to(["site/profile"])
 ]];
 
-$usernameLabel = Icon::show('info-circle') . Yii::t('user', 'Input the username.');
-$emailLabel = Icon::show('info-circle') . Yii::t('user', 'Input the e-mail address.');
-$languageLabel = Icon::show('info-circle') . Yii::t('user', 'Input the language.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$usernameLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the username.');
+$emailLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the e-mail address.');
+$languageLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the language.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -91,7 +91,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 		<br>
 
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), [
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), [
 			'class' => 'help-block'
 		]) ?>
 

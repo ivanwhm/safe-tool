@@ -10,12 +10,11 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Feature;
-use app\models\Epic;
 use app\models\Product;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -25,7 +24,7 @@ $this->title = Yii::t('feature', 'Features');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('map-signs'),
+		"icon" => Icons::getIcon(Icons::FEATURE),
 		"url" => Url::to(["feature/index"])
 	]
 ];
@@ -42,10 +41,10 @@ $this->params['breadcrumbs'] = [
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('map-signs') . ' ' . Yii::t('feature', 'Features') . '</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::FEATURE) . ' ' . Yii::t('feature', 'Features') . '</h3>',
 			'type' => 'default',
-			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
-			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
+			'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
+			'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
 			'footer' => false
 		],
 		'columns' => [
@@ -85,7 +84,7 @@ $this->params['breadcrumbs'] = [
 				'buttons' => [
 					'delete' => function ($url) {
 						return Html::a(
-							Icon::show('trash'),
+							Icons::getIcon(Icons::CRUD_DELETE),
 							[$url],
 							[
 								'data-confirm' => Yii::t('feature', 'Do you want to delete this feature?'),

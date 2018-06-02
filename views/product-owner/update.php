@@ -9,8 +9,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\ProductOwner;
-use kartik\icons\Icon;
 use yii\helpers\Url;
 use yii\web\View;
 
@@ -19,16 +19,16 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
 		"active" => false,
-		"icon" => Icon::show('edit')
+		"icon" => Icons::getIcon(Icons::RECORDS)
 	],
 	[
 		"label" => Yii::t('product-owner', 'Product owners'),
-		"icon" => Icon::show('user-md'),
+		"icon" => Icons::getIcon(Icons::PRODUCT_OWNER),
 		"url" => Url::to(["product-owner/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('pencil'),
+		"icon" => Icons::getIcon(Icons::CRUD_EDIT),
 		"url" => $model->getLink(true)
 	]
 ];

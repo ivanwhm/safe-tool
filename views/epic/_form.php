@@ -11,21 +11,21 @@
 
 //Imports
 use app\models\enums\EpicType;
+use app\models\enums\Icons;
 use app\models\Epic;
 use app\models\Product;
-use kartik\icons\Icon;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$titleHelp = Icon::show('info-circle') . Yii::t('epic', 'Input the title of the epic.');
-$productHelp = Icon::show('info-circle') . Yii::t('epic', 'Select the product of this epic.');
-$typeHelp = Icon::show('info-circle') . Yii::t('epic', 'Select the type of this epic.');
-$epicHelp = Icon::show('info-circle') . Yii::t('epic', 'Describe this epic.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$titleHelp =  Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Input the title of the epic.');
+$productHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Select the product of this epic.');
+$typeHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Select the type of this epic.');
+$epicHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Describe this epic.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -87,8 +87,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>
 
 	<?= Html::tag('span', $mandatoryFields, [
@@ -100,10 +100,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 			'class' => $model->getIsNewRecord() ? 'btn btn-success' : 'btn btn-primary'
 		]) ?>
 		<?= Html::a($cancelLabel, $model->getIsNewRecord() ? ['index'] : [
-			'view',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-danger'
+			'view', 'id' => $model->getAttribute('id')], ['class' => 'btn btn-danger'
 		]) ?>
 	</div>
 

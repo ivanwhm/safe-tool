@@ -10,12 +10,12 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\enums\Language;
 use app\models\enums\Status;
 use app\models\User;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -25,12 +25,12 @@ $this->title = Yii::t('user', 'Users');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
-		"icon" => Icon::show('edit'),
+		"icon" => Icons::getIcon(Icons::RECORDS),
 		"active" => false,
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('users'),
+		"icon" => Icons::getIcon(Icons::USERS),
 		"url" => Url::to(["user/index"])
 	]
 ];
@@ -46,10 +46,10 @@ $this->params['breadcrumbs'] = [
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('users') . ' ' . Yii::t('user', 'Users') . '</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::USERS) . ' ' . Yii::t('user', 'Users') . '</h3>',
 			'type' => GridView::TYPE_DEFAULT,
-			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
-			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
+			'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
+			'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
 			'footer' => false
 		],
 		'columns' => [
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'] = [
 				'buttons' => [
 					'delete' => function ($url) {
 						return Html::a(
-							Icon::show('trash'),
+							Icons::getIcon(Icons::CRUD_DELETE),
 							[$url],
 							[
 								'data-confirm' => Yii::t('user', 'Do you want to delete this user?'),

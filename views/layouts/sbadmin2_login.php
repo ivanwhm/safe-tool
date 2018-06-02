@@ -11,7 +11,6 @@
 
 //Imports
 use app\assets\SBAdmin2\SBAdmin2Asset;
-use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\web\View;
 
@@ -26,7 +25,6 @@ SBAdmin2Asset::register($this);
 	<head>
 		<meta charset="<?= Yii::$app->charset ?>">
 		<?= Html::csrfMetaTags() ?>
-		<?php Icon::map($this, Icon::FA); ?>
 		<title><?= Yii::$app->name ?></title>
 		<?php $this->head() ?>
 	</head>

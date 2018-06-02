@@ -10,12 +10,12 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\enums\Status;
-use app\models\StoryStatus;
 use app\models\enums\YesNo;
+use app\models\StoryStatus;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -26,11 +26,11 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
 		"active" => false,
-		"icon" => Icon::show('edit')
+		"icon" => Icons::getIcon(Icons::RECORDS)
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('tags'),
+		"icon" => Icons::getIcon(Icons::STORY_STATUS),
 		"url" => Url::to(["story-status/index"])
 	]
 ];
@@ -47,12 +47,12 @@ $this->params['breadcrumbs'] = [
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('tags') . ' ' . Yii::t('story-status', 
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::STORY_STATUS) . ' ' . Yii::t('story-status', 
 					'Story statuses') . '</h3>',
 			'type' => 'default',
-			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), 
+			'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), 
 				['create'], ['class' => 'btn btn-success']),
-			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), 
+			'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), 
 				['index'], ['class' => 'btn btn-info']),
 			'footer' => false
 		],
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'] = [
 				'buttons' => [
 					'delete' => function ($url) {
 						return Html::a(
-							Icon::show('trash'),
+							Icons::getIcon(Icons::CRUD_DELETE),
 							[$url],
 							[
 								'data-confirm' => Yii::t('story-status', 'Do you want to delete this story status?'),

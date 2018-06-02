@@ -12,6 +12,7 @@
 //Imports
 use app\assets\SBAdmin2\SBAdmin2Asset;
 use app\models\enums\Language;
+use app\models\enums\Icons;
 use app\models\User;
 use kartik\dialog\Dialog;
 use kartik\icons\Icon;
@@ -24,8 +25,8 @@ SBAdmin2Asset::register($this);
 try {
 	echo Dialog::widget([
 			'options' => [
-				'btnOKLabel' => Icon::show('check') . ' ' . Yii::t('index', 'Yes'),
-				'btnCancelLabel' => Icon::show('ban') . ' ' . Yii::t('index', 'No'),
+				'btnOKLabel' => Icons::getIcon(ICONS::FORM_OK) . ' ' . Yii::t('index', 'Yes'),
+				'btnCancelLabel' => Icons::getIcon(Icons::FORM_CANCEL) . ' ' . Yii::t('index', 'No'),
 			]
 		]
 	);
@@ -47,8 +48,8 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 	<meta charset='<?= Yii::$app->charset ?>'>
 	<meta content='width=device-width, initial-scale=1' name='viewport'>
 	<?= Html::csrfMetaTags() ?>
-	<?php Icon::map($this, Icon::FA); ?>
 	<?php Icon::map($this, Icon::FI); ?>
+	<link rel="stylesheet" type="text/css" href="<?= Yii::$app->getRequest()->getBaseUrl(); ?>/fonts/font-awesome/css/font-awesome.min.css" />
 	<title><?= Yii::$app->name . ' - ' . $this->title ?></title>
 	<?php $this->head() ?>
 </head>
@@ -75,7 +76,7 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 			<!-- /.dropdown -->
 			<li class='dropdown'>
 				<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-					<?= Language::getCountryIconFromLanguage($user->getAttribute('language'), ['class' => 'fa-fw']) . ' ' . Icon::show('caret-down') ?>
+					<?= Language::getCountryIconFromLanguage($user->getAttribute('language'), ['class' => 'fa-fw']) . ' ' . Icons::getIcon(Icons::FORM_CARET) ?>
 				</a>
 				<ul class='dropdown-menu'>
 					<?php
@@ -92,23 +93,23 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 			<!-- /.dropdown -->
 			<li class='dropdown'>
 				<a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-					<?= Icon::show('user', ['class' => 'fa-fw']) . Icon::show('caret-down') ?>
+					<?= Icons::getIcon(Icons::FORM_USER) . Icons::getIcon(Icons::FORM_CARET) ?>
 				</a>
 				<ul class='dropdown-menu dropdown-user'>
 					<li>
 						<a href="<?= Url::to(["site/profile"]) ?>">
-							<?= Icon::show('user', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'User profile') ?>
+							<?= Icons::getIcon(Icons::USERS) . ' ' . Yii::t('user', 'User profile') ?>
 						</a>
 					</li>
 					<li>
 						<a href='<?= Url::to(['site/password']) ?>'>
-							<?= Icon::show('key', ['class' => 'fa-fw']) . Yii::t('password', 'Change password') ?>
+							<?= Icons::getIcon(Icons::USER_PASSWORD) . Yii::t('password', 'Change password') ?>
 						</a>
 					</li>
 					<li class='divider'></li>
 					<li>
 						<a id='btn-logout'>
-							<?= Icon::show('sign-out', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Log out') ?>
+							<?= Icons::getIcon(Icons::FORM_LOGOUT) . ' ' . Yii::t('index', 'Log out') ?>
 						</a>
 					</li>
 				</ul>
@@ -123,32 +124,32 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 				<ul class='nav' id='side-menu'>
 					<li>
 						<a href='<?= Url::to(['site/index']) ?>'>
-							<?= Icon::show('dashboard', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Dashboard') ?>
+							<?= Icons::getIcon(Icons::DASHBOARD) . ' ' . Yii::t('index', 'Dashboard') ?>
 						</a>
 					</li>
 					<li>
 						<a href='#'>
-							<?= Icon::show('edit', ['class' => 'fa-fw']) . ' ' . Yii::t('index', 'Records') ?>
+							<?= Icons::getIcon(Icons::RECORDS) . ' ' . Yii::t('index', 'Records') ?>
 						</a>
 						<ul class='nav nav-second-level'>
 							<li>
 								<a href='<?= Url::to(['user/index']) ?>'>
-									<?= Icon::show('users', ['class' => 'fa-fw']) . ' ' . Yii::t('user', 'Users') ?>
+									<?= Icons::getIcon(Icons::USERS) . ' ' . Yii::t('user', 'Users') ?>
 								</a>
 							</li>
 							<li>
 								<a href='<?= Url::to(['product-owner/index']) ?>'>
-									<?= Icon::show('user-md', ['class' => 'fa-fw']) . ' ' . Yii::t('product-owner', 'Product owners') ?>
+									<?= Icons::getIcon(Icons::PRODUCT_OWNER) . ' ' . Yii::t('product-owner', 'Product owners') ?>
 								</a>
 							</li>
 							<li>
 								<a href='<?= Url::to(['user-role/index']) ?>'>
-									<?= Icon::show('female', ['class' => 'fa-fw']) . ' ' . Yii::t('user-role', 'User roles') ?>
+									<?= Icons::getIcon(Icons::USER_ROLE) . ' ' . Yii::t('user-role', 'User roles') ?>
 								</a>
 							</li>
 							<li>
 								<a href='<?= Url::to(['story-status/index']) ?>'>
-									<?= Icon::show('tags', ['class' => 'fa-fw']) . ' ' . Yii::t('story-status', 'Story statuses') ?>
+									<?= Icons::getIcon(Icons::STORY_STATUS) . ' ' . Yii::t('story-status', 'Story statuses') ?>
 								</a>
 							</li>
 						</ul>
@@ -156,22 +157,22 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 					</li>
 					<li>
 						<a href='<?= Url::to(['product/index']) ?>'>
-							<?= Icon::show('product-hunt', ['class' => 'fa-fw']) . ' ' . Yii::t('product', 'Products') ?>
+							<?= Icons::getIcon(Icons::PRODUCT) . ' ' . Yii::t('product', 'Products') ?>
 						</a>
 					</li>
 					<li>
 						<a href='<?= Url::to(['epic/index']) ?>'>
-							<?= Icon::show('globe', ['class' => 'fa-fw']) . ' ' . Yii::t('epic', 'Epics') ?>
+							<?= Icons::getIcon(Icons::EPIC). ' ' . Yii::t('epic', 'Epics') ?>
 						</a>
 					</li>
 					<li>
 						<a href='<?= Url::to(['feature/index']) ?>'>
-							<?= Icon::show('map-signs', ['class' => 'fa-fw']) . ' ' . Yii::t('feature', 'Features') ?>
+							<?= Icons::getIcon(Icons::FEATURE) . ' ' . Yii::t('feature', 'Features') ?>
 						</a>
 					</li>
 					<li>
 						<a href='<?= Url::to(['story/index']) ?>'>
-							<?= Icon::show('book', ['class' => 'fa-fw']) . ' ' . Yii::t('story', 'Stories') ?>
+							<?= Icons::getIcon(Icons::STORY) . ' ' . Yii::t('story', 'Stories') ?>
 						</a>
 					</li>
 				</ul>
@@ -191,7 +192,7 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 					<!-- .breadcrumb -->
 					<ol class='breadcrumb2'>
 						<li>
-							<?= Icon::show('dashboard') ?>
+							<?= Icons::getIcon(Icons::DASHBOARD) ?>
 							<a href='<?= Url::to(['site/index']) ?>'>
 								<?= Yii::t('index', 'Dashboard') ?>
 							</a>

@@ -11,12 +11,12 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Story;
 use app\models\StoryAcceptanceCriteria;
 use kartik\detail\DetailView;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -26,12 +26,12 @@ $this->title = Yii::t('story', 'View story');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('story', 'Stories'),
-		"icon" => Icon::show('book'),
+		"icon" => Icons::getIcon(Icons::STORY),
 		"url" => Url::to(["story/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('eye'),
+		"icon" => Icons::getIcon(Icons::CRUD_VIEW),
 		"url" => $model->getLink()
 	]
 ];
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'] = [
 		'model' => $model,
 		'hover' => true,
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('eye') . ' ' . $this->title . '</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::CRUD_VIEW) . ' ' . $this->title . '</h3>',
 			'type' => DetailView::TYPE_DEFAULT,
 		],
 		'buttons1' => '',
@@ -99,25 +99,25 @@ $this->params['breadcrumbs'] = [
 	]) ?>
 
 	<p>
-		<?= Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], [
+		<?= Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], [
 			'class' => 'btn btn-success'
 		]) ?>
 
-		<?= Html::a(Icon::show('pencil') . Yii::t('index', 'Update'), [
+		<?= Html::a(Icons::getIcon(Icons::CRUD_EDIT) . Yii::t('index', 'Update'), [
 			'update',
 			'id' => $model->getAttribute('id')
 		], [
 			'class' => 'btn btn-primary'
 		]) ?>
 		
-		<?= Html::a(Icon::show('exchange') . Yii::t('index', 'Transfer'), [
+		<?= Html::a(Icons::getIcon(Icons::FORM_TRANSFER) . Yii::t('index', 'Transfer'), [
 			'transfer',
 			'id' => $model->getAttribute('id')
 		], [
 			'class' => 'btn btn-primary'
 		]) ?>
 
-		<?= Html::a(Icon::show('trash') . Yii::t('index', 'Delete'), [
+		<?= Html::a(Icons::getIcon(Icons::CRUD_DELETE) . Yii::t('index', 'Delete'), [
 			'delete',
 			'id' => $model->getAttribute('id')
 		], [
@@ -144,13 +144,13 @@ $this->params['breadcrumbs'] = [
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('check-circle') . ' ' . 
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::STORY_ACCEPTANCE_CRITERIA) . ' ' . 
 				Yii::t('story-acceptance-criteria', 'Acceptance criterias') . '</h3>',
 			'type' => 'default',
-			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'),
+			'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'),
 				['story-acceptance-criteria/create', 'story' => $model->getAttribute('id')], 
 				['class' => 'btn btn-success']),
-			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), 
+			'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), 
 				['index'], ['class' => 'btn btn-info']),
 			'footer' => false
 		],
@@ -169,7 +169,7 @@ $this->params['breadcrumbs'] = [
 				'buttons' => [
 					'delete' => function ($url) {
 						return Html::a(
-							Icon::show('trash'),
+							Icons::getIcon(Icons::CRUD_DELETE),
 							[$url],
 							[
 								'data-confirm' => Yii::t('story-acceptance-criteria', 

@@ -10,13 +10,13 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Product;
+use app\models\ProductOwner;
 use app\models\Story;
 use app\models\StoryStatus;
-use app\models\ProductOwner;
 use kartik\grid\ActionColumn;
 use kartik\grid\GridView;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -26,7 +26,7 @@ $this->title = Yii::t('story', 'Stories');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('book'),
+		"icon" => Icons::getIcon(Icons::STORY),
 		"url" => Url::to(["story/index"])
 	]
 ];
@@ -43,10 +43,10 @@ $this->params['breadcrumbs'] = [
 		'persistResize' => true,
 		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('book') . ' ' . Yii::t('story', 'Stories') . '</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::STORY) . ' ' . Yii::t('story', 'Stories') . '</h3>',
 			'type' => 'default',
-			'before' => Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
-			'after' => Html::a(Icon::show('refresh') . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
+			'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
+			'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
 			'footer' => false
 		],
 		'columns' => [
@@ -123,7 +123,7 @@ $this->params['breadcrumbs'] = [
 				'buttons' => [
 					'delete' => function ($url) {
 						return Html::a(
-							Icon::show('trash'),
+							Icons::getIcon(Icons::CRUD_DELETE),
 							[$url],
 							[
 								'data-confirm' => Yii::t('story', 'Do you want to delete this story?'),
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'] = [
 					},
 					'transfer' => function ($url) {
 						return Html::a(
-							Icon::show('exchange'),
+							Icons::getIcon(Icons::FORM_TRANSFER),
 							[$url]
 						);
 					}

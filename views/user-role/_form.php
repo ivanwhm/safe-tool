@@ -10,20 +10,20 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\enums\Status;
 use app\models\UserRole;
-use kartik\icons\Icon;
 use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$nameHelp = Icon::show('info-circle') . Yii::t('user-role', 'Input the name of the user role.');
-$descriptionHelp = Icon::show('info-circle') . Yii::t('user-role', 'Input the description of the user role.');
-$activeHelp = Icon::show('info-circle') . Yii::t('user-role', 'Please tell if the user role is active or inactive.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$nameHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user-role', 'Input the name of the user role.');
+$descriptionHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user-role', 'Input the description of the user role.');
+$activeHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user-role', 'Please tell if the user role is active or inactive.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -78,8 +78,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>
 
 	<?= Html::tag('span', $mandatoryFields, [

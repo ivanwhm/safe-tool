@@ -10,18 +10,18 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\ProductOwner;
 use app\models\Story;
-use kartik\icons\Icon;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$productOwnerIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the product owner of the story.');
-$transferLabel = Icon::show('exchange') . Yii::t('index', 'Transfer');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$productOwnerIDHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Select the product owner of the story.');
+$transferLabel = Icons::getIcon(Icons::FORM_TRANSFER) . Yii::t('index', 'Transfer');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -50,8 +50,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>
 
 	<?= Html::tag('span', $mandatoryFields, [

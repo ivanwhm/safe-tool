@@ -11,29 +11,29 @@
  */
 
 //Imports
+use app\models\enums\Icons;
+use app\models\forms\ChangePasswordForm;
 use app\models\User;
-use kartik\icons\Icon;
 use kartik\password\PasswordInput;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\models\forms\ChangePasswordForm;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('password', 'Change password');
 $this->params['breadcrumbs'] = [[
 		"label" => Yii::t('password', 'Change password'),
-		"icon" => Icon::show('key'),
+		"icon" => Icons::getIcon(Icons::USER_PASSWORD),
 		"active" => false,
 		"url" => Url::to(["site/password"])
 	]];
 
-$oldPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the old password.');
-$newPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the new password.');
-$repeatNewPasswordLabel = Icon::show('info-circle') . Yii::t('password', 'Input the new password (again).');
-$changePasswordLabel = Icon::show('pencil') . Yii::t('password', 'Change password');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$oldPasswordLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('password', 'Input the old password.');
+$newPasswordLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('password', 'Input the new password.');
+$repeatNewPasswordLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('password', 'Input the new password (again).');
+$changePasswordLabel = Icons::getIcon(Icons::CRUD_EDIT) . Yii::t('password', 'Change password');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -109,7 +109,7 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 
 		<br>
 
-		<?= Html::tag('span', Icon::show('user') . $user->printLastPasswordChangeInformation(), [
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $user->printLastPasswordChangeInformation(), [
 			'class' => 'help-block'
 		]) ?>
 

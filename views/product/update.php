@@ -9,8 +9,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Product;
-use kartik\icons\Icon;
 use yii\helpers\Url;
 use yii\web\View;
 
@@ -18,12 +18,12 @@ $this->title = Yii::t('product', 'Update product');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('product', 'Products'),
-		"icon" => Icon::show('product-hunt'),
+		"icon" => Icons::getIcon(Icons::PRODUCT),
 		"url" => Url::to(["product/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('pencil'),
+		"icon" => Icons::getIcon(Icons::CRUD_EDIT),
 		"url" => $model->getLink(true)
 	]
 ];

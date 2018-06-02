@@ -10,6 +10,7 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Epic;
 use app\models\Feature;
 use app\models\Product;
@@ -17,7 +18,6 @@ use app\models\Story;
 use app\models\StoryStatus;
 use app\models\UserRole;
 use kartik\depdrop\DepDrop;
-use kartik\icons\Icon;
 use kartik\number\NumberControl;
 use kartik\select2\Select2;
 use yii\helpers\Html;
@@ -25,17 +25,17 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$productIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the product of the story.');
-$epicIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the epic of the story.');
-$featureIDHelp = Icon::show('info-circle') . Yii::t('story', 'Select the feature of the story.');
-$userRoleHelp = Icon::show('info-circle') . Yii::t('story', 'Select the user role of the story.');
-$iWantToHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the activity that the user want solve.');
-$soThatHelp = Icon::show('info-circle') . Yii::t('story', 'Describe the business value of the activity.');
-$priorityHelp = Icon::show('info-circle') . Yii::t('story', 'Input the priority of this story. 0 indicates a low priority.');
-$storyStatusHelp = Icon::show('info-circle') . Yii::t('story', 'Select the status of the story.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$productIDHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Select the product of the story.');
+$epicIDHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Select the epic of the story.');
+$featureIDHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Select the feature of the story.');
+$userRoleHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Select the user role of the story.');
+$iWantToHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Describe the activity that the user want solve.');
+$soThatHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Describe the business value of the activity.');
+$priorityHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Input the priority of this story. 0 indicates a low priority.');
+$storyStatusHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story', 'Select the status of the story.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -170,8 +170,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>
 
 	<?= Html::tag('span', $mandatoryFields, [

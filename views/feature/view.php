@@ -9,9 +9,9 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Feature;
 use kartik\detail\DetailView;
-use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -20,12 +20,12 @@ $this->title = Yii::t('feature', 'View feature');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('feature', 'Features'),
-		"icon" => Icon::show('map-signs'),
+		"icon" => Icons::getIcon(Icons::FEATURE),
 		"url" => Url::to(["feature/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('eye'),
+		"icon" => Icons::getIcon(Icons::CRUD_VIEW),
 		"url" => $model->getLink()
 	]
 ];
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'] = [
 		'model' => $model,
 		'hover' => true,
 		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icon::show('eye') . ' ' . $this->title . '</h3>',
+			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::CRUD_VIEW) . ' ' . $this->title . '</h3>',
 			'type' => DetailView::TYPE_DEFAULT,
 		],
 		'buttons1' => '',
@@ -73,18 +73,18 @@ $this->params['breadcrumbs'] = [
 	]) ?>
 
 	<p>
-		<?= Html::a(Icon::show('plus') . Yii::t('index', 'Add'), ['create'], [
+		<?= Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], [
 			'class' => 'btn btn-success'
 		]) ?>
 
-		<?= Html::a(Icon::show('pencil') . Yii::t('index', 'Update'), [
+		<?= Html::a(Icons::getIcon(Icons::CRUD_EDIT) . Yii::t('index', 'Update'), [
 			'update',
 			'id' => $model->getAttribute('id')
 		], [
 			'class' => 'btn btn-primary'
 		]) ?>
 
-		<?= Html::a(Icon::show('trash') . Yii::t('index', 'Delete'), [
+		<?= Html::a(Icons::getIcon(Icons::CRUD_DELETE) . Yii::t('index', 'Delete'), [
 			'delete',
 			'id' => $model->getAttribute('id')
 		], [

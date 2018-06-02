@@ -10,17 +10,17 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\StoryAcceptanceCriteria;
-use kartik\icons\Icon;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$acceptanceCriteriaHelp = Icon::show('info-circle') . Yii::t('story-acceptance-criteria',
+$acceptanceCriteriaHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story-acceptance-criteria',
 		'Describe the acceptance criteria of the story.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -49,9 +49,9 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), 
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), 
 			['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(),
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(),
 			['class' => 'help-block']) ?>
 	<?php endif; ?>
 

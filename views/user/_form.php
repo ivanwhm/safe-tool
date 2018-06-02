@@ -10,10 +10,10 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\enums\Language;
 use app\models\enums\Status;
 use app\models\User;
-use kartik\icons\Icon;
 use kartik\password\PasswordInput;
 use kartik\select2\Select2;
 use kartik\switchinput\SwitchInput;
@@ -21,16 +21,16 @@ use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$userNameHelp = Icon::show('info-circle') . Yii::t('user', 'Input the name of the user.');
-$usernameHelp = Icon::show('info-circle') . Yii::t('user', 'Input the username.');
-$emailHelp = Icon::show('info-circle') . Yii::t('user', 'Input the e-mail address.');
-$passwordHelp = Icon::show('info-circle') . Yii::t('user', 'Input the password.');
-$repeatPasswordHelp = Icon::show('info-circle') . Yii::t('user', 'Input the password (again).');
-$languageHelp = Icon::show('info-circle') . Yii::t('user', 'Input the language.');
-$activeHelp = Icon::show('info-circle') . Yii::t('user', 'Please tell if the user is active or inactive.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$userNameHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the name of the user.');
+$usernameHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the username.');
+$emailHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the e-mail address.');
+$passwordHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the password.');
+$repeatPasswordHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the password (again).');
+$languageHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the language.');
+$activeHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Please tell if the user is active or inactive.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 ?>
 
 <div class="user-form">
@@ -139,8 +139,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>
 
 	<?= Html::tag('span', $mandatoryFields, [

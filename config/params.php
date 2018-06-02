@@ -7,11 +7,5 @@ return [
 	 * 
 	 * @var int
 	 */
-	'loginDuration' => 2592000,
-	/**
-	 * Standard Icon Framework.
-	 * 
-	 * @var string
-	 */
-	'icon-framework' => 'fa'
+	'loginDuration' => 2592000
 ];

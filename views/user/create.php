@@ -10,8 +10,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\User;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\View;
@@ -20,18 +20,18 @@ $this->title = Yii::t('user', 'Add user');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
-		"icon" => Icon::show('edit'),
+		"icon" => Icons::getIcon(Icons::RECORDS),
 		"active" => false
 	],
 	[
 		"label" => Yii::t('user', 'Users'),
-		"icon" => Icon::show('users'),
+		"icon" => Icons::getIcon(Icons::USERS),
 		"url" => Url::to(["user/index"])
 	],
 	[
 		"label" => $this->title,
 		"active" => false,
-		"icon" => Icon::show('plus')
+		"icon" => Icons::getIcon(Icons::CRUD_ADD)
 	]
 ];
 

@@ -10,8 +10,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Product;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\View;
@@ -20,12 +20,12 @@ $this->title = Yii::t('product', 'Add product');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('product', 'Products'),
-		"icon" => Icon::show('product-hunt'),
+		"icon" => Icons::getIcon(Icons::PRODUCT),
 		"url" => Url::to(["product/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('plus'),
+		"icon" => Icons::getIcon(Icons::CRUD_ADD),
 		"active" => false
 	]
 ];

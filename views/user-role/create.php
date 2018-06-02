@@ -10,8 +10,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\UserRole;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\View;
@@ -21,16 +21,16 @@ $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('index', 'Records'),
 		"active" => false,
-		"icon" => Icon::show('edit')
+		"icon" => Icons::getIcon(Icons::RECORDS)
 	],
 	[
 		"label" => Yii::t('user-role', 'User roles'),
-		"icon" => Icon::show('female'),
+		"icon" => Icons::getIcon(Icons::USER_ROLE),
 		"url" => Url::to(["user-role/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('plus'),
+		"icon" => Icons::getIcon(Icons::CRUD_ADD),
 		"active" => false
 	]
 ];

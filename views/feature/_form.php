@@ -10,25 +10,25 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Epic;
 use app\models\Feature;
 use app\models\Product;
 use kartik\depdrop\DepDrop;
-use kartik\icons\Icon;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
-$featureHelp = Icon::show('info-circle') . Yii::t('feature', 'Input the feature description.');
-$productIDHelp = Icon::show('info-circle') . Yii::t('feature', 'Select the product of the feature.');
-$epicIDHelp = Icon::show('info-circle') . Yii::t('feature', 'Select the epic of the feature.');
-$benefitHypothesisHelp = Icon::show('info-circle') . Yii::t('feature', 'Describe the benefit hypothesis for this feature.');
-$acceptanceCriteriaHelp = Icon::show('info-circle') . Yii::t('feature', 'Describe the acceptance criteria for this feature.');
-$saveLabel = Icon::show('download') . Yii::t('index', 'Save');
-$cancelLabel = Icon::show('ban') . Yii::t('index', 'Cancel');
-$mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with (*) are required.');
+$featureHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('feature', 'Input the feature description.');
+$productIDHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('feature', 'Select the product of the feature.');
+$epicIDHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('feature', 'Select the epic of the feature.');
+$benefitHypothesisHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('feature', 'Describe the benefit hypothesis for this feature.');
+$acceptanceCriteriaHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('feature', 'Describe the acceptance criteria for this feature.');
+$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
+$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
+$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
 
 ?>
 
@@ -111,8 +111,8 @@ $mandatoryFields = Icon::show('asterisk') . Yii::t('index', 'Fields marked with 
 	<br>
 
 	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icon::show('user') . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
+		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
 	<?php endif; ?>
 
 	<?= Html::tag('span', $mandatoryFields, [

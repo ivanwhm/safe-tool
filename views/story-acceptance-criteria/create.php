@@ -10,8 +10,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\StoryAcceptanceCriteria;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\View;
@@ -20,17 +20,17 @@ $this->title = Yii::t('story-acceptance-criteria', 'Add acceptance criteria');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('story', 'View story'),
-		"icon" => Icon::show('book'),
+		"icon" => Icons::getIcon(Icons::STORY),
 		"url" => $model->getStory()->getLink()
 	],
 	[
 		"label" => Yii::t('story-acceptance-criteria', 'Acceptance criterias'),
-		"icon" => Icon::show('check-circle'),
+		"icon" => Icons::getIcon(Icons::STORY_ACCEPTANCE_CRITERIA),
 		"url" => Url::to(['story/view', 'id' => $model->getAttribute('story_id')])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('plus'),
+		"icon" => Icons::getIcon(Icons::CRUD_ADD),
 		"active" => false
 	]
 ];

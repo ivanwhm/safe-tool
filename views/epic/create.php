@@ -10,8 +10,8 @@
  */
 
 //Imports
+use app\models\enums\Icons;
 use app\models\Epic;
-use kartik\icons\Icon;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\View;
@@ -20,12 +20,12 @@ $this->title = Yii::t('epic', 'Add epic');
 $this->params['breadcrumbs'] = [
 	[
 		"label" => Yii::t('epic', 'Epics'),
-		"icon" => Icon::show('globe'),
+		"icon" => Icons::getIcon(Icons::EPIC),
 		"url" => Url::to(["epic/index"])
 	],
 	[
 		"label" => $this->title,
-		"icon" => Icon::show('plus'),
+		"icon" => Icons::getIcon(Icons::CRUD_ADD),
 		"active" => false
 	]
 ];
