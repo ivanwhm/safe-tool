@@ -9,6 +9,7 @@
  */
 
 //Imports
+use app\components\SafeToolDetailView;
 use app\models\enums\Icons;
 use app\models\Product;
 use kartik\detail\DetailView;
@@ -29,64 +30,41 @@ $this->params['breadcrumbs'] = [
 		"url" => $model->getLink()
 	]
 ];
-?>
 
-<div class="product-view">
+echo Html::beginTag('div', ['class' => 'product-view']);
 
-	<?= DetailView::widget([
-		'model' => $model,
-		'hover' => true,
-		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::CRUD_VIEW) . ' ' . $this->title . '</h3>',
-			'type' => DetailView::TYPE_DEFAULT,
+echo DetailView::widget([
+	'model' => $model,
+	'hover' => true,
+	'panel' => [
+		'heading' => SafeToolDetailView::getDetailViewHeading($this->title),
+		'type' => DetailView::TYPE_DEFAULT,
+	],
+	'buttons1' => '',
+	'buttons2' => '',
+	'attributes' => [
+		'id',
+		'name',
+		[
+			'attribute' => 'status',
+			'format' => 'html',
+			'value' => $model->getStatus()
 		],
-		'buttons1' => '',
-		'buttons2' => '',
-		'attributes' => [
-			'id',
-			'name',
-			[
-				'attribute' => 'status',
-				'format' => 'html',
-				'value' => $model->getStatus()
-			],
-			'date_created:datetime',
-			[
-				'attribute' => 'user_created',
-				'format' => 'html',
-				'value' => $model->printUserCreatedLink()
-			],
-			'date_updated:datetime',
-			[
-				'attribute' => 'user_updated',
-				'format' => 'html',
-				'value' => $model->printUserUpdatedLink()
-			],
+		'date_created:datetime',
+		[
+			'attribute' => 'user_created',
+			'format' => 'html',
+			'value' => $model->printUserCreatedLink()
 		],
-	]) ?>
+		'date_updated:datetime',
+		[
+			'attribute' => 'user_updated',
+			'format' => 'html',
+			'value' => $model->printUserUpdatedLink()
+		],
+	],
+]);
 
-	<p>
-		<?= Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], [
-			'class' => 'btn btn-success'
-		]) ?>
+echo SafeToolDetailView::getCrudButtons($model, Yii::t('product', 'Do you want to delete this product?'));
 
-		<?= Html::a(Icons::getIcon(Icons::CRUD_EDIT) . Yii::t('index', 'Update'), [
-			'update',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-primary'
-		]) ?>
-
-		<?= Html::a(Icons::getIcon(Icons::CRUD_DELETE) . Yii::t('index', 'Delete'), [
-			'delete',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-danger',
-			'data' => [
-				'confirm' => Yii::t('product', 'Do you want to delete this product?'),
-				'method' => 'post'
-			]
-		]) ?>
-	</p>
-
-</div>
+echo Html::endTag('div');
