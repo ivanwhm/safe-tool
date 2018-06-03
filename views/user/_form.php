@@ -20,14 +20,6 @@ use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 
-$userNameHelp = Yii::t('user', 'Input the name of the user.');
-$usernameHelp = Yii::t('user', 'Input the username.');
-$emailHelp = Yii::t('user', 'Input the e-mail address.');
-$passwordHelp = Yii::t('user', 'Input the password.');
-$repeatPasswordHelp = Yii::t('user', 'Input the password (again).');
-$languageHelp = Yii::t('user', 'Input the language.');
-$activeHelp = Yii::t('user', 'Please tell if the user is active or inactive.');
-
 echo Html::beginTag('div', ['class' => 'user-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'user-form']);
@@ -37,19 +29,19 @@ echo $form->field($model, 'name')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbName'
-], $userNameHelp);
+]);
 
 if ($model->getIsNewRecord()) {
 	echo $form->field($model, 'username')->textInput([
 		'maxlength' => true,
 		'aria-describedby' => 'hbUsername'
-	], $usernameHelp);
+	]);
 }
 
 echo $form->field($model, 'email')->textInput([
 	'maxlength' => true,
 	'aria-describedby' => 'hbEmail'
-], $emailHelp);
+]);
 
 echo $form->field($model, 'password')->widget(PasswordInput::class, [
 	'options' => [
@@ -59,7 +51,7 @@ echo $form->field($model, 'password')->widget(PasswordInput::class, [
 		'showMeter' => true,
 		'toggleMask' => true
 	]
-], $passwordHelp);
+]);
 
 echo $form->field($model, 'new_password')->widget(PasswordInput::class, [
 	'options' => [
@@ -69,7 +61,7 @@ echo $form->field($model, 'new_password')->widget(PasswordInput::class, [
 		'showMeter' => true,
 		'toggleMask' => true
 	]
-], $repeatPasswordHelp);
+]);
 
 echo $form->field($model, 'language')->widget(Select2::class, [
 	'data' => Language::getData(),
@@ -77,7 +69,7 @@ echo $form->field($model, 'language')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbLanguage'
 	]
-], $languageHelp);
+]);
 
 echo $form->field($model, 'status')->widget(SwitchInput::class, [
 	'type' => SwitchInput::CHECKBOX,
@@ -91,7 +83,7 @@ echo $form->field($model, 'status')->widget(SwitchInput::class, [
 		'onColor' => 'success',
 		'offColor' => 'danger'
 	]
-], $activeHelp);
+]);
 
 echo Html::tag('br');
 

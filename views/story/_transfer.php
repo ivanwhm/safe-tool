@@ -18,8 +18,6 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\web\View;
 
-$productOwnerIDHelp = Yii::t('story', 'Select the product owner of the story.');
-
 echo Html::beginTag('div', ['class' => 'story-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'story-form']);
@@ -31,7 +29,7 @@ echo $form->field($model, 'product_owner_id')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbProductOwnerID'
 	]
-], $productOwnerIDHelp);
+]);
 
 echo Html::tag('br');
 

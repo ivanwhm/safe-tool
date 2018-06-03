@@ -80,6 +80,22 @@ class Feature extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'feature' => Yii::t('feature', 'Input the feature description.'),
+			'product_id' => Yii::t('feature', 'Select the product of the feature.'),
+			'epic_id' => Yii::t('feature', 'Select the epic of the feature.'),
+			'benefit_hypothesis' => Yii::t('feature', 'Describe the benefit hypothesis for this feature.'),
+			'acceptance_criteria' => Yii::t('feature', 'Describe the acceptance criteria for this feature.')
+		];
+	}
+
+	/**
 	 * Returns the product of the feature.
 	 *
 	 * @return Product
@@ -176,5 +192,4 @@ class Feature extends SafeToolActiveRecord
 		}
 		return ArrayHelper::map($features, 'id', 'feature');
 	}
-
 }

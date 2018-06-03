@@ -65,7 +65,7 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 	{
 		return [
 			['status', 'default', 'value' => Status::ACTIVE],
-			['language', 'default', 'value' => Yii::$app->getSession()->get('language')],			
+			['language', 'default', 'value' => Yii::$app->getSession()->get('language')],
 			[['username', 'name', 'email', 'language', 'status'], 'required'],
 			[['id', 'user_created', 'user_updated'], 'integer'],
 			[['last_login_date', 'last_password_change', 'date_created', 'date_updated'], 'safe'],
@@ -110,6 +110,24 @@ class User extends SafeToolActiveRecord implements IdentityInterface
 		];
 	}
 
+	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'name' => Yii::t('user', 'Input the name of the user.'),
+			'username' => Yii::t('user', 'Input the username.'),
+			'email' => Yii::t('user', 'Input the e-mail address.'),
+			'password' => Yii::t('user', 'Input the password.'),
+			'new_password' => Yii::t('user', 'Input the password (again).'),
+			'language' => Yii::t('user', 'Input the language.'),
+			'status' => Yii::t('user', 'Please tell if the user is active or inactive.')
+		];
+	}
+	
 	/**
 	 * Return the user model that created this user.
 	 *

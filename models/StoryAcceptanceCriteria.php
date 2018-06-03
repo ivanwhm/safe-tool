@@ -68,6 +68,18 @@ class StoryAcceptanceCriteria extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'acceptance_criteria' => Yii::t('story-acceptance-criteria', 'Describe the acceptance criteria of the story.'),
+		];
+	}
+
+	/**
 	 * Returns the story of the acceptance criteria.
 	 *
 	 * @return Story
@@ -76,7 +88,7 @@ class StoryAcceptanceCriteria extends SafeToolActiveRecord
 	{
 		return Story::findOne(['id' => $this->getAttribute('story_id')]);
 	}
-	
+
 	/**
 	 * Returns the form search.
 	 *
@@ -117,5 +129,4 @@ class StoryAcceptanceCriteria extends SafeToolActiveRecord
 		}
 		return Url::to(['story-acceptance-criteria/view', 'id' => $this->getAttribute('id')]);
 	}
-
 }

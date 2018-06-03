@@ -70,6 +70,19 @@ class Product extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'name' => Yii::t('product', 'Input the name of the product.'),
+			'status' => Yii::t('product', 'Please tell if the product is active or inactive.')
+		];
+	}
+	
+	/**
 	 * Returns the link to product visualization info.
 	 *
 	 * @param bool $edit Edit or view link
@@ -134,8 +147,9 @@ class Product extends SafeToolActiveRecord
 	 *
 	 * @return string
 	 */
-	public function printLink() {
+	public function printLink()
+	{
 		return Html::a($this->getAttribute('name'), $this->getLink());
 	}
-	
+
 }

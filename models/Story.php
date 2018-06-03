@@ -55,7 +55,7 @@ class Story extends SafeToolActiveRecord
 	public function rules()
 	{
 		return [
-			[['product_id', 'epic_id', 'feature_id', 'user_role_id', 'i_want_to', 'so_that', 'priority', 'story_status_id'], 
+			[['product_id', 'epic_id', 'feature_id', 'user_role_id', 'i_want_to', 'so_that', 'priority', 'story_status_id'],
 				'required'],
 			[['product_owner_id'], 'required', 'on' => 'transfer'],
 			[['id', 'product_owner_id', 'product_id', 'epic_id', 'feature_id', 'user_role_id', 'story_status_id',
@@ -104,6 +104,26 @@ class Story extends SafeToolActiveRecord
 			'date_updated' => Yii::t('story', 'Date of the last update'),
 			'user_created' => Yii::t('story', 'The user of creation'),
 			'user_updated' => Yii::t('story', 'The user of the last update'),
+		];
+	}
+
+	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'product_owner_id' => Yii::t('story', 'Select the product owner of the story.'),
+			'product_id' => Yii::t('story', 'Select the product of the story.'),
+			'epic_id' => Yii::t('story', 'Select the epic of the story.'),
+			'feature_id' => Yii::t('story', 'Select the feature of the story.'),
+			'user_role_id' => Yii::t('story', 'Select the user role of the story.'),
+			'i_want_to' => Yii::t('story', 'Describe the activity that the user want solve.'),
+			'so_that' => Yii::t('story', 'Describe the business value of the activity.'),
+			'priority' => Yii::t('story', 'Input the priority of this story. 0 indicates a low priority.'),
+			'story_status_id' => Yii::t('story', 'Select the status of the story.')
 		];
 	}
 
@@ -226,7 +246,7 @@ class Story extends SafeToolActiveRecord
 		if (!$this->hasErrors()) {
 			if ($this->getStoryStatus()->isReady() == YesNo::YES) {
 				if (StoryAcceptanceCriteria::find()->where(['story_id' => $this->getAttribute('id')])->count() == 0) {
-					$this->addError($attribute, Yii::t('story', 
+					$this->addError($attribute, Yii::t('story',
 						'This story does not have any acceptance criteria and cannot have the status defined as ready.'));
 				}
 			}

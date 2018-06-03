@@ -28,10 +28,6 @@ $this->params['breadcrumbs'] = [[
 	"url" => Url::to(["site/password"])
 ]];
 
-$oldPasswordLabel = Yii::t('password', 'Input the old password.');
-$newPasswordLabel = Yii::t('password', 'Input the new password.');
-$repeatNewPasswordLabel = Yii::t('password', 'Input the new password (again).');
-
 echo Html::beginTag('div', ['class' => 'change-password-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'change-password-form']);
@@ -58,7 +54,7 @@ echo $form->field($model, 'oldPassword')->widget(
 		'showMeter' => false,
 		'toggleMask' => true
 	]
-], $oldPasswordLabel);
+]);
 
 echo $form->field($model, 'newPassword')->widget(
 	PasswordInput::class, [
@@ -69,7 +65,7 @@ echo $form->field($model, 'newPassword')->widget(
 		'showMeter' => true,
 		'toggleMask' => true
 	]
-], $newPasswordLabel);
+]);
 
 echo $form->field($model, 'repeatNewPassword')->widget(
 	PasswordInput::class, [
@@ -80,7 +76,7 @@ echo $form->field($model, 'repeatNewPassword')->widget(
 		'showMeter' => true,
 		'toggleMask' => true
 	]
-], $repeatNewPasswordLabel);
+]);
 
 echo Html::tag('br');
 

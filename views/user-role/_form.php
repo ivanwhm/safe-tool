@@ -17,10 +17,6 @@ use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 
-$nameHelp = Yii::t('user-role', 'Input the name of the user role.');
-$descriptionHelp = Yii::t('user-role', 'Input the description of the user role.');
-$activeHelp = Yii::t('user-role', 'Please tell if the user role is active or inactive.');
-
 echo Html::beginTag('div', ['class' => 'user-role-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'user-role-form']);
@@ -30,12 +26,12 @@ echo $form->field($model, 'role')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbName'
-], $nameHelp);
+]);
 
 echo $form->field($model, 'description')->textarea([
 	'rows' => '3',
 	'aria-describedby' => 'hbDescription'
-], $descriptionHelp);
+]);
 
 echo $form->field($model, 'status')->widget(SwitchInput::class, [
 	'type' => SwitchInput::CHECKBOX,
@@ -49,7 +45,7 @@ echo $form->field($model, 'status')->widget(SwitchInput::class, [
 		'onColor' => 'success',
 		'offColor' => 'danger'
 	]
-], $activeHelp);
+]);
 
 echo Html::tag('br');
 

@@ -14,7 +14,7 @@ use app\models\enums\Icons;
 use app\models\forms\LoginForm;
 use yii\helpers\Html;
 use yii\web\View;
-use app\components\SafeToolActiveForm;
+use yii\widgets\ActiveForm;
 
 ?>
 
@@ -36,7 +36,7 @@ use app\components\SafeToolActiveForm;
 		
 		<div class="panel-body">
 
-			<?php $form = SafeToolActiveForm::begin(['id' => 'login-form']); ?>
+			<?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 			
 			<fieldset>
 				
@@ -77,7 +77,7 @@ use app\components\SafeToolActiveForm;
 
 			</fieldset>
 			
-			<?php SafeToolActiveForm::end(); ?>
+			<?php ActiveForm::end(); ?>
 			<!-- #login-form -->
 			
 		</div>

@@ -16,8 +16,6 @@ use app\models\StoryAcceptanceCriteria;
 use yii\helpers\Html;
 use yii\web\View;
 
-$acceptanceCriteriaHelp = Yii::t('story-acceptance-criteria', 'Describe the acceptance criteria of the story.');
-
 echo Html::beginTag('div', ['class' => 'story-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'story-form']);
@@ -28,7 +26,7 @@ echo $form->field($model, 'acceptance_criteria')->textarea([
 	'autofocus' => true,
 	'rows' => '4',
 	'aria-describedby' => 'hbAcceptanceCriteria'
-], $acceptanceCriteriaHelp);
+]);
 
 echo Html::tag('br');
 

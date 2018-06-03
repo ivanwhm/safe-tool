@@ -73,6 +73,20 @@ class UserRole extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'role' => Yii::t('user-role', 'Input the name of the user role.'),
+			'description' => Yii::t('user-role', 'Input the description of the user role.'),
+			'status' => Yii::t('user-role', 'Please tell if the user role is active or inactive.')
+		];
+	}
+
+	/**
 	 * Returns the status description of the user role.
 	 *
 	 * @return string
@@ -138,5 +152,4 @@ class UserRole extends SafeToolActiveRecord
 		$products = self::find()->andFilterWhere(['=', 'status', Status::ACTIVE])->orderBy('role')->all();
 		return ArrayHelper::map($products, 'id', 'role');
 	}
-
 }

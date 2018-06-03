@@ -27,10 +27,6 @@ $this->params['breadcrumbs'] = [[
 	"url" => Url::to(["site/profile"])
 ]];
 
-$usernameLabel = Yii::t('user', 'Input the username.');
-$emailLabel = Yii::t('user', 'Input the e-mail address.');
-$languageLabel = Yii::t('user', 'Input the language.');
-
 echo Html::beginTag('div', ['class' => 'user-profile-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'user-profile-form']);
@@ -51,13 +47,13 @@ echo $form->field($model, 'username')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbUsername'
-], $usernameLabel);
+]);
 
 echo $form->field($model, 'email')->textInput([
 	'maxlength' => true,
 	'autofocus' => false,
 	'aria-describedby' => 'hbEmail'
-], $emailLabel);
+]);
 
 echo $form->field($model, 'language')->widget(Select2::class, [
 	'data' => Language::getData(),
@@ -65,7 +61,7 @@ echo $form->field($model, 'language')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbLanguage'
 	]
-], $languageLabel);
+]);
 
 echo Html::tag('br');
 

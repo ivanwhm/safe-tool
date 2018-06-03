@@ -19,10 +19,6 @@ use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 
-$productOwnerNameHelp = Yii::t('product-owner', 'Input the name of the product owner.');
-$userIDHelp = Yii::t('product-owner', 'Select the user associated with this product owner.');
-$activeHelp = Yii::t('product-owner', 'Please tell if the product owner is active or inactive.');
-
 echo Html::beginTag('div', ['class' => 'product-owner-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'product-owner-form']);
@@ -32,7 +28,7 @@ echo $form->field($model, 'name')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbName'
-], $productOwnerNameHelp);
+]);
 
 echo $form->field($model, 'user_id')->widget(Select2::class, [
 	'data' => User::getUsers(),
@@ -40,7 +36,7 @@ echo $form->field($model, 'user_id')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbUserID'
 	]
-], $userIDHelp);
+]);
 
 echo $form->field($model, 'status')->widget(SwitchInput::class, [
 	'type' => SwitchInput::CHECKBOX,
@@ -54,7 +50,7 @@ echo $form->field($model, 'status')->widget(SwitchInput::class, [
 		'onColor' => 'success',
 		'offColor' => 'danger'
 	]
-], $activeHelp);
+]);
 
 echo Html::tag('br');
 

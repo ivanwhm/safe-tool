@@ -79,6 +79,20 @@ class StoryStatus extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'name' => Yii::t('story-status', 'Input the name of the story status.'),
+			'ready' => Yii::t('story-status', 'Please tell if the ready property is yes or no.'),
+			'status' => Yii::t('story-status', 'Please tell if the story status is active or inactive.')
+		];
+	}
+
+	/**
 	 * Returns the status description of the story status.
 	 *
 	 * @return string
@@ -156,16 +170,18 @@ class StoryStatus extends SafeToolActiveRecord
 	 *
 	 * @return string
 	 */
-	public function printLink() {
+	public function printLink()
+	{
 		return Html::a($this->getAttribute('name'), $this->getLink());
 	}
 
 	/**
 	 * Returns if the status is ready.
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function isReady() {
+	public function isReady()
+	{
 		return $this->getAttribute('ready') == YesNo::YES;
 	}
 }

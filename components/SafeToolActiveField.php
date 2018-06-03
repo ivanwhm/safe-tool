@@ -18,36 +18,40 @@ class SafeToolActiveField extends ActiveField
 	/**
 	 * Returns the HELP tag for form fields.
 	 *
-	 * @param string $help Help message.
 	 * @param string $id Help ID.
 	 * @return string
 	 */
-	private function help($help, $id)
+	private function help($id)
 	{
-		$icon = Icons::getIcon(Icons::FORM_HELP);
-		return Html::tag('span', $icon . $help, [
-			'id' => $id,
-			'class' => 'help-block'
-		]);
+		if ($this->model->hasMethod('getHelpMessages') &&
+			isset($this->model->getHelpMessages()[$this->attribute])) {
+			$icon = Icons::getIcon(Icons::FORM_HELP);
+			$message = $this->model->getHelpMessages()[$this->attribute];
+			return Html::tag('span', $icon . $message, [
+				'id' => $id,
+				'class' => 'help-block'
+			]);
+		}
+		return '';
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function textInput($options = [], $help = '')
+	public function textInput($options = [])
 	{
 		$input = parent::textInput($options);
-		$input .= $this->help($help, isset($options['aria-describedby']) ? $options['aria-describedby'] : '');
+		$input .= $this->help(isset($options['aria-describedby']) ? $options['aria-describedby'] : '');
 		return $input;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
-	public function widget($class, $config = [], $help = '')
+	public function widget($class, $config = [])
 	{
 		$widget = parent::widget($class, $config);
-		$widget .= $this->help($help, isset($config['options']['aria-describedby']) ?
+		$widget .= $this->help(isset($config['options']['aria-describedby']) ?
 			$config['options']['aria-describedby'] : '');
 		return $widget;
 	}
@@ -55,10 +59,10 @@ class SafeToolActiveField extends ActiveField
 	/**
 	 * @inheritdoc
 	 */
-	public function textarea($options = [], $help = '')
+	public function textarea($options = [])
 	{
 		$text = parent::textarea($options);
-		$text .= $this->help($help, isset($options['aria-describedby']) ? $options['aria-describedby'] : '');
+		$text .= $this->help(isset($options['aria-describedby']) ? $options['aria-describedby'] : '');
 		return $text;
 	}
 

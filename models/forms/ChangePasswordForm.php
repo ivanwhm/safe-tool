@@ -65,6 +65,20 @@ class ChangePasswordForm extends Model
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'oldPassword' => Yii::t('password', 'Input the old password.'),
+			'newPassword' => Yii::t('password', 'Input the new password.'),
+			'repeatNewPassword' => Yii::t('password', 'Input the new password (again).')
+		];
+	}
+
+	/**
 	 * Validates de user's password.
 	 *
 	 * @param string $attribute the attribute currently being validated
@@ -92,7 +106,7 @@ class ChangePasswordForm extends Model
 		$user->new_password = $this->repeatNewPassword;
 		$user->setAttribute('last_password_change', new Expression('current_timestamp'));
 		$user->setAttribute('user_updated', Yii::$app->getUser()->getId());
-		
+
 		return $user->save(false);
 	}
 

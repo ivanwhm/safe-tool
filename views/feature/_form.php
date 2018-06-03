@@ -20,12 +20,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
-$featureHelp = Yii::t('feature', 'Input the feature description.');
-$productIDHelp = Yii::t('feature', 'Select the product of the feature.');
-$epicIDHelp = Yii::t('feature', 'Select the epic of the feature.');
-$benefitHypothesisHelp = Yii::t('feature', 'Describe the benefit hypothesis for this feature.');
-$acceptanceCriteriaHelp = Yii::t('feature', 'Describe the acceptance criteria for this feature.');
-
 echo Html::beginTag('div', ['class' => 'feature-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'feature-form']);
@@ -35,7 +29,7 @@ echo $form->field($model, 'feature')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbFeature'
-], $featureHelp);
+]);
 
 echo $form->field($model, 'product_id')->widget(Select2::class, [
 	'data' => Product::getProducts(),
@@ -44,7 +38,7 @@ echo $form->field($model, 'product_id')->widget(Select2::class, [
 		'aria-describedby' => 'hbProductID',
 		'id' => 'SelectProductID'
 	]
-], $productIDHelp);
+]);
 
 echo $form->field($model, 'epic_id')->widget(DepDrop::class, [
 	'type' => DepDrop::TYPE_SELECT2,
@@ -59,19 +53,19 @@ echo $form->field($model, 'epic_id')->widget(DepDrop::class, [
 		'placeholder' => '---',
 		'url' => Url::to(['epic/epics']),
 	]
-], $epicIDHelp);
+]);
 
 echo $form->field($model, 'benefit_hypothesis')->textarea([
 	'maxlength' => true,
 	'rows' => '5',
 	'aria-describedby' => 'hbBenefitHypothesis'
-], $benefitHypothesisHelp);
+]);
 
 echo $form->field($model, 'acceptance_criteria')->textarea([
 	'maxlength' => true,
 	'rows' => '10',
 	'aria-describedby' => 'hbAcceptanceCriteria'
-], $acceptanceCriteriaHelp);
+]);
 
 echo Html::tag('br');
 

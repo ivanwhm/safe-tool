@@ -18,11 +18,6 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\web\View;
 
-$titleHelp = Yii::t('epic', 'Input the title of the epic.');
-$productHelp = Yii::t('epic', 'Select the product of this epic.');
-$typeHelp = Yii::t('epic', 'Select the type of this epic.');
-$epicHelp = Yii::t('epic', 'Describe this epic.');
-
 echo Html::beginTag('div', ['class' => 'epic-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'epic-form']);
@@ -33,7 +28,7 @@ echo $form->field($model, 'title')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbTitle'
-], $titleHelp);
+]);
 
 echo $form->field($model, 'product_id')->widget(Select2::class, [
 	'data' => Product::getProducts(),
@@ -41,7 +36,7 @@ echo $form->field($model, 'product_id')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbProduct'
 	]
-], $productHelp);
+]);
 
 echo $form->field($model, 'type')->widget(Select2::class, [
 	'data' => EpicType::getData(),
@@ -49,12 +44,12 @@ echo $form->field($model, 'type')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbType'
 	]
-], $typeHelp);
+]);
 
 echo $form->field($model, 'epic')->textarea([
 	'rows' => '10',
 	'aria-describedby' => 'hbEpic'
-], $epicHelp);
+]);
 
 echo Html::tag('br');
 

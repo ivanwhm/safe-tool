@@ -24,15 +24,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
-$productIDHelp = Yii::t('story', 'Select the product of the story.');
-$epicIDHelp = Yii::t('story', 'Select the epic of the story.');
-$featureIDHelp = Yii::t('story', 'Select the feature of the story.');
-$userRoleHelp = Yii::t('story', 'Select the user role of the story.');
-$iWantToHelp = Yii::t('story', 'Describe the activity that the user want solve.');
-$soThatHelp = Yii::t('story', 'Describe the business value of the activity.');
-$priorityHelp = Yii::t('story', 'Input the priority of this story. 0 indicates a low priority.');
-$storyStatusHelp = Yii::t('story', 'Select the status of the story.');
-
 echo Html::beginTag('div', ['class' => 'story-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'story-form']);
@@ -45,7 +36,7 @@ echo $form->field($model, 'product_id')->widget(Select2::class, [
 		'aria-describedby' => 'hbProductID',
 		'id' => 'SelectProductID'
 	]
-], $productIDHelp);
+]);
 
 echo $form->field($model, 'epic_id')->widget(DepDrop::class, [
 	'type' => DepDrop::TYPE_SELECT2,
@@ -61,7 +52,7 @@ echo $form->field($model, 'epic_id')->widget(DepDrop::class, [
 		'url' => Url::to(['epic/epics']),
 		'loadingText' => Yii::t('index', 'Loading...')
 	]
-], $epicIDHelp);
+]);
 
 echo $form->field($model, 'feature_id')->widget(DepDrop::class, [
 	'type' => DepDrop::TYPE_SELECT2,
@@ -77,7 +68,7 @@ echo $form->field($model, 'feature_id')->widget(DepDrop::class, [
 		'url' => Url::to(['feature/features']),
 		'loadingText' => Yii::t('index', 'Loading...')
 	]
-], $featureIDHelp);
+]);
 
 echo $form->field($model, 'user_role_id')->widget(Select2::class, [
 	'data' => UserRole::getUserRoles(),
@@ -85,19 +76,19 @@ echo $form->field($model, 'user_role_id')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbUserRoleID'
 	]
-], $userRoleHelp);
+]);
 
 echo $form->field($model, 'i_want_to')->textarea([
 	'maxlength' => true,
 	'rows' => '2',
 	'aria-describedby' => 'hbIWantTo'
-], $iWantToHelp);
+]);
 
 echo $form->field($model, 'so_that')->textarea([
 	'maxlength' => true,
 	'rows' => '2',
 	'aria-describedby' => 'hbSoThat'
-], $soThatHelp);
+]);
 
 echo $form->field($model, 'priority')->widget(NumberControl::class, [
 	'maskedInputOptions' => [
@@ -106,7 +97,7 @@ echo $form->field($model, 'priority')->widget(NumberControl::class, [
 	'options' => [
 		'aria-describedby' => 'hbPriorityID'
 	]
-], $priorityHelp);
+]);
 
 echo $form->field($model, 'story_status_id')->widget(Select2::class, [
 	'data' => StoryStatus::getStoryStatuses(),
@@ -114,7 +105,7 @@ echo $form->field($model, 'story_status_id')->widget(Select2::class, [
 		'prompt' => '---',
 		'aria-describedby' => 'hbStoryStatusID'
 	]
-], $storyStatusHelp);
+]);
 
 echo Html::tag('br');
 

@@ -18,10 +18,6 @@ use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
 
-$nameHelp = Yii::t('story-status', 'Input the name of the story status.');
-$readyHelp = Yii::t('story-status', 'Please tell if the ready property is yes or no.');
-$activeHelp = Yii::t('story-status', 'Please tell if the story status is active or inactive.');
-
 echo Html::beginTag('div', ['class' => 'story-status-form']);
 
 $form = SafeToolActiveForm::begin(['id' => 'story-status-form']);
@@ -31,7 +27,7 @@ echo $form->field($model, 'name')->textInput([
 	'maxlength' => true,
 	'autofocus' => true,
 	'aria-describedby' => 'hbName'
-], $nameHelp);
+]);
 
 echo $form->field($model, 'ready')->widget(SwitchInput::class, [
 	'type' => SwitchInput::CHECKBOX,
@@ -45,7 +41,7 @@ echo $form->field($model, 'ready')->widget(SwitchInput::class, [
 		'onColor' => 'success',
 		'offColor' => 'danger'
 	]
-], $readyHelp);
+]);
 
 echo $form->field($model, 'status')->widget(SwitchInput::class, [
 	'type' => SwitchInput::CHECKBOX,
@@ -59,7 +55,7 @@ echo $form->field($model, 'status')->widget(SwitchInput::class, [
 		'onColor' => 'success',
 		'offColor' => 'danger'
 	]
-], $activeHelp);
+]);
 
 echo Html::tag('br');
 

@@ -77,6 +77,19 @@ class Epic extends SafeToolActiveRecord
 	}
 
 	/**
+	 * @inheritdoc
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'title' => Yii::t('epic', 'Input the title of the epic.'),
+			'product_id' => Yii::t('epic', 'Select the product of this epic.'),
+			'type' => Yii::t('epic', 'Select the type of this epic.'),
+			'epic' => Yii::t('epic', 'Describe this epic.')
+		];
+	}
+
+	/**
 	 * Returns the type description of the epic.
 	 *
 	 * @return string
@@ -154,17 +167,18 @@ class Epic extends SafeToolActiveRecord
 	 *
 	 * @return string
 	 */
-	public function printLink() {
+	public function printLink()
+	{
 		return Html::a($this->getAttribute('title'), $this->getLink());
 	}
 
 	/**
 	 * Return the product of the epic.
-	 * 
+	 *
 	 * @return Product
 	 */
 	public function getProduct()
 	{
 		return Product::findOne(['id' => $this->getAttribute('product_id')]);
-	}	
+	}
 }

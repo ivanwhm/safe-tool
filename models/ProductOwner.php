@@ -78,6 +78,20 @@ class ProductOwner extends SafeToolActiveRecord
 	}
 
 	/**
+	 * Returns the help messages for forms.
+	 *
+	 * @return array
+	 */
+	public function getHelpMessages()
+	{
+		return [
+			'name' => Yii::t('product-owner', 'Input the name of the product owner.'),
+			'user_id' => Yii::t('product-owner', 'Select the user associated with this product owner.'),
+			'status' => Yii::t('product-owner', 'Please tell if the product owner is active or inactive.')
+		];
+	}
+
+	/**
 	 * Returns the user associated with this product owner.
 	 *
 	 * @return User
