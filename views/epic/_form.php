@@ -4,106 +4,63 @@
  *
  * @var $this View
  * @var $model Epic
- * @var $form ActiveForm
+ * @var $form SafeToolActiveForm
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
+use app\components\SafeToolActiveForm;
 use app\models\enums\EpicType;
-use app\models\enums\Icons;
 use app\models\Epic;
 use app\models\Product;
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\widgets\ActiveForm;
 
-$titleHelp =  Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Input the title of the epic.');
-$productHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Select the product of this epic.');
-$typeHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Select the type of this epic.');
-$epicHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('epic', 'Describe this epic.');
-$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
-$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
-$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
+$titleHelp = Yii::t('epic', 'Input the title of the epic.');
+$productHelp = Yii::t('epic', 'Select the product of this epic.');
+$typeHelp = Yii::t('epic', 'Select the type of this epic.');
+$epicHelp = Yii::t('epic', 'Describe this epic.');
 
-?>
+echo Html::beginTag('div', ['class' => 'epic-form']);
 
-<div class="epic-form">
+$form = SafeToolActiveForm::begin(['id' => 'epic-form']);
 
-	<?php $form = ActiveForm::begin(['id' => 'epic-form']); ?>
+echo $form->printErrorSummary($model);
 
-	<?php if ($model->hasErrors()) : ?>
-		<div class="alert alert-danger">
-			<?= $form->errorSummary($model) ?>
-		</div>
-	<?php endif; ?>
+echo $form->field($model, 'title')->textInput([
+	'maxlength' => true,
+	'autofocus' => true,
+	'aria-describedby' => 'hbTitle'
+], $titleHelp);
 
-	<?= $form->field($model, 'title')->textInput([
-		'maxlength' => true,
-		'autofocus' => true,
-		'aria-describedby' => 'hbTitle'
-	]) ?>
+echo $form->field($model, 'product_id')->widget(Select2::class, [
+	'data' => Product::getProducts(),
+	'options' => [
+		'prompt' => '---',
+		'aria-describedby' => 'hbProduct'
+	]
+], $productHelp);
 
-	<?= Html::tag('span', $titleHelp, [
-		'id' => 'hbTitle',
-		'class' => 'help-block'
-	]) ?>
+echo $form->field($model, 'type')->widget(Select2::class, [
+	'data' => EpicType::getData(),
+	'options' => [
+		'prompt' => '---',
+		'aria-describedby' => 'hbType'
+	]
+], $typeHelp);
 
-	<?= $form->field($model, 'product_id')->widget(Select2::class, [
-		'data' => Product::getProducts(),
-		'options' => [
-			'prompt' => '---',
-			'aria-describedby' => 'hbProduct'
-		]]) ?>
+echo $form->field($model, 'epic')->textarea([
+	'rows' => '10',
+	'aria-describedby' => 'hbEpic'
+], $epicHelp);
 
-	<?= Html::tag('span', $productHelp, [
-		'id' => 'hbProduct',
-		'class' => 'help-block'
-	]) ?>
-	
-	<?= $form->field($model, 'type')->widget(Select2::class, [
-		'data' => EpicType::getData(),
-		'options' => [
-			'prompt' => '---',
-			'aria-describedby' => 'hbType'
-		]]) ?>
+echo Html::tag('br');
 
-	<?= Html::tag('span', $typeHelp, [
-		'id' => 'hbType',
-		'class' => 'help-block'
-	]) ?>
+echo $form->printMandatoryFieldsMessage();
+echo $form->printModelDates($model);
+echo $form->printFormButtons($model);
+SafeToolActiveForm::end();
 
-	<?= $form->field($model, 'epic')->textarea([
-		'rows' => '10',
-		'aria-describedby' => 'hbEpic'
-	]) ?>
-
-	<?= Html::tag('span', $epicHelp, [
-		'id' => 'hbEpic',
-		'class' => 'help-block'
-	]) ?>	
-
-	<br>
-
-	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
-	<?php endif; ?>
-
-	<?= Html::tag('span', $mandatoryFields, [
-		'class' => 'help-block'
-	]) ?>
-
-	<div class="form-group">
-		<?= Html::submitButton($saveLabel, [
-			'class' => $model->getIsNewRecord() ? 'btn btn-success' : 'btn btn-primary'
-		]) ?>
-		<?= Html::a($cancelLabel, $model->getIsNewRecord() ? ['index'] : [
-			'view', 'id' => $model->getAttribute('id')], ['class' => 'btn btn-danger'
-		]) ?>
-	</div>
-
-	<?php ActiveForm::end(); ?>
-
-</div>
+echo Html::endTag('div');

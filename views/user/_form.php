@@ -4,13 +4,13 @@
  *
  * @var $this View
  * @var $model User
- * @var $form ActiveForm
+ * @var $form SafeToolActiveForm
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
-use app\models\enums\Icons;
+use app\components\SafeToolActiveForm;
 use app\models\enums\Language;
 use app\models\enums\Status;
 use app\models\User;
@@ -19,146 +19,85 @@ use kartik\select2\Select2;
 use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\widgets\ActiveForm;
 
-$userNameHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the name of the user.');
-$usernameHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the username.');
-$emailHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the e-mail address.');
-$passwordHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the password.');
-$repeatPasswordHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the password (again).');
-$languageHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the language.');
-$activeHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Please tell if the user is active or inactive.');
-$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
-$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
-$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
-?>
+$userNameHelp = Yii::t('user', 'Input the name of the user.');
+$usernameHelp = Yii::t('user', 'Input the username.');
+$emailHelp = Yii::t('user', 'Input the e-mail address.');
+$passwordHelp = Yii::t('user', 'Input the password.');
+$repeatPasswordHelp = Yii::t('user', 'Input the password (again).');
+$languageHelp = Yii::t('user', 'Input the language.');
+$activeHelp = Yii::t('user', 'Please tell if the user is active or inactive.');
 
-<div class="user-form">
+echo Html::beginTag('div', ['class' => 'user-form']);
 
-	<?php $form = ActiveForm::begin(['id' => 'user-form']); ?>
+$form = SafeToolActiveForm::begin(['id' => 'user-form']);
+echo $form->printErrorSummary($model);
 
-	<?php if ($model->hasErrors()) : ?>
-		<div class="alert alert-danger">
-			<?= $form->errorSummary($model) ?>
-		</div>
-	<?php endif; ?>
+echo $form->field($model, 'name')->textInput([
+	'maxlength' => true,
+	'autofocus' => true,
+	'aria-describedby' => 'hbName'
+], $userNameHelp);
 
-	<?= $form->field($model, 'name')->textInput([
+if ($model->getIsNewRecord()) {
+	echo $form->field($model, 'username')->textInput([
 		'maxlength' => true,
-		'autofocus' => true,
-		'aria-describedby' => 'hbName'
-	]) ?>
+		'aria-describedby' => 'hbUsername'
+	], $usernameHelp);
+}
 
-	<?= Html::tag('span', $userNameHelp, [
-		'id' => 'hbName',
-		'class' => 'help-block'
-	]) ?>
+echo $form->field($model, 'email')->textInput([
+	'maxlength' => true,
+	'aria-describedby' => 'hbEmail'
+], $emailHelp);
 
-	<?php if ($model->getIsNewRecord()) : ?>
+echo $form->field($model, 'password')->widget(PasswordInput::class, [
+	'options' => [
+		'aria-describedby' => 'hbPassword'
+	],
+	'pluginOptions' => [
+		'showMeter' => true,
+		'toggleMask' => true
+	]
+], $passwordHelp);
 
-		<?= $form->field($model, 'username')->textInput([
-			'maxlength' => true,
-			'aria-describedby' => 'hbUsername'
-		]) ?>
+echo $form->field($model, 'new_password')->widget(PasswordInput::class, [
+	'options' => [
+		'aria-describedby' => 'hbNewPassword'
+	],
+	'pluginOptions' => [
+		'showMeter' => true,
+		'toggleMask' => true
+	]
+], $repeatPasswordHelp);
 
-		<?= Html::tag('span', $usernameHelp, [
-			'id' => 'hbUsername',
-			'class' => 'help-block'
-		]) ?>
+echo $form->field($model, 'language')->widget(Select2::class, [
+	'data' => Language::getData(),
+	'options' => [
+		'prompt' => '---',
+		'aria-describedby' => 'hbLanguage'
+	]
+], $languageHelp);
 
-	<?php endif; ?>
+echo $form->field($model, 'status')->widget(SwitchInput::class, [
+	'type' => SwitchInput::CHECKBOX,
+	'options' => [
+		'aria-describedby' => 'hbStatus'
+	],
+	'pluginOptions' => [
+		'handleWidth' => 60,
+		'onText' => Status::getStatusDescription(Status::ACTIVE),
+		'offText' => Status::getStatusDescription(Status::INACTIVE),
+		'onColor' => 'success',
+		'offColor' => 'danger'
+	]
+], $activeHelp);
 
-	<?= $form->field($model, 'email')->textInput([
-		'maxlength' => true,
-		'aria-describedby' => 'hbEmail'
-	]) ?>
+echo Html::tag('br');
 
-	<?= Html::tag('span', $emailHelp, [
-		'id' => 'hbEmail',
-		'class' => 'help-block'
-	]) ?>
+echo $form->printMandatoryFieldsMessage();
+echo $form->printModelDates($model);
+echo $form->printFormButtons($model);
+SafeToolActiveForm::end();
 
-	<?= $form->field($model, 'password')->widget(PasswordInput::class, [
-		'options' => [
-			'aria-describedby' => 'hbPassword'
-		],
-		'pluginOptions' => [
-			'showMeter' => true,
-			'toggleMask' => true
-		]]); ?>
-
-	<?= Html::tag('span', $passwordHelp, [
-		'id' => 'hbPassword',
-		'class' => 'help-block'
-	]) ?>
-
-	<?= $form->field($model, 'new_password')->widget(PasswordInput::class, [
-		'options' => [
-			'aria-describedby' => 'hbNewPassword'
-		],
-		'pluginOptions' => [
-			'showMeter' => true,
-			'toggleMask' => true
-		]]); ?>
-
-	<?= Html::tag('span', $repeatPasswordHelp, [
-		'id' => 'hbNewPassword',
-		'class' => 'help-block'
-	]) ?>
-
-	<?= $form->field($model, 'language')->widget(Select2::class, [
-		'data' => Language::getData(),
-		'options' => [
-			'prompt' => '---',
-			'aria-describedby' => 'hbLanguage'
-		]]) ?>
-
-	<?= Html::tag('span', $languageHelp, [
-		'id' => 'hbLanguage',
-		'class' => 'help-block'
-	]) ?>
-
-
-	<?= $form->field($model, 'status')->widget(SwitchInput::class, [
-		'type' => SwitchInput::CHECKBOX,
-		'pluginOptions' => [
-			'handleWidth' => 60,
-			'onText' => Status::getStatusDescription(Status::ACTIVE),
-			'offText' => Status::getStatusDescription(Status::INACTIVE),
-			'onColor' => 'success',
-			'offColor' => 'danger',
-			'aria-describedby' => 'hbStatus',
-		]
-	]); ?>
-
-	<?= Html::tag('span', $activeHelp, [
-		'id' => 'hbStatus',
-		'class' => 'help-block'
-	]) ?>
-
-	<br>
-
-	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
-	<?php endif; ?>
-
-	<?= Html::tag('span', $mandatoryFields, [
-		'class' => 'help-block'
-	]) ?>
-
-	<div class="form-group">
-		<?= Html::submitButton($saveLabel, [
-			'class' => $model->getIsNewRecord() ? 'btn btn-success' : 'btn btn-primary'
-		]) ?>
-		<?= Html::a($cancelLabel, $model->getIsNewRecord() ? ['index'] : [
-			'view',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-danger'
-		]) ?>
-	</div>
-
-	<?php ActiveForm::end(); ?>
-
-</div>
+echo Html::endTag('div');

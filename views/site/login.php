@@ -3,7 +3,7 @@
  * Displays the login page.
  *
  * @var $this View
- * @var $form ActiveForm
+ * @var $form SafeToolActiveForm
  * @var $model LoginForm;
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
@@ -14,7 +14,7 @@ use app\models\enums\Icons;
 use app\models\forms\LoginForm;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\widgets\ActiveForm;
+use app\components\SafeToolActiveForm;
 
 ?>
 
@@ -36,7 +36,7 @@ use yii\widgets\ActiveForm;
 		
 		<div class="panel-body">
 
-			<?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+			<?php $form = SafeToolActiveForm::begin(['id' => 'login-form']); ?>
 			
 			<fieldset>
 				
@@ -77,7 +77,7 @@ use yii\widgets\ActiveForm;
 
 			</fieldset>
 			
-			<?php ActiveForm::end(); ?>
+			<?php SafeToolActiveForm::end(); ?>
 			<!-- #login-form -->
 			
 		</div>

@@ -4,108 +4,68 @@
  *
  * @var $this View
  * @var $model StoryStatus
- * @var $form ActiveForm
+ * @var $form SafeToolActiveForm
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
-use app\models\enums\Icons;
+use app\components\SafeToolActiveForm;
 use app\models\enums\Status;
 use app\models\enums\YesNo;
 use app\models\StoryStatus;
 use kartik\switchinput\SwitchInput;
 use yii\helpers\Html;
 use yii\web\View;
-use yii\widgets\ActiveForm;
 
-$nameHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story-status', 'Input the name of the story status.');
-$readyHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story-status', 'Please tell if the ready property is yes or no.');
-$activeHelp = Icons::getIcon(Icons::FORM_HELP) . Yii::t('story-status', 'Please tell if the story status is active or inactive.');
-$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
-$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
-$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
+$nameHelp = Yii::t('story-status', 'Input the name of the story status.');
+$readyHelp = Yii::t('story-status', 'Please tell if the ready property is yes or no.');
+$activeHelp = Yii::t('story-status', 'Please tell if the story status is active or inactive.');
 
-?>
+echo Html::beginTag('div', ['class' => 'story-status-form']);
 
-<div class="story-status-form">
+$form = SafeToolActiveForm::begin(['id' => 'story-status-form']);
+echo $form->printErrorSummary($model);
 
-	<?php $form = ActiveForm::begin(['id' => 'story-status-form']); ?>
+echo $form->field($model, 'name')->textInput([
+	'maxlength' => true,
+	'autofocus' => true,
+	'aria-describedby' => 'hbName'
+], $nameHelp);
 
-	<?php if ($model->hasErrors()) : ?>
-		<div class="alert alert-danger">
-			<?= $form->errorSummary($model) ?>
-		</div>
-	<?php endif; ?>
+echo $form->field($model, 'ready')->widget(SwitchInput::class, [
+	'type' => SwitchInput::CHECKBOX,
+	'options' => [
+		'aria-describedby' => 'hbReady'
+	],
+	'pluginOptions' => [
+		'handleWidth' => 60,
+		'onText' => YesNo::getStatusDescription(YesNo::YES),
+		'offText' => YesNo::getStatusDescription(YesNo::NO),
+		'onColor' => 'success',
+		'offColor' => 'danger'
+	]
+], $readyHelp);
 
-	<?= $form->field($model, 'name')->textInput([
-		'maxlength' => true,
-		'autofocus' => true,
-		'aria-describedby' => 'hbName'
-	]) ?>
+echo $form->field($model, 'status')->widget(SwitchInput::class, [
+	'type' => SwitchInput::CHECKBOX,
+	'options' => [
+		'aria-describedby' => 'hbStatus'
+	],
+	'pluginOptions' => [
+		'handleWidth' => 60,
+		'onText' => Status::getStatusDescription(Status::ACTIVE),
+		'offText' => Status::getStatusDescription(Status::INACTIVE),
+		'onColor' => 'success',
+		'offColor' => 'danger'
+	]
+], $activeHelp);
 
-	<?= Html::tag('span', $nameHelp, [
-		'id' => 'hbName',
-		'class' => 'help-block'
-	]) ?>
+echo Html::tag('br');
 
-	<?= $form->field($model, 'ready')->widget(SwitchInput::class, [
-		'type' => SwitchInput::CHECKBOX,
-		'pluginOptions' => [
-			'handleWidth' => 60,
-			'onText' => YesNo::getStatusDescription(YesNo::YES),
-			'offText' => YesNo::getStatusDescription(YesNo::NO),
-			'onColor' => 'success',
-			'offColor' => 'danger',
-			'aria-describedby' => 'hbReady',
-		]
-	]); ?>
+echo $form->printMandatoryFieldsMessage();
+echo $form->printModelDates($model);
+echo $form->printFormButtons($model);
+SafeToolActiveForm::end();
 
-	<?= Html::tag('span', $readyHelp, [
-		'id' => 'hbReady',
-		'class' => 'help-block'
-	]) ?>
-	
-	<?= $form->field($model, 'status')->widget(SwitchInput::class, [
-		'type' => SwitchInput::CHECKBOX,
-		'pluginOptions' => [
-			'handleWidth' => 60,
-			'onText' => Status::getStatusDescription(Status::ACTIVE),
-			'offText' => Status::getStatusDescription(Status::INACTIVE),
-			'onColor' => 'success',
-			'offColor' => 'danger',
-			'aria-describedby' => 'hbStatus',
-		]
-	]); ?>
-
-	<?= Html::tag('span', $activeHelp, [
-		'id' => 'hbStatus',
-		'class' => 'help-block'
-	]) ?>
-
-	<br>
-
-	<?php if (!$model->getIsNewRecord()) : ?>
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printCreatedInformation(), ['class' => 'help-block']) ?>
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), ['class' => 'help-block']) ?>
-	<?php endif; ?>
-
-	<?= Html::tag('span', $mandatoryFields, [
-		'class' => 'help-block'
-	]) ?>
-
-	<div class="form-group">
-		<?= Html::submitButton($saveLabel, [
-			'class' => $model->getIsNewRecord() ? 'btn btn-success' : 'btn btn-primary'
-		]) ?>
-		<?= Html::a($cancelLabel, $model->getIsNewRecord() ? ['index'] : [
-			'view',
-			'id' => $model->getAttribute('id')
-		], [
-			'class' => 'btn btn-danger'
-		]) ?>
-	</div>
-
-	<?php ActiveForm::end(); ?>
-
-</div>
+echo Html::endTag('div');

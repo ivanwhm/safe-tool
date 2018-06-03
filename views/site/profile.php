@@ -10,6 +10,7 @@
  */
 
 //Imports
+use app\components\SafeToolActiveForm;
 use app\models\enums\Icons;
 use app\models\enums\Language;
 use app\models\User;
@@ -17,7 +18,6 @@ use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
-use yii\widgets\ActiveForm;
 
 $this->title = Yii::t('user', 'User profile');
 $this->params['breadcrumbs'] = [[
@@ -27,86 +27,52 @@ $this->params['breadcrumbs'] = [[
 	"url" => Url::to(["site/profile"])
 ]];
 
-$usernameLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the username.');
-$emailLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the e-mail address.');
-$languageLabel = Icons::getIcon(Icons::FORM_HELP) . Yii::t('user', 'Input the language.');
-$saveLabel = Icons::getIcon(Icons::FORM_SAVE) . Yii::t('index', 'Save');
-$cancelLabel = Icons::getIcon(Icons::FORM_CANCEL) . Yii::t('index', 'Cancel');
-$mandatoryFields = Icons::getIcon(Icons::FORM_MANDATORY) . Yii::t('index', 'Fields marked with (*) are required.');
+$usernameLabel = Yii::t('user', 'Input the username.');
+$emailLabel = Yii::t('user', 'Input the e-mail address.');
+$languageLabel = Yii::t('user', 'Input the language.');
 
-?>
+echo Html::beginTag('div', ['class' => 'user-profile-form']);
 
-<div class="user-profile">
+$form = SafeToolActiveForm::begin(['id' => 'user-profile-form']);
+echo $form->printErrorSummary($model);
 
-	<div class="user-profile-form">
+if ($updated) {
+	echo Html::beginTag('div', ['class' => 'alert alert-success alert-dismissable']);
+	echo Html::button('&times;', [
+		'class' => 'close',
+		'data-dismiss' => 'alert',
+		'aria-hidden' => 'true',
+	]);
+	echo Yii::t('user', 'Data updated successfully.');
+	echo Html::endTag('div');
+}
 
-		<?php $form = ActiveForm::begin(['id' => 'user-profile-form']); ?>
+echo $form->field($model, 'username')->textInput([
+	'maxlength' => true,
+	'autofocus' => true,
+	'aria-describedby' => 'hbUsername'
+], $usernameLabel);
 
-		<?php if ($model->hasErrors()) : ?>
-			<div class="alert alert-danger">
-				<?= $form->errorSummary($model) ?>
-			</div>
-		<?php endif; ?>
+echo $form->field($model, 'email')->textInput([
+	'maxlength' => true,
+	'autofocus' => false,
+	'aria-describedby' => 'hbEmail'
+], $emailLabel);
 
-		<?php if ($updated) : ?>
-			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<?= Yii::t('user', 'Data updated successfully.') ?>
-			</div>
-		<?php endif; ?>
+echo $form->field($model, 'language')->widget(Select2::class, [
+	'data' => Language::getData(),
+	'options' => [
+		'prompt' => '---',
+		'aria-describedby' => 'hbLanguage'
+	]
+], $languageLabel);
 
-		<?= $form->field($model, 'username')->textInput([
-			'maxlength' => true,
-			'autofocus' => true,
-			'aria-describedby' => 'hbUsername'
-		]) ?>
+echo Html::tag('br');
 
-		<?= Html::tag('span', $usernameLabel, [
-			'id' => 'hbUsername',
-			'class' => 'help-block'
-		]) ?>
+echo $form->printMandatoryFieldsMessage();
+echo $form->printModelDates($model, false);
+echo $form->printFormButtons($model, Yii::t('index', 'Save'),
+	Icons::FORM_SAVE, ['site/index'], ['site/index']);
+SafeToolActiveForm::end();
 
-		<?= $form->field($model, 'email')->textInput([
-			'maxlength' => true,
-			'autofocus' => false,
-			'aria-describedby' => 'hbEmail'
-		]) ?>
-
-		<?= Html::tag('span', $emailLabel, [
-			'id' => 'hbEmail',
-			'class' => 'help-block'
-		]) ?>
-
-		<?= $form->field($model, 'language')->widget(Select2::class, [
-			'data' => Language::getData(),
-			'options' => [
-				'prompt' => '---',
-				'aria-describedby' => 'hbLanguage'
-			]]) ?>
-
-		<?= Html::tag('span', $languageLabel, [
-			'id' => 'hbLanguage',
-			'class' => 'help-block'
-		]) ?>
-
-		<br>
-
-		<?= Html::tag('span', Icons::getIcon(Icons::FORM_USER) . $model->printLastUpdatedInformation(), [
-			'class' => 'help-block'
-		]) ?>
-
-		<?= Html::tag('span', $mandatoryFields, [
-			'class' => 'help-block'
-		]) ?>
-
-		<div class="form-group">
-			<?= Html::submitButton($saveLabel, ['class' => 'btn btn-success']) ?>
-			<?= Html::a($cancelLabel, ['index'], ['class' => 'btn btn-danger']) ?>
-		</div>
-
-		<?php ActiveForm::end(); ?>
-
-	</div>
-
-</div>
-
+echo Html::endTag('div');
