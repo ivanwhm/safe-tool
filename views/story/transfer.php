@@ -11,6 +11,7 @@
 //Imports
 use app\models\enums\Icons;
 use app\models\Story;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
@@ -27,9 +28,7 @@ $this->params['breadcrumbs'] = [
 		"url" => $model->getLink(true)
 	]
 ];
-?>
-<div class="story-transfer">
 
-	<?= $this->render('_transfer', ['model' => $model]) ?>
-
-</div>
+echo Html::beginTag('div', ['class' => 'story-transfer']);
+echo $this->render('_transfer', ['model' => $model]);
+echo Html::endTag('div');

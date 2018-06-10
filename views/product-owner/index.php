@@ -35,82 +35,77 @@ $this->params['breadcrumbs'] = [
 	]
 ];
 
-?>
-<div class="product-owner-index">
-
-	<?= GridView::widget([
-		'id' => 'product-owner-gridview',
-		'dataProvider' => $dataProvider,
-		'filterModel' => $searchModel,
-		'pjax' => true,
-		'hover' => true,
-		'persistResize' => true,
-		'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
-		'panel' => [
-			'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::PRODUCT_OWNER) . ' ' . Yii::t('product-owner', 'Product owners') . '</h3>',
-			'type' => 'default',
-			'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
-			'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
-			'footer' => false
+echo Html::beginTag('div', ['class' => 'product-owner-index']);
+echo GridView::widget([
+	'id' => 'product-owner-gridview',
+	'dataProvider' => $dataProvider,
+	'filterModel' => $searchModel,
+	'pjax' => true,
+	'hover' => true,
+	'persistResize' => true,
+	'resizeStorageKey' => Yii::$app->getUser()->getId() . '-' . date("m"),
+	'panel' => [
+		'heading' => ' <h3 class="panel-title">' . Icons::getIcon(Icons::PRODUCT_OWNER) . ' ' . Yii::t('product-owner', 'Product owners') . '</h3>',
+		'type' => 'default',
+		'before' => Html::a(Icons::getIcon(Icons::CRUD_ADD) . Yii::t('index', 'Add'), ['create'], ['class' => 'btn btn-success']),
+		'after' => Html::a(Icons::getIcon(Icons::CRUD_RELOAD) . Yii::t('index', 'Reload'), ['index'], ['class' => 'btn btn-info']),
+		'footer' => false
+	],
+	'columns' => [
+		[
+			'attribute' => 'id',
+			'hAlign' => GridView::ALIGN_LEFT,
+			'width' => '70px',
+			'filter' => false
 		],
-		'columns' => [
-			[
-				'attribute' => 'id',
-				'hAlign' => GridView::ALIGN_LEFT,
-				'width' => '70px',
-				'filter' => false
-			],
-			'name',
-			[
-				'attribute' => 'user_id',
-				'format' => 'html',
-				'value' => function (ProductOwner $data) {
-					return $data->printUserLink();
-				},
-				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => User::getUsers(),
-				'filterWidgetOptions' => [
-					'pluginOptions' => [
-						'allowClear' => true
-					],
+		'name',
+		[
+			'attribute' => 'user_id',
+			'format' => 'html',
+			'value' => function (ProductOwner $data) {
+				return $data->printUserLink();
+			},
+			'filterType' => GridView::FILTER_SELECT2,
+			'filter' => User::getUsers(),
+			'filterWidgetOptions' => [
+				'pluginOptions' => [
+					'allowClear' => true
 				],
-				'filterInputOptions' => [
-					'placeholder' => '---'
-				]
 			],
-			[
-				'attribute' => 'status',
-				'format' => 'html',
-				'width' => '120px',
-				'value' => function (ProductOwner $data) {
-					return $data->getStatus();
-				},
-				'filterType' => GridView::FILTER_SELECT2,
-				'filter' => Status::getData(),
-				'filterWidgetOptions' => [
-					'pluginOptions' => ['allowClear' => true],
-				],
-				'filterInputOptions' => ['placeholder' => '---']
-			],
-			[
-				'class' => ActionColumn::class,
-				'template' => '{view} {update} {delete}',
-				'buttons' => [
-					'delete' => function ($url) {
-						return Html::a(
-							Icons::getIcon(Icons::CRUD_DELETE),
-							[$url],
-							[
-								'data-confirm' => Yii::t('product-owner', 'Do you want to delete this product owner?'),
-								'data-method' => 'post'
-							]
-						);
-					}
-				]
-			],
+			'filterInputOptions' => [
+				'placeholder' => '---'
+			]
 		],
-	]);
-
-	?>
-
-</div>
+		[
+			'attribute' => 'status',
+			'format' => 'html',
+			'width' => '120px',
+			'value' => function (ProductOwner $data) {
+				return $data->getStatus();
+			},
+			'filterType' => GridView::FILTER_SELECT2,
+			'filter' => Status::getData(),
+			'filterWidgetOptions' => [
+				'pluginOptions' => ['allowClear' => true],
+			],
+			'filterInputOptions' => ['placeholder' => '---']
+		],
+		[
+			'class' => ActionColumn::class,
+			'template' => '{view} {update} {delete}',
+			'buttons' => [
+				'delete' => function ($url) {
+					return Html::a(
+						Icons::getIcon(Icons::CRUD_DELETE),
+						[$url],
+						[
+							'data-confirm' => Yii::t('product-owner', 'Do you want to delete this product owner?'),
+							'data-method' => 'post'
+						]
+					);
+				}
+			]
+		],
+	],
+]);
+echo Html::endTag('div');

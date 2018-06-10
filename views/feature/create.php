@@ -13,6 +13,7 @@
 use app\models\enums\Icons;
 use app\models\Feature;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
@@ -30,9 +31,6 @@ $this->params['breadcrumbs'] = [
 	]
 ];
 
-?>
-<div class="feature-create">
-
-	<?= $this->render('_form', ['model' => $model]) ?>
-
-</div>
+echo Html::beginTag('div', ['class' => 'feature-create']);
+echo $this->render('_form', ['model' => $model]);
+echo Html::endTag('div');

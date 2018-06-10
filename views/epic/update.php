@@ -11,6 +11,7 @@
 //Imports
 use app\models\enums\Icons;
 use app\models\Epic;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
@@ -27,9 +28,7 @@ $this->params['breadcrumbs'] = [
 		"url" => $model->getLink(true)
 	]
 ];
-?>
-<div class="epic-update">
 
-	<?= $this->render('_form', ['model' => $model]) ?>
-
-</div>
+echo Html::beginTag('div', ['class' => 'epic-update']);
+echo $this->render('_form', ['model' => $model]);
+echo Html::endTag('div');
