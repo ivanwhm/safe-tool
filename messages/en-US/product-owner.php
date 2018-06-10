@@ -18,5 +18,6 @@ return [
 	'Please tell if the product owner is active or inactive.' => '',
 	'Select the user associated with this product owner.' => '',
 	'Input the name of the product owner.' => '',
-	'This user does not have a product owner associated.' => ''
+	'This user does not have a product owner associated.' => '',
+	'This user already is associated with another product owner.' => ''
 ];

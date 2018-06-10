@@ -53,10 +53,14 @@ class ProductOwner extends SafeToolActiveRecord
 			[['date_created', 'date_updated'], 'safe'],
 			[['name'], 'string', 'max' => 100],
 			[['status'], 'boolean'],
-			[['user_id'], 'unique'],
-			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_created' => 'id']],
-			[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_updated' => 'id']],
+			[['user_id'], 'unique', 'message' => Yii::t('product-owner',
+				'This user already is associated with another product owner.')],
+			[['user_created'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => [
+				'user_created' => 'id']],
+			[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => [
+				'user_id' => 'id']],
+			[['user_updated'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => [
+				'user_updated' => 'id']],
 		];
 	}
 
@@ -198,7 +202,8 @@ class ProductOwner extends SafeToolActiveRecord
 			'status' => Status::ACTIVE
 		]);
 		if (!$productOwnerId instanceof ProductOwner) {
-			throw new NotFoundHttpException(Yii::t('product-owner', 'This user does not have a product owner associated.'));
+			throw new NotFoundHttpException(Yii::t('product-owner',
+				'This user does not have a product owner associated.'));
 		}
 		return $productOwnerId->getAttribute('id');
 	}

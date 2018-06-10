@@ -18,5 +18,6 @@ return [
 	'Please tell if the product owner is active or inactive.' => 'Por favor, informe se o dono do produto está ativo ou inativo.',
 	'Select the user associated with this product owner.' => 'Selecione o usuário associado a este dono do produto.',
 	'Input the name of the product owner.' => 'Informe o nome do dono do produto',
-	'This user does not have a product owner associated.' => 'Este usuário não tem um dono de produto associado.'
+	'This user does not have a product owner associated.' => 'Este usuário não tem um dono de produto associado.',
+	'This user already is associated with another product owner.' => 'Este usuário já está associado com outro dono de produto.'
 ];
