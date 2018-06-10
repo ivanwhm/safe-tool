@@ -33,7 +33,7 @@ body {
 }
 .navbar-top-links li a {
   padding: 15px;
-  min-height: 50px;
+  min-height: 60px;
 	cursor: pointer;
 }
 .navbar-top-links .dropdown-menu li {
@@ -105,7 +105,7 @@ body {
     z-index: 1;
     position: absolute;
     width: 250px;
-    margin-top: 51px;
+    margin-top: 61px;
   }
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,
@@ -169,6 +169,7 @@ body {
 }
 .login-panel {
   margin-top: 25%;
+	height: 45px;
 }
 .flot-chart {
   display: block;

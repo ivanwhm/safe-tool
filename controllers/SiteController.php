@@ -113,8 +113,6 @@ class SiteController extends SafeToolController
 		}
 
 		return $this->render('login', [
-			'hasLogo' => false,
-			'logo' => '',
 			'model' => $model
 		]);
 	}

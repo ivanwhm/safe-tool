@@ -68,7 +68,12 @@ $logoutMessage = Yii::t('index', '{username}, are you sure you want to log out?'
 				<span class='icon-bar'></span>
 				<span class='icon-bar'></span>
 			</button>
-			<a class='navbar-brand' href='<?= Url::to(['site/index']) ?>'><?= Yii::$app->name ?></a>
+			<a class='navbar-brand' href='<?= Url::to(['site/index']) ?>'>
+				<?= Html::img(Yii::$app->getRequest()->getBaseUrl() . '/images/logo.png', [
+					'alt' => Yii::$app->name,
+					'title' => Yii::$app->name
+				]) ?>
+			</a>
 		</div>
 		<!-- /.navbar-header -->
 

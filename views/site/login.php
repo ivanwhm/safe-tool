@@ -20,11 +20,7 @@ use yii\widgets\ActiveForm;
 
 <div class="col-md-4 col-md-offset-4">
 	<div class="login-panel logo-panel">
-		<?php
-			if ($hasLogo && $logo != '') {
-				echo Html::img($logo, ['alt' => 'logo']);
-			}
-		?>		
+		<?= Html::img(Yii::$app->getRequest()->getBaseUrl() . '/images/logo.png', ['alt' => 'logo']) ?>
 	</div>
 	<!-- ./login-panel logo-panel -->
 	
