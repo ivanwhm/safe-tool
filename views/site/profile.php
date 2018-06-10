@@ -11,6 +11,7 @@
 
 //Imports
 use app\components\SafeToolActiveForm;
+use app\components\SafeToolMessages;
 use app\models\enums\Icons;
 use app\models\enums\Language;
 use app\models\User;
@@ -33,14 +34,7 @@ $form = SafeToolActiveForm::begin(['id' => 'user-profile-form']);
 echo $form->printErrorSummary($model);
 
 if ($updated) {
-	echo Html::beginTag('div', ['class' => 'alert alert-success alert-dismissable']);
-	echo Html::button('&times;', [
-		'class' => 'close',
-		'data-dismiss' => 'alert',
-		'aria-hidden' => 'true',
-	]);
-	echo Yii::t('user', 'Data updated successfully.');
-	echo Html::endTag('div');
+	echo SafeToolMessages::printMessage('success', Yii::t('user', 'Data updated successfully.'));
 }
 
 echo $form->field($model, 'username')->textInput([

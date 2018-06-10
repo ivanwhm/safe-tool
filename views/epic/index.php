@@ -5,11 +5,14 @@
  * @var $this View
  * @var $dataProvider ActiveDataProvider
  * @var $searchModel Epic
+ * @var $error boolean
+ * @var $errorMessage string
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
+use app\components\SafeToolMessages;
 use app\models\enums\EpicType;
 use app\models\enums\Icons;
 use app\models\Epic;
@@ -29,6 +32,10 @@ $this->params['breadcrumbs'] = [
 		"url" => Url::to(["epic/index"])
 	]
 ];
+
+if ($error) {
+	echo SafeToolMessages::printMessage('danger', $errorMessage);
+}
 
 echo Html::beginTag('div', ['class' => 'epic-index']);
 echo GridView::widget([

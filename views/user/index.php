@@ -5,11 +5,14 @@
  * @var $this View
  * @var $dataProvider ActiveDataProvider
  * @var $searchModel User
+ * @var $error boolean
+ * @var $errorMessage string
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
+use app\components\SafeToolMessages;
 use app\models\enums\Icons;
 use app\models\enums\Language;
 use app\models\enums\Status;
@@ -34,6 +37,10 @@ $this->params['breadcrumbs'] = [
 		"url" => Url::to(["user/index"])
 	]
 ];
+
+if ($error) {
+	echo SafeToolMessages::printMessage('danger', $errorMessage);
+}
 
 echo Html::beginTag('div', ['class' => 'user-index']);
 echo GridView::widget([

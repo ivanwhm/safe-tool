@@ -5,11 +5,14 @@
  * @var $this View
  * @var $dataProvider ActiveDataProvider
  * @var $searchModel StoryStatus
+ * @var $error boolean
+ * @var $errorMessage string
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
+use app\components\SafeToolMessages;
 use app\models\enums\Icons;
 use app\models\enums\Status;
 use app\models\enums\YesNo;
@@ -34,6 +37,10 @@ $this->params['breadcrumbs'] = [
 		"url" => Url::to(["story-status/index"])
 	]
 ];
+
+if ($error) {
+	echo SafeToolMessages::printMessage('danger', $errorMessage);
+}
 
 echo Html::beginTag('div', ['class' => 'story-status-index']);
 echo GridView::widget([

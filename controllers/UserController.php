@@ -22,16 +22,21 @@ class UserController extends SafeToolController
 	/**
 	 * Lists all User models.
 	 *
+	 * @param bool $error Indicates if has an error.
+	 * @param string $errorMessage The error message.
+	 *
 	 * @return string
 	 */
-	public function actionIndex()
+	public function actionIndex($error = false, $errorMessage = '')
 	{
 		$searchModel = new User();
 		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
-			'searchModel' => $searchModel
+			'searchModel' => $searchModel,
+			'error' => $error,
+			'errorMessage' => $errorMessage
 		]);
 	}
 

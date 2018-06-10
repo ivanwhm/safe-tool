@@ -12,6 +12,7 @@
 
 //Imports
 use app\components\SafeToolActiveForm;
+use app\components\SafeToolMessages;
 use app\models\enums\Icons;
 use app\models\forms\ChangePasswordForm;
 use app\models\User;
@@ -34,14 +35,8 @@ $form = SafeToolActiveForm::begin(['id' => 'change-password-form']);
 $form->printErrorSummary($model);
 
 if ($updated) {
-	echo Html::beginTag('div', ['class' => 'alert alert-success alert-dismissable']);
-	echo Html::button('&times;', [
-		'class' => 'close',
-		'data-dismiss' => 'alert',
-		'aria-hidden' => 'true',
-	]);
-	echo Yii::t('password', 'Password changed successfully.');
-	echo Html::endTag('div');
+	echo SafeToolMessages::printMessage('success', Yii::t('password', 
+		'Password changed successfully.'));
 }
 
 echo $form->field($model, 'oldPassword')->widget(

@@ -20,16 +20,21 @@ class StoryStatusController extends SafeToolController
 	/**
 	 * Lists all Story Status models.
 	 *
+	 * @param bool $error Indicates if has an error.
+	 * @param string $errorMessage The error message.
+	 *
 	 * @return string
 	 */
-	public function actionIndex()
+	public function actionIndex($error = false, $errorMessage = '')
 	{
 		$searchModel = new StoryStatus();
 		$dataProvider = $searchModel->search(Yii::$app->getRequest()->getQueryParams());
 
 		return $this->render('index', [
 			'dataProvider' => $dataProvider,
-			'searchModel' => $searchModel
+			'searchModel' => $searchModel,
+			'error' => $error,
+			'errorMessage' => $errorMessage
 		]);
 
 	}

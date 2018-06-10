@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('index', 'Dashboard');
 ?>
-		
+
 <div class="row">
 	<div class="col-lg-3 col-md-6">
 		<div class="panel panel-black">

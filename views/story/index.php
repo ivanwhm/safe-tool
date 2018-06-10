@@ -5,11 +5,16 @@
  * @var $this View
  * @var $dataProvider ActiveDataProvider
  * @var $searchModel Story
+ * @var $error boolean
+ * @var $errorMessage string
+ * @var $error boolean
+ * @var $errorMessage string
  *
  * @author Ivan Wilhelm <ivan.whm@icloud.com>
  */
 
 //Imports
+use app\components\SafeToolMessages;
 use app\models\enums\Icons;
 use app\models\Product;
 use app\models\ProductOwner;
@@ -32,6 +37,11 @@ $this->params['breadcrumbs'] = [
 ];
 
 echo Html::beginTag('div', ['class' => 'story-index']);
+
+if ($error) {
+	echo SafeToolMessages::printMessage('danger', $errorMessage);
+}
+
 echo GridView::widget([
 	'id' => 'story-gridview',
 	'dataProvider' => $dataProvider,

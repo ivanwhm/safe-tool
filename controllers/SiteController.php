@@ -83,10 +83,34 @@ class SiteController extends SafeToolController
 		$exception = Yii::$app->getErrorHandler()->exception;
 
 		if ($exception !== null) {
-			return $this->render('error', [
-					'exception' => $exception,
-				]
-			);
+			
+			$result = Yii::$app->getUrlManager()->parseRequest(Yii::$app->getRequest());
+			if ($result !== false) {
+				$route = explode('/', $result[0])[0];
+				
+				switch ($route) {
+					case 'story' :
+						return $this->redirect(['story/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'epic' :
+						return $this->redirect(['epic/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'feature' :
+						return $this->redirect(['feature/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'product' :
+						return $this->redirect(['product/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'product-owner' :
+						return $this->redirect(['product-owner/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'story-acceptance-criteria' :
+						return $this->redirect(['story/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'story-status' :
+						return $this->redirect(['story-status/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'user' :
+						return $this->redirect(['user/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+					case 'user-role' :
+						return $this->redirect(['user-role/index', 'error' => true, 'errorMessage' => $exception->getMessage()]);
+				}
+			}
+
+			return $this->render('error', ['exception' => $exception]);
 		}
 
 		return '';
